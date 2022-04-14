@@ -24,12 +24,32 @@ typedef enum TokenID {
 	MUL,
 	DIV,
 
+	OPEN_DIV,
+	CLOSE_DIV,
+	HEADER,
+	SRC_LINK,
+	MATRIX,
+	IMAGE,
+
+	ATR_IMG_SOURCE,
+	ATR_SOURCE,
+	ATR_INTERNAL_LINK,
+	ATR_SIZE,
+
+	ATR_DELIMITER,
+	DEF_DELIMITER,
+	ATR_ASSIGNATION,
+
 	// Paréntesis.
 	OPEN_PARENTHESIS,
 	CLOSE_PARENTHESIS,
 
 	// Tipos de dato.
-	INTEGER
+	INTEGER,
+	TEXT,
+	LINK,
+	ATR_COLOR,
+	ATR_POSITION
 } TokenID;
 
 /**
@@ -38,6 +58,14 @@ typedef enum TokenID {
  * construcciones regulares, ya que utiliza un autómata finito determinístico
  * (a.k.a. DFA), como mecanismo de escaneo y reconocimiento.
  */
+
+TokenID TextPatternAction(char * lexeme);
+
+TokenID AtrColorPatternAction(char * lexeme);
+
+TokenID AtrPositionPatternAction(char * lexeme);
+
+TokenID LinkPatternAction(char * lexeme);
 
 TokenID IntegerPatternAction(const char * lexeme);
 
