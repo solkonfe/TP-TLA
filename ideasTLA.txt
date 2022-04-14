@@ -1,0 +1,73 @@
+Headings: h1,...,h6
+Habría que definir un tag "header"
+y como atributo colocar uno que se llame "size" donde
+1 es el mas grande y 6 el mas chico.
+
+Links: el uso del tag <a>.
+Podemos definir un tag "link", con un atributo
+"source", y que luego se coloque el texto que va de placeholder
+del link.
+
+3 niveles de anidamiento:
+Esto no pasa por tags si no mas bien por lo que permitimos
+dentro de cada tag. Con tener el tag "box", deberíamos
+permitir que el cuerpo de un "box" tenga todos los 
+elementos posibles (box, img, header, link, etc.)
+
+Post similar a ...: Hay que emular un sitio web
+
+Utilizar todos los estilos: ¿?
+
+Matriz 9x9: No entiendo si la idea es que se genere 
+hardcodeado o que el sistema contemple su uso.
+Si es el primer caso, se podría crear el tag "matrix"
+que genere la matriz automaticamente
+
+Links internos dentro de la pagina: 
+Se me ocurre usar id de atributo, y que despues se use 
+otro atributo (podría sr link también, al fin y al cabo
+a la hora de traducirlo sería href igual).
+
+Tutorial: Lo último a hacer, usamos un tag "tutorial"
+que imprime todo
+
+Tabla de casos de uso: 
+tag "table" con "row" y "column" para hacerlo legible.
+La transcripción es facil, en html ya estan definidas las tablas
+
+
+Ej:
+
+box color=black, size=big, position=center:
+"Hola me llamo Manu"
+box color=white, size=small, position=left:
+"Div interior"
+endbox
+endbox
+
+box EXPR_GENERAL endbox
+box EXPR_ATRS DEF_DELIMITER
+
+EXPR_ATRS --> ATR ATR_ASSIGNATION ATR_VALUE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
