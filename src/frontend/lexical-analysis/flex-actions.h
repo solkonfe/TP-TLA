@@ -6,7 +6,8 @@
 /**
  * Se definen los diferentes IDs de cada token disponible para el scanner Flex.
  */
-typedef enum TokenID {
+typedef enum TokenID
+{
 
 	// Por defecto, el valor "0" hace fallar el analizador sintáctico.
 	UNKNOWN = 0,
@@ -60,6 +61,8 @@ TokenID TitleTokenPattern(const char * lexeme);
 
 void IgnoredPatternAction(const char * lexeme);
 
-TokenID UnknownPatternAction(const char * lexeme);
+TokenID UnknownPatternAction(const char *lexeme);
+
+TokenID WordPatternAction(const char *lexeme);
 
 #endif

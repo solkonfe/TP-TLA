@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+85143683ea5e072c9bb32cbf583a1817 ../src/frontend/lexical-analysis/flex-scanner.c
+d74eb9416f523de757f2fc4a187f3f11 ../src/frontend/syntactic-analysis/bison-parser.c

@@ -15,6 +15,7 @@
 
 /* Patrones reutilizables. */
 crlf			\r\n
+letter          [a-zA-Z]
 digit			[0-9]
 title_size      (xs|s|m|l|xl|xxl)
 color           (black|red|blue|green|orange|yellow|pink)
@@ -42,10 +43,12 @@ whitespace		[ \f\n\r\t\v]
 
 {position}                                  { return PositionPatternAction(yytext);}
 
-{digit}+									{ return IntegerPatternAction(yytext); }
+{letter}+                                   { return WordPatternAction(yytext); }
 
 {whitespace}								{ IgnoredPatternAction(yytext); }
 
 .											{ return UnknownPatternAction(yytext); }
+
+{digit}+									{ return IntegerPatternAction(yytext); }
 
 %%

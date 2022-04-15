@@ -56,7 +56,14 @@ void IgnoredPatternAction(const char * lexeme) {
 	LogDebug("IgnoredPatternAction: '%s'.", lexeme);
 }
 
-TokenID UnknownPatternAction(const char * lexeme) {
+TokenID UnknownPatternAction(const char *lexeme)
+{
 	LogDebug("UnknownPatternAction: '%s'.", lexeme);
 	return YYUNDEF;
+}
+
+TokenID WordPatternAction(const char *lexeme)
+{
+	LogDebug("WordPatternAction: '%s'.", lexeme);
+	return WORD;
 }
