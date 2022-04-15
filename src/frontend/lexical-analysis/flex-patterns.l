@@ -16,9 +16,12 @@
 /* Patrones reutilizables. */
 crlf			\r\n
 digit			[0-9]
-title_size      (xs|s|m|l|xl|xxl)
+/* https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url */
+link            \"https://.*\..*\"
+title_size      (x-small|small|medium|large|x-large|xx-large)
 color           (black|red|blue|green|orange|yellow|pink)
 position        (left|center|right)
+content         \".*\"
 endline			\n
 whitespace		[ \f\n\r\t\v]
 
@@ -26,7 +29,7 @@ whitespace		[ \f\n\r\t\v]
 
 "start"                                     { return StartTokenPattern(yytext);}
 "end"                                       { return EndTokenPattern(yytext);}
-"box:"                                      { return BoxTokenPattern(yytext); }
+"box"                                       { return BoxTokenPattern(yytext); }
 "endbox"                                    { return EndBoxTokenPattern(yytext); }
 
 "title"                                     { return TitleTokenPattern(yytext); }
@@ -35,6 +38,9 @@ whitespace		[ \f\n\r\t\v]
 
 ":"                                         { return DEF_DELIMITER; }
 
+{link}                                      { return LINK; }
+
+{content}                                   { return ContentPatternAction(yytext); }
 
 {title_size}                                { return TitleSizePatternAction(yytext); }
 

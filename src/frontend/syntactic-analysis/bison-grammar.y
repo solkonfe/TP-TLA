@@ -16,9 +16,10 @@
 %token COLOR
 %token POSITION
 %token DEF_DELIMITER
-
 %token TABLE
 %token MATRIX
+%token CONTENT
+%token LINK
 
 // Reglas de asociatividad y precedencia (de menor a mayor):
 %left ADD SUB
@@ -29,14 +30,35 @@
 program: START web_expression END				{ $$ = ProgramGrammarAction(0); }
 	;
 
-web_expression: title_expression				{$$ = WebGrammarAction(0);}
-	| web_expression web_expression				{$$ = WebGrammarAction(1);}
+web_expression: title_expression				{ $$ = WebGrammarAction(0);}
+	| web_expression web_expression				{ $$ = WebGrammarAction(1);}
 	| TABLE										{}
 	| MATRIX									{}
+	| div_expression							{}
 	;
 
-title_expression: TITLE DEF_DELIMITER			{ $$ = TitleGrammarAction(0); }
-	| TITLE title_attrs DEF_DELIMITER 			{	$$ = TitleGrammarAction(1);}
+div_expression: BOX div_attrs DEF_DELIMITER div_expression ENDBOX				{}
+	| BOX DEF_DELIMITER div_expression ENDBOX									{}
+	| BOX DEF_DELIMITER simple_expression ENDBOX								{}
+	| BOX div_attrs DEF_DELIMITER simple_expression ENDBOX						{}
+	| BOX DEF_DELIMITER div_expression simple_expression ENDBOX					{}
+	| BOX div_attrs DEF_DELIMITER div_expression simple_expression ENDBOX		{}
+	| BOX DEF_DELIMITER simple_expression div_expression ENDBOX					{}
+	| BOX div_attrs DEF_DELIMITER simple_expression div_expression ENDBOX		{}
+	;
+
+div_attrs: POSITION																{}
+	;
+
+simple_expression: CONTENT														{}
+	| title_expression															{}
+	| simple_expression simple_expression										{}
+	;
+
+title_expression: TITLE DEF_DELIMITER CONTENT			{ $$ = TitleGrammarAction(0); }
+	| TITLE title_attrs DEF_DELIMITER CONTENT			{ $$ = TitleGrammarAction(1); }
+	| TITLE DEF_DELIMITER LINK							{ $$ = TitleGrammarAction(0); }
+	| TITLE title_attrs DEF_DELIMITER LINK				{ $$ = TitleGrammarAction(1); }
 	;
 
 title_attrs: TITLE_SIZE COLOR POSITION			{}
@@ -48,7 +70,7 @@ title_attrs: TITLE_SIZE COLOR POSITION			{}
 	| POSITION									{}
 	;
 
-constant: INTEGER												{ $$ = IntegerConstantGrammarAction($1); }
+constant: INTEGER										{ $$ = IntegerConstantGrammarAction($1); }
 	;
 	
 %%

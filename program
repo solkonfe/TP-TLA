@@ -1,1 +1,12 @@
-start title : end
+start 
+box:
+title small black center : "hola"
+    box :
+    title : "chau"
+        box:
+        title: "hola2"
+        "https://www.google.com"
+        endbox
+    endbox
+endbox
+end

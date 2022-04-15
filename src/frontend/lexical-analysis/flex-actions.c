@@ -27,12 +27,12 @@ TokenID EndBoxTokenPattern(const char * lexeme) {
 }
 
 TokenID TitleSizePatternAction(const char * lexeme) {
-	LogDebug("ColorTokenPattern: '%s'.", lexeme);
+	LogDebug("TitleSizePatternAction: '%s'.", lexeme);
 	return TITLE_SIZE;
 }
 
 TokenID ColorPatternAction(const char * lexeme){
-	LogDebug("ColorTokenPattern: '%s'.", lexeme);
+	LogDebug("ColorPatternAction: '%s'.", lexeme);
 	return COLOR;
 }
 
@@ -40,6 +40,21 @@ TokenID PositionPatternAction(const char * lexeme){
 	LogDebug("PositionTokenPattern: '%s'.", lexeme);
 	return POSITION;
 }
+
+TokenID ContentPatternAction(const char * lexeme) {
+	LogDebug("ContentPatternAction: '%s'.", lexeme);
+	return CONTENT;
+}
+
+TokenID LinkPatternAction(const char * lexeme) {
+	LogDebug("LinkPatternAction: '%s'.", lexeme);
+	return LINK;
+}
+
+/*TokenID TextDelimiterPatternAction(const char * lexeme){
+	LogDebug("TextDelimiterPatternAction: '%s'.", lexeme);
+	return TEXT_DELIMITER;
+}*/
 
 TokenID IntegerPatternAction(const char * lexeme) {
 	LogDebug("IntegerPatternAction: '%s'.", lexeme);

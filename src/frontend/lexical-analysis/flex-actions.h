@@ -34,7 +34,9 @@ typedef enum TokenID {
 	DEF_DELIMITER,
 
 	TABLE,
-	MATRIX
+	MATRIX,
+	CONTENT,
+	LINK
 } TokenID;
 
 /**
@@ -57,6 +59,10 @@ TokenID PositionPatternAction(const char * lexeme);
 TokenID IntegerPatternAction(const char * lexeme);
 
 TokenID TitleTokenPattern(const char * lexeme);
+
+TokenID ContentPatternAction(const char * lexeme) ;
+TokenID LinkPatternAction(const char * lexeme);
+//TokenID TextDelimiterPatternAction(const char * lexeme);
 
 void IgnoredPatternAction(const char * lexeme);
 
