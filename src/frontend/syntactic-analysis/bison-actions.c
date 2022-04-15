@@ -20,30 +20,20 @@ void yyerror(const char * string) {
 }
 
 int ProgramGrammarAction(const int value) {
-	LogDebug("ProgramGrammarAction(%d)", value);
+	LogDebug("Reconozco patrón. ProgramGrammarAction(%d)", value);
 	state.succeed = true;
 	state.result = value;
 	return value;
 }
 
-int AdditionExpressionGrammarAction(const int leftValue, const int rightValue) {
-	LogDebug("AdditionExpressionGrammarAction(%d, %d)", leftValue, rightValue);
-	return Add(leftValue, rightValue);
+int WebGrammarAction(const int value){
+	LogDebug("Reconozco patrón. WebGrammarAction(%d)", value);
+	return value;
 }
 
-int SubtractionExpressionGrammarAction(const int leftValue, const int rightValue) {
-	LogDebug("SubtractionExpressionGrammarAction(%d, %d)", leftValue, rightValue);
-	return Subtract(leftValue, rightValue);
-}
-
-int MultiplicationExpressionGrammarAction(const int leftValue, const int rightValue) {
-	LogDebug("MultiplicationExpressionGrammarAction(%d, %d)", leftValue, rightValue);
-	return Multiply(leftValue, rightValue);
-}
-
-int DivisionExpressionGrammarAction(const int leftValue, const int rightValue) {
-	LogDebug("DivisionExpressionGrammarAction(%d, %d)", leftValue, rightValue);
-	return Divide(leftValue, rightValue);
+int TitleGrammarAction(const int value){
+	LogDebug("Reconozco patrón. TitleGrammarAction(%d)", value);
+	return value;
 }
 
 int FactorExpressionGrammarAction(const int value) {

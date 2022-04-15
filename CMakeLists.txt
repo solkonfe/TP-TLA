@@ -1,5 +1,5 @@
 # Versión mínima requerida de CMake:
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.20.2)
 
 # Nombre del proyecto, y lenguaje usado (C, en este caso):
 project(Compiler C)
@@ -10,7 +10,7 @@ add_custom_command(
 	COMMAND bison -d ../src/frontend/syntactic-analysis/bison-grammar.y -o ../src/frontend/syntactic-analysis/bison-parser.c)
 
 # Seleccionar estrategia según el compilador de C disponible en el sistema:
-if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+#if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
 	message(NOTICE "El compilador de C es GCC.")
 
 	# Opciones para GCC:
@@ -24,23 +24,23 @@ if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
 		COMMAND flex -o ../src/frontend/lexical-analysis/flex-scanner.c ../src/frontend/lexical-analysis/flex-patterns.l
 		DEPENDS ../src/frontend/syntactic-analysis/bison-parser.c ../src/frontend/syntactic-analysis/bison-parser.h)
 
-elseif (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
-	message(NOTICE "El compilador de C es Microsoft Visual Studio.")
+#elseif (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
+#	message(NOTICE "El compilador de C es Microsoft Visual Studio.")
 
 	# Opciones para MSVC:
 	# add_compile_options(...)
 
 	# Compilar el scanner con Flex, usando compatibilidad con Microsoft Windows:
-	add_custom_command(
-		OUTPUT ../src/frontend/lexical-analysis/flex-scanner.c
-		COMMAND flex --wincompat -o ../src/frontend/lexical-analysis/flex-scanner.c ../src/frontend/lexical-analysis/flex-patterns.l
-		DEPENDS ../src/frontend/syntactic-analysis/bison-parser.c ../src/frontend/syntactic-analysis/bison-parser.h)
+#	add_custom_command(
+#		OUTPUT ../src/frontend/lexical-analysis/flex-scanner.c
+#		COMMAND flex --wincompat -o ../src/frontend/lexical-analysis/flex-scanner.c ../src/frontend/lexical-analysis/flex-patterns.l
+#		DEPENDS ../src/frontend/syntactic-analysis/bison-parser.c ../src/frontend/syntactic-analysis/bison-parser.h)
 
-else ()
-	message(NOTICE "El compilador de C es desconocido.")
-	message(NOTICE "No se generará el scanner con Flex.")
+#else ()
+#	message(NOTICE "El compilador de C es desconocido.")
+#	message(NOTICE "No se generará el scanner con Flex.")
 
-endif ()
+#endif ()
 
 # Especificar punto de entrada del proyecto y códigos fuente (extensión *.c):
 add_executable(Compiler

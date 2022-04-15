@@ -18,18 +18,23 @@ typedef enum TokenID {
 	// internos que Bison reserva para crear "tokens literales":
 	YYUNDEF = 257,
 
-	// Operadores aritméticos.
-	ADD,
-	SUB,
-	MUL,
-	DIV,
-
-	// Paréntesis.
-	OPEN_PARENTHESIS,
-	CLOSE_PARENTHESIS,
-
 	// Tipos de dato.
-	INTEGER
+	INTEGER,
+
+	BOX,
+	ENDBOX,
+
+	START,
+	END,
+
+	TITLE, 
+	TITLE_SIZE,
+	COLOR,
+	POSITION,
+	DEF_DELIMITER,
+
+	TABLE,
+	MATRIX
 } TokenID;
 
 /**
@@ -39,7 +44,19 @@ typedef enum TokenID {
  * (a.k.a. DFA), como mecanismo de escaneo y reconocimiento.
  */
 
+TokenID StartTokenPattern(const char * lexeme);
+TokenID EndTokenPattern(const char * lexeme);
+
+TokenID BoxTokenPattern(const char * lexeme);
+TokenID EndBoxTokenPattern(const char * lexeme);
+
+TokenID TitleSizePatternAction(const char * lexeme);
+TokenID ColorPatternAction(const char * lexeme);
+TokenID PositionPatternAction(const char * lexeme);
+
 TokenID IntegerPatternAction(const char * lexeme);
+
+TokenID TitleTokenPattern(const char * lexeme);
 
 void IgnoredPatternAction(const char * lexeme);
 

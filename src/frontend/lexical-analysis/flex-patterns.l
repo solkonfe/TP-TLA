@@ -16,18 +16,31 @@
 /* Patrones reutilizables. */
 crlf			\r\n
 digit			[0-9]
+title_size      (xs|s|m|l|xl|xxl)
+color           (black|red|blue|green|orange|yellow|pink)
+position        (left|center|right)
 endline			\n
 whitespace		[ \f\n\r\t\v]
 
 %%
 
-"+"											{ return ADD; }
-"-"											{ return SUB; }
-"*"											{ return MUL; }
-"/"											{ return DIV; }
+"start"                                     { return StartTokenPattern(yytext);}
+"end"                                       { return EndTokenPattern(yytext);}
+"box:"                                      { return BoxTokenPattern(yytext); }
+"endbox"                                    { return EndBoxTokenPattern(yytext); }
 
-"("											{ return OPEN_PARENTHESIS; }
-")"											{ return CLOSE_PARENTHESIS; }
+"title"                                     { return TitleTokenPattern(yytext); }
+"table"                                     { return TABLE; }
+"matrix"                                    { return MATRIX; }
+
+":"                                         { return DEF_DELIMITER; }
+
+
+{title_size}                                { return TitleSizePatternAction(yytext); }
+
+{color}                                     { return ColorPatternAction(yytext);}
+
+{position}                                  { return PositionPatternAction(yytext);}
 
 {digit}+									{ return IntegerPatternAction(yytext); }
 
