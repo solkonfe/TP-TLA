@@ -17,7 +17,7 @@
 crlf			\r\n
 digit			[0-9]
 /* https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url */
-link            \"https://.*\..*\"
+link            \"chau\"
 title_size      (x-small|small|medium|large|x-large|xx-large)
 color           (black|red|blue|green|orange|yellow|pink)
 position        (left|center|right)
@@ -35,8 +35,13 @@ whitespace		[ \f\n\r\t\v]
 "title"                                     { return TitleTokenPattern(yytext); }
 "table"                                     { return TABLE; }
 "matrix"                                    { return MATRIX; }
+"random"                                    { return RANDOM; }
+"tutorial"                                  { return TUTORIAL; }
+"image"                                     { return IMAGE; }
+"link"                                      { return HYPERLINK; }
 
 ":"                                         { return DEF_DELIMITER; }
+","                                         { return COMMA; }
 
 {link}                                      { return LINK; }
 

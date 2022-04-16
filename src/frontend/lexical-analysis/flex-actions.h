@@ -32,11 +32,16 @@ typedef enum TokenID {
 	COLOR,
 	POSITION,
 	DEF_DELIMITER,
+	COMMA,
 
 	TABLE,
 	MATRIX,
 	CONTENT,
-	LINK
+	LINK,
+	RANDOM,
+	TUTORIAL,
+	IMAGE,
+	HYPERLINK
 } TokenID;
 
 /**

@@ -1,6 +1,6 @@
 start 
 box:
-title small black center : "hola"
+title small, black, center : "hola"
     box :
     title : "chau"
         box:
