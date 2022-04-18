@@ -17,7 +17,7 @@
 crlf			\r\n
 /* https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url */
 link            \'https:\/\/.*\..*\'
-source          src=\"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)\"
+source          src=\'https:\/\/.*\..*\'
 idref           \'#.*\'
 id              id=\'.*\'
 title_size      (x-small|small|medium|large|x-large|xx-large)
@@ -42,13 +42,14 @@ whitespace		[ \f\n\r\t\v]
 "image"                                     { return IMAGE; }
 "link"                                      { return HYPERLINK; }
 
-"bold"                                      { return BOLD; }
-"italic"                                    { return ITALIC; }
-"underlined"                                { return UNDERLINED; }
+"bold"                                      { return BoldTokenPattern(yytext); }
+"italic"                                    { return ItalicTokenPattern(yytext); }
+"underlined"                                { return UnderlinedTokenPattern(yytext); }
 
 "row"                                       { return ROW; }
 "endrow"                                    { return ENDROW;}
 "data"                                      { return DATA; }
+"text"                                      { return TEXT; }
 
 "x"                                         {return TIMES;}
 ":"                                         { return DEF_DELIMITER; }

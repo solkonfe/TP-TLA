@@ -33,6 +33,7 @@
 %token ENDROW
 %token DATA
 %token TIMES
+%token TEXT
 %token CONTENT
 
 // Reglas de asociatividad y precedencia (de menor a mayor):
@@ -45,6 +46,7 @@ program: START web_expression END				{ $$ = ProgramGrammarAction(0); }
 	;
 
 web_expression: title_expression				{ $$ = WebGrammarAction(0);}
+	| text_expression
 	| img_expression							{ $$ = WebGrammarAction(1);}
 	| link_expression							{ $$ = WebGrammarAction(2);}
 	| web_expression web_expression				{ $$ = WebGrammarAction(3);}
@@ -53,8 +55,10 @@ web_expression: title_expression				{ $$ = WebGrammarAction(0);}
 	| div_expression							{ $$ = WebGrammarAction(7);}
 	;
 
-img_expression: IMAGE img_attrs	SOURCE					{}
+img_expression: IMAGE SOURCE
+	| IMAGE img_attrs	SOURCE					{}
 	| IMAGE img_attrs SOURCE DEF_DELIMITER CONTENT		{}
+	
 	;
 
 img_attrs: IDREF 
@@ -108,7 +112,77 @@ div_attrs: POSITION																{}
 	| ID POSITION																{}
 	;
 
-simple_expression: CONTENT														{}
+text_expression: TEXT text_attrs DEF_DELIMITER CONTENT
+	| DEF_DELIMITER CONTENT
+	;
+
+text_attrs: 
+	| COLOR COMMA POSITION								{}
+	| COLOR COMMA POSITION COMMA BOLD							{}
+	| COLOR COMMA POSITION COMMA BOLD COMMA ITALIC					{}
+	| COLOR COMMA POSITION COMMA BOLD COMMA UNDERLINED				{}
+	| COLOR COMMA POSITION COMMA BOLD COMMA ITALIC COMMA UNDERLINED		{}
+	| COLOR COMMA POSITION COMMA ITALIC COMMA UNDERLINED			{}
+	| COLOR COMMA POSITION COMMA ITALIC						{}
+	| COLOR COMMA POSITION COMMA UNDERLINED					{}
+
+	| COLOR COMMA POSITION COMMA ID								{}
+	| COLOR COMMA POSITION COMMA ID BOLD						{}
+	| COLOR COMMA POSITION COMMA ID BOLD ITALIC					{}
+	| COLOR COMMA POSITION COMMA ID BOLD UNDERLINED				{}
+	| COLOR COMMA POSITION COMMA ID BOLD ITALIC UNDERLINED		{}
+	| COLOR COMMA POSITION COMMA ID ITALIC UNDERLINED			{}
+	| COLOR COMMA POSITION COMMA ID ITALIC						{}
+	| COLOR COMMA POSITION COMMA ID UNDERLINED					{}
+
+	| COLOR												{}
+	| COLOR COMMA BOLD									{}
+	| COLOR COMMA BOLD COMMA ITALIC						{}
+	| COLOR COMMA BOLD COMMA UNDERLINED					{}
+	| COLOR COMMA BOLD COMMA ITALIC COMMA UNDERLINED	{}
+	| COLOR COMMA ITALIC COMMA UNDERLINED				{}
+	| COLOR COMMA ITALIC								{}
+	| COLOR COMMA UNDERLINED							{}
+
+	| COLOR COMMA ID											{}
+	| COLOR COMMA ID COMMA BOLD									{}
+	| COLOR COMMA ID COMMA BOLD COMMA ITALIC					{}
+	| COLOR COMMA ID COMMA BOLD COMMA UNDERLINED				{}
+	| COLOR COMMA ID COMMA BOLD COMMA ITALIC COMMA UNDERLINED	{}
+	| COLOR COMMA ID COMMA ITALIC COMMA UNDERLINED				{}
+	| COLOR COMMA ID COMMA ITALIC								{}
+	| COLOR COMMA ID COMMA UNDERLINED							{}
+
+	| POSITION												{}
+	| POSITION COMMA BOLD									{}
+	| POSITION COMMA BOLD COMMA ITALIC						{}
+	| POSITION COMMA BOLD COMMA UNDERLINED					{}
+	| POSITION COMMA BOLD COMMA ITALIC COMMA UNDERLINED		{}
+	| POSITION COMMA ITALIC COMMA UNDERLINED				{}
+	| POSITION COMMA ITALIC									{}
+	| POSITION COMMA UNDERLINED								{}
+
+	| POSITION	COMMA ID									{}
+	| POSITION COMMA ID COMMA BOLD									{}
+	| POSITION COMMA ID COMMA BOLD COMMA ITALIC					{}
+	| POSITION COMMA ID COMMA BOLD COMMA UNDERLINED				{}
+	| POSITION COMMA ID COMMA BOLD COMMA ITALIC COMMA UNDERLINED	{}
+	| POSITION COMMA ID COMMA ITALIC COMMA UNDERLINED				{}
+	| POSITION COMMA ID COMMA ITALIC								{}
+	| POSITION COMMA ID COMMA UNDERLINED							{}
+
+	| ID													{}
+	| ID COMMA BOLD									{}
+	| ID COMMA BOLD COMMA ITALIC						{}
+	| ID COMMA BOLD COMMA UNDERLINED					{}
+	| ID COMMA BOLD COMMA ITALIC COMMA UNDERLINED	{}
+	| ID COMMA ITALIC COMMA UNDERLINED				{}
+	| ID COMMA ITALIC								{}
+	| ID COMMA UNDERLINED							{}
+	;
+
+
+simple_expression: text_expression														{}
 	| title_expression															{}
 	| simple_expression simple_expression										{}
 	| img_expression															{}

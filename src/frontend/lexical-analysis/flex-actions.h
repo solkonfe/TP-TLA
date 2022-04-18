@@ -46,6 +46,7 @@ typedef enum TokenID {
 	ENDROW,
 	DATA,
 	TIMES,
+	TEXT,
 	CONTENT
 } TokenID;
 
@@ -69,6 +70,10 @@ TokenID PositionPatternAction(const char * lexeme);
 TokenID IdrefPatternAction(const char * lexeme);
 TokenID IdPatternAction(const char * lexeme);
 TokenID SourcePatternAction(const char * lexeme);
+
+TokenID BoldTokenPattern(const char * lexeme);
+TokenID ItalicTokenPattern(const char * lexeme);
+TokenID UnderlinedTokenPattern(const char * lexeme);
 
 TokenID TitleTokenPattern(const char * lexeme);
 TokenID HyperlinkPatternAction(const char * lexeme);

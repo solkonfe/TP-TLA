@@ -1,0 +1,7 @@
+start
+    box: 
+        title: "This is box 1"
+        box: 
+            title: "I will not be closing this box"
+    endbox
+end

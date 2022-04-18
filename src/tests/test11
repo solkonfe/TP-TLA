@@ -1,0 +1,5 @@
+start
+    beginbox:
+        title: "This program should not work"
+    endbox
+end

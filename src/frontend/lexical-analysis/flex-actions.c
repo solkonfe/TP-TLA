@@ -66,8 +66,23 @@ TokenID SourcePatternAction(const char * lexeme){
 	return SOURCE;
 }
 
+TokenID BoldTokenPattern(const char * lexeme){
+	LogDebug("BoldTokenPattern: '%s'.", lexeme);
+	return BOLD;
+}
+
+TokenID ItalicTokenPattern(const char * lexeme){
+	LogDebug("ItalicTokenPattern: '%s'.", lexeme);
+	return ITALIC;
+}
+
+TokenID UnderlinedTokenPattern(const char * lexeme){
+	LogDebug("UnderlinedTokenPattern: '%s'.", lexeme);
+	return UNDERLINED;
+}
+
 TokenID TitleTokenPattern(const char * lexeme){
-	LogDebug("TitlePatternAction: '%s'.", lexeme);
+	LogDebug("TitleTokenPattern: '%s'.", lexeme);
 	return TITLE;
 }
 
