@@ -36,24 +36,24 @@ whitespace		[ \f\n\r\t\v]
 "endbox"                                    { return EndBoxTokenPattern(yytext); }
 
 "title"                                     { return TitleTokenPattern(yytext); }
-"table"                                     { return TABLE; }
-"endtable"                                  { return ENDTABLE; }
-"random"                                    { return RANDOM; }
-"image"                                     { return IMAGE; }
-"link"                                      { return HYPERLINK; }
+"table"                                     { return TableTokenPattern(yytext); }
+"endtable"                                  { return EndTableTokenPattern(yytext); }
+"random"                                    { return RandomTokenPattern(yytext); }
+"image"                                     { return ImageTokenPattern(yytext); }
+"link"                                      { return HyperlinkTokenPattern(yytext); }
 
 "bold"                                      { return BoldTokenPattern(yytext); }
 "italic"                                    { return ItalicTokenPattern(yytext); }
 "underlined"                                { return UnderlinedTokenPattern(yytext); }
 
-"row"                                       { return ROW; }
-"endrow"                                    { return ENDROW;}
-"data"                                      { return DATA; }
-"text"                                      { return TEXT; }
+"row"                                       { return RowTokenPattern(yytext); }
+"endrow"                                    { return EndRowTokenPattern(yytext);}
+"data"                                      { return DataTokenPattern(yytext); }
+"text"                                      { return TextTokenPattern(yytext); }
 
-"x"                                         {return TIMES;}
-":"                                         { return DEF_DELIMITER; }
-","                                         { return COMMA; }
+"x"                                         {return TimesTokenPattern(yytext);}
+":"                                         { return DefDelimiterTokenPattern(yytext); }
+","                                         { return CommaTokenPattern(yytext); }
 
 
 
@@ -73,9 +73,9 @@ whitespace		[ \f\n\r\t\v]
 
 {position}                                  { return PositionPatternAction(yytext);}
 
-{number}                                    {return NUMBER;}
+{number}                                    { return NumberPatternAction(yytext);}
 
-{whitespace}								{ IgnoredPatternAction(yytext); }
+{whitespace}								{}
 
 .											{ return UnknownPatternAction(yytext); }
 

@@ -26,24 +26,84 @@ TokenID EndBoxTokenPattern(const char * lexeme) {
 	return ENDBOX;
 }
 
-TokenID TitleSizePatternAction(const char * lexeme) {
-	LogDebug("TitleSizePatternAction: '%s'.", lexeme);
-	return TITLE_SIZE;
+TokenID TitleTokenPattern(const char * lexeme){
+	LogDebug("TitleTokenPattern: '%s'.", lexeme);
+	return TITLE;
 }
 
-TokenID ColorPatternAction(const char * lexeme){
-	LogDebug("ColorPatternAction: '%s'.", lexeme);
-	return COLOR;
+TokenID TableTokenPattern(const char * lexeme){
+	LogDebug("TableTokenPattern: '%s'.", lexeme);
+	return TABLE;
 }
 
-TokenID PositionPatternAction(const char * lexeme){
-	LogDebug("PositionTokenPattern: '%s'.", lexeme);
-	return POSITION;
+TokenID EndTableTokenPattern(const char * lexeme){
+	LogDebug("EndTableTokenPattern: '%s'.", lexeme);
+	return ENDTABLE;
 }
 
-TokenID ContentPatternAction(const char * lexeme) {
-	LogDebug("ContentPatternAction: '%s'.", lexeme);
-	return CONTENT;
+TokenID RandomTokenPattern(const char * lexeme){
+	LogDebug("RandomTokenPattern: '%s'.", lexeme);
+	return RANDOM;
+}
+
+TokenID ImageTokenPattern(const char * lexeme){
+	LogDebug("ImageTokenPattern: '%s'.", lexeme);
+	return IMAGE;
+}
+
+TokenID HyperlinkTokenPattern(const char * lexeme){
+	LogDebug("HyperlinkTokenPattern: '%s'.", lexeme);
+	return HYPERLINK;
+}
+
+TokenID BoldTokenPattern(const char * lexeme){
+	LogDebug("BoldTokenPattern: '%s'.", lexeme);
+	return BOLD;
+}
+
+TokenID ItalicTokenPattern(const char * lexeme){
+	LogDebug("ItalicTokenPattern: '%s'.", lexeme);
+	return ITALIC;
+}
+
+TokenID UnderlinedTokenPattern(const char * lexeme){
+	LogDebug("UnderlinedTokenPattern: '%s'.", lexeme);
+	return UNDERLINED;
+}
+
+TokenID RowTokenPattern(const char * lexeme){
+	LogDebug("RowTokenPattern: '%s'.", lexeme);
+	return ROW;
+}
+
+TokenID EndRowTokenPattern(const char * lexeme){
+	LogDebug("EndRowTokenPattern: '%s'.", lexeme);
+	return ENDROW;
+}
+
+TokenID DataTokenPattern(const char * lexeme){
+	LogDebug("DataTokenPattern: '%s'.", lexeme);
+	return DATA;
+}
+
+TokenID TextTokenPattern(const char * lexeme){
+	LogDebug("TextTokenPattern: '%s'.", lexeme);
+	return TEXT;
+}
+
+TokenID TimesTokenPattern(const char * lexeme){
+	LogDebug("TimesTokenPattern: '%s'.", lexeme);
+	return TIMES;
+}
+
+TokenID DefDelimiterTokenPattern(const char * lexeme){
+	LogDebug("DefDelimiterTokenPattern: '%s'.", lexeme);
+	return DEF_DELIMITER;
+}
+
+TokenID CommaTokenPattern(const char * lexeme){
+	LogDebug("CommaTokenPattern: '%s'.", lexeme);
+	return COMMA;
 }
 
 TokenID LinkPatternAction(const char * lexeme) {
@@ -66,33 +126,29 @@ TokenID SourcePatternAction(const char * lexeme){
 	return SOURCE;
 }
 
-TokenID BoldTokenPattern(const char * lexeme){
-	LogDebug("BoldTokenPattern: '%s'.", lexeme);
-	return BOLD;
+TokenID ContentPatternAction(const char * lexeme) {
+	LogDebug("ContentPatternAction: '%s'.", lexeme);
+	return CONTENT;
 }
 
-TokenID ItalicTokenPattern(const char * lexeme){
-	LogDebug("ItalicTokenPattern: '%s'.", lexeme);
-	return ITALIC;
+TokenID TitleSizePatternAction(const char * lexeme) {
+	LogDebug("TitleSizePatternAction: '%s'.", lexeme);
+	return TITLE_SIZE;
 }
 
-TokenID UnderlinedTokenPattern(const char * lexeme){
-	LogDebug("UnderlinedTokenPattern: '%s'.", lexeme);
-	return UNDERLINED;
+TokenID ColorPatternAction(const char * lexeme){
+	LogDebug("ColorPatternAction: '%s'.", lexeme);
+	return COLOR;
 }
 
-TokenID TitleTokenPattern(const char * lexeme){
-	LogDebug("TitleTokenPattern: '%s'.", lexeme);
-	return TITLE;
+TokenID PositionPatternAction(const char * lexeme){
+	LogDebug("PositionPatternAction: '%s'.", lexeme);
+	return POSITION;
 }
 
-TokenID HyperlinkPatternAction(const char * lexeme){
-	LogDebug("HyperlinkPatternACtion: '%s'", lexeme);
-	return HYPERLINK;
-}
-
-void IgnoredPatternAction(const char * lexeme) {
-	//LogDebug("IgnoredPatternAction: '%s'.", lexeme);
+TokenID NumberPatternAction(const char * lexeme){
+	LogDebug("NumberPatternAction: '%s'.", lexeme);
+	return POSITION;
 }
 
 TokenID UnknownPatternAction(const char * lexeme) {

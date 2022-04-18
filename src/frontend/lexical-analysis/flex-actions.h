@@ -63,25 +63,36 @@ TokenID EndTokenPattern(const char * lexeme);
 TokenID BoxTokenPattern(const char * lexeme);
 TokenID EndBoxTokenPattern(const char * lexeme);
 
-TokenID TitleSizePatternAction(const char * lexeme);
-TokenID ColorPatternAction(const char * lexeme);
-TokenID PositionPatternAction(const char * lexeme);
-
-TokenID IdrefPatternAction(const char * lexeme);
-TokenID IdPatternAction(const char * lexeme);
-TokenID SourcePatternAction(const char * lexeme);
+TokenID TitleTokenPattern(const char * lexeme);
+TokenID TableTokenPattern(const char * lexeme);
+TokenID EndTableTokenPattern(const char * lexeme);
+TokenID RandomTokenPattern(const char * lexeme);
+TokenID ImageTokenPattern(const char * lexeme);
+TokenID HyperlinkTokenPattern(const char * lexeme);
 
 TokenID BoldTokenPattern(const char * lexeme);
 TokenID ItalicTokenPattern(const char * lexeme);
 TokenID UnderlinedTokenPattern(const char * lexeme);
 
-TokenID TitleTokenPattern(const char * lexeme);
-TokenID HyperlinkPatternAction(const char * lexeme);
+TokenID RowTokenPattern(const char * lexeme);
+TokenID EndRowTokenPattern(const char * lexeme);
+TokenID DataTokenPattern(const char * lexeme);
+TokenID TextTokenPattern(const char * lexeme);
 
-TokenID ContentPatternAction(const char * lexeme) ;
+TokenID TimesTokenPattern(const char * lexeme);
+TokenID DefDelimiterTokenPattern(const char * lexeme);
+TokenID CommaTokenPattern(const char * lexeme);
+
 TokenID LinkPatternAction(const char * lexeme);
+TokenID IdrefPatternAction(const char * lexeme);
+TokenID IdPatternAction(const char * lexeme);
+TokenID SourcePatternAction(const char * lexeme);
+TokenID ContentPatternAction(const char * lexeme);
 
-void IgnoredPatternAction(const char * lexeme);
+TokenID TitleSizePatternAction(const char * lexeme);
+TokenID ColorPatternAction(const char * lexeme);
+TokenID PositionPatternAction(const char * lexeme);
+TokenID NumberPatternAction(const char * lexeme);
 
 TokenID UnknownPatternAction(const char * lexeme);
 
