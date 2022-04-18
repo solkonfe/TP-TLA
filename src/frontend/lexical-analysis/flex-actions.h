@@ -19,29 +19,27 @@ typedef enum TokenID {
 	YYUNDEF = 257,
 
 	// Tipos de dato.
-	INTEGER,
-
 	BOX,
 	ENDBOX,
-
 	START,
 	END,
-
 	TITLE, 
 	TITLE_SIZE,
 	COLOR,
 	POSITION,
 	DEF_DELIMITER,
 	COMMA,
-
 	TABLE,
 	MATRIX,
-	CONTENT,
 	LINK,
 	RANDOM,
 	TUTORIAL,
 	IMAGE,
-	HYPERLINK
+	HYPERLINK,
+	ID,
+	IDREF,
+	SOURCE,
+	CONTENT
 } TokenID;
 
 /**
@@ -61,13 +59,15 @@ TokenID TitleSizePatternAction(const char * lexeme);
 TokenID ColorPatternAction(const char * lexeme);
 TokenID PositionPatternAction(const char * lexeme);
 
-TokenID IntegerPatternAction(const char * lexeme);
+TokenID IdrefPatternAction(const char * lexeme);
+TokenID IdPatternAction(const char * lexeme);
+TokenID SourcePatternAction(const char * lexeme);
 
 TokenID TitleTokenPattern(const char * lexeme);
+TokenID HyperlinkPatternAction(const char * lexeme);
 
 TokenID ContentPatternAction(const char * lexeme) ;
 TokenID LinkPatternAction(const char * lexeme);
-//TokenID TextDelimiterPatternAction(const char * lexeme);
 
 void IgnoredPatternAction(const char * lexeme);
 

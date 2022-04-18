@@ -15,9 +15,11 @@
 
 /* Patrones reutilizables. */
 crlf			\r\n
-digit			[0-9]
 /* https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url */
-link            \"chau\"
+link            \'https:\/\/.*\..*\'
+source          src=\"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)\"
+idref           \'#.*\'
+id              id=\'.*\'
 title_size      (x-small|small|medium|large|x-large|xx-large)
 color           (black|red|blue|green|orange|yellow|pink)
 position        (left|center|right)
@@ -38,12 +40,20 @@ whitespace		[ \f\n\r\t\v]
 "random"                                    { return RANDOM; }
 "tutorial"                                  { return TUTORIAL; }
 "image"                                     { return IMAGE; }
-"link"                                      { return HYPERLINK; }
+"link"                                      { return HyperlinkPatternAction(yytext); }
 
 ":"                                         { return DEF_DELIMITER; }
 ","                                         { return COMMA; }
 
-{link}                                      { return LINK; }
+
+
+{link}                                      { return LinkPatternAction(yytext); }
+
+{idref}                                     { return IdrefPatternAction(yytext); }
+
+{id}                                        { return IdPatternAction(yytext); }
+
+{source}                                   { return SourcePatternAction(yytext); }
 
 {content}                                   { return ContentPatternAction(yytext); }
 
@@ -52,8 +62,6 @@ whitespace		[ \f\n\r\t\v]
 {color}                                     { return ColorPatternAction(yytext);}
 
 {position}                                  { return PositionPatternAction(yytext);}
-
-{digit}+									{ return IntegerPatternAction(yytext); }
 
 {whitespace}								{ IgnoredPatternAction(yytext); }
 

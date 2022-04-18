@@ -51,15 +51,19 @@ TokenID LinkPatternAction(const char * lexeme) {
 	return LINK;
 }
 
-/*TokenID TextDelimiterPatternAction(const char * lexeme){
-	LogDebug("TextDelimiterPatternAction: '%s'.", lexeme);
-	return TEXT_DELIMITER;
-}*/
+TokenID IdrefPatternAction(const char * lexeme){
+	LogDebug("IDrefPatternAction: '%s'.", lexeme);
+	return IDREF;
+}
 
-TokenID IntegerPatternAction(const char * lexeme) {
-	LogDebug("IntegerPatternAction: '%s'.", lexeme);
-	yylval = atoi(lexeme);
-	return INTEGER;
+TokenID IdPatternAction(const char * lexeme){
+	LogDebug("IDPatternAction: '%s'.", lexeme);
+	return ID;
+}
+
+TokenID SourcePatternAction(const char * lexeme){
+	LogDebug("SourcePatternAction: '%s'.", lexeme);
+	return SOURCE;
 }
 
 TokenID TitleTokenPattern(const char * lexeme){
@@ -67,8 +71,13 @@ TokenID TitleTokenPattern(const char * lexeme){
 	return TITLE;
 }
 
+TokenID HyperlinkPatternAction(const char * lexeme){
+	LogDebug("HyperlinkPatternACtion: '%s'", lexeme);
+	return HYPERLINK;
+}
+
 void IgnoredPatternAction(const char * lexeme) {
-	LogDebug("IgnoredPatternAction: '%s'.", lexeme);
+	//LogDebug("IgnoredPatternAction: '%s'.", lexeme);
 }
 
 TokenID UnknownPatternAction(const char * lexeme) {
