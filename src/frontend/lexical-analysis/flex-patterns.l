@@ -23,6 +23,7 @@ id              id=\'.*\'
 title_size      (x-small|small|medium|large|x-large|xx-large)
 color           (black|red|blue|green|orange|yellow|pink)
 position        (left|center|right)
+number          [0-9]+
 content         \".*\"
 endline			\n
 whitespace		[ \f\n\r\t\v]
@@ -36,12 +37,20 @@ whitespace		[ \f\n\r\t\v]
 
 "title"                                     { return TitleTokenPattern(yytext); }
 "table"                                     { return TABLE; }
-"matrix"                                    { return MATRIX; }
+"endtable"                                  { return ENDTABLE; }
 "random"                                    { return RANDOM; }
-"tutorial"                                  { return TUTORIAL; }
 "image"                                     { return IMAGE; }
-"link"                                      { return HyperlinkPatternAction(yytext); }
+"link"                                      { return HYPERLINK; }
 
+"bold"                                      { return BOLD; }
+"italic"                                    { return ITALIC; }
+"underlined"                                { return UNDERLINED; }
+
+"row"                                       { return ROW; }
+"endrow"                                    { return ENDROW;}
+"data"                                      { return DATA; }
+
+"x"                                         {return TIMES;}
 ":"                                         { return DEF_DELIMITER; }
 ","                                         { return COMMA; }
 
@@ -62,6 +71,8 @@ whitespace		[ \f\n\r\t\v]
 {color}                                     { return ColorPatternAction(yytext);}
 
 {position}                                  { return PositionPatternAction(yytext);}
+
+{number}                                    {return NUMBER;}
 
 {whitespace}								{ IgnoredPatternAction(yytext); }
 

@@ -4,9 +4,32 @@ title small, black, center : "hola"
     box :
     title : "chau"
         box:
-        title: "hola2"
-        "https://www.google.com"
+        title id='t1' : "hola2"
+        link 'https://www.google.com' : "chau"
+
+        link '#t1' : "Ir a seccion T1"
         endbox
     endbox
+
+    table : 3 x 4
+        row :
+            head : 
+            head : 
+            head :
+            head :
+        end
+        row :
+            data :
+            data :
+            data :
+            data :
+        endrow
+        row :
+            data :
+            data :
+            data :
+            data :
+        endrow
+    endtable
 endbox
 end
