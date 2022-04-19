@@ -55,14 +55,14 @@ web_expression: title_expression				{ $$ = WebGrammarAction(0);}
 	| div_expression							{ $$ = WebGrammarAction(7);}
 	;
 
-img_expression: IMAGE SOURCE
-	| IMAGE img_attrs	SOURCE					{}
-	| IMAGE img_attrs SOURCE DEF_DELIMITER CONTENT		{}
+img_expression: IMAGE img_attrs 					{}
+	| IMAGE img_attrs DEF_DELIMITER CONTENT		{}
 	
 	;
 
-img_attrs: IDREF 
-	| LINK
+img_attrs: SOURCE
+	| IDREF 
+	| SOURCE LINK
 	;
 
 link_expression: HYPERLINK link_attrs DEF_DELIMITER CONTENT
@@ -179,6 +179,10 @@ text_attrs:
 	| ID COMMA ITALIC COMMA UNDERLINED				{}
 	| ID COMMA ITALIC								{}
 	| ID COMMA UNDERLINED							{}
+
+	| BOLD									{}
+	| ITALIC								{}
+	| UNDERLINED		{}
 	;
 
 

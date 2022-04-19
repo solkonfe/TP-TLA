@@ -16,9 +16,9 @@
 /* Patrones reutilizables. */
 crlf			\r\n
 /* https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url */
-link            \'https:\/\/.*\..*\'
+link            \'https:\/\/.*\..*'
 source          src=\'https:\/\/.*\..*\'
-idref           \'#.*\'
+idref           idref=\'#.*\'
 id              id=\'.*\'
 title_size      (x-small|small|medium|large|x-large|xx-large)
 color           (black|red|blue|green|orange|yellow|pink)
@@ -33,8 +33,7 @@ whitespace		[ \f\n\r\t\v]
 "start"                                     { return StartTokenPattern(yytext);}
 "end"                                       { return EndTokenPattern(yytext);}
 "box"                                       { return BoxTokenPattern(yytext); }
-"endbox"                                    { return EndBoxTokenPattern(yytext); }
-
+"endbox"                                    { return EndBoxTokenPattern(yytext);}
 "title"                                     { return TitleTokenPattern(yytext); }
 "table"                                     { return TableTokenPattern(yytext); }
 "endtable"                                  { return EndTableTokenPattern(yytext); }
