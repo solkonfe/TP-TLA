@@ -7,9 +7,6 @@ start
         endrow
         row:
             data: "R7.1"
-            data green: "Aceptar"
-            data: "Un prorgama que genere HTML Headings."
         endrow
     endtable
 end
-

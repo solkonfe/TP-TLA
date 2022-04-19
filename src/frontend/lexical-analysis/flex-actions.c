@@ -148,7 +148,7 @@ TokenID PositionPatternAction(const char * lexeme){
 
 TokenID NumberPatternAction(const char * lexeme){
 	LogDebug("NumberPatternAction: '%s'.", lexeme);
-	return POSITION;
+	return NUMBER;
 }
 
 TokenID UnknownPatternAction(const char * lexeme) {

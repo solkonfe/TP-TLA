@@ -1,0 +1,21 @@
+start
+    table: 9 x 9
+        row:
+            data: "relleno"
+            data: "cada"
+            data: "columna"
+            data: "si"
+            data: "no"
+            data: "se"
+            data: "rellenan"
+            data: "vacias"
+        endrow
+        row:
+            data: "lo"
+            data: "mismo"
+            data: "con"
+            data: "las"
+            data: "filas"
+        endrow
+    endtable
+end
