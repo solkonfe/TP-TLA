@@ -3,6 +3,6 @@ start
         title id='t1' : "This is section 1"
     endbox
     box:
-        link '#t1' : "Go to section 1"
+        link idref='#t1' : "Go to section 1"
     endbox
 end
