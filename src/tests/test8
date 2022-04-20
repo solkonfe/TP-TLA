@@ -1,21 +1,13 @@
 start
 title x-large: "Tutorial for the usage of the .lmth language"
 
-text: "In order to add a title, you should type title: followed by the text you want to show in said title between
-inverted commas. Additionally, you can add attributes such as size (x-small, small, medium, large, x-large, xx-large),
-color (black, red, blue, green, orange, yellow, pink), position(left, center, right), bold, italic, underlined (and they
-have to be in that order)."
+text: "In order to add a title, you should type title: followed by the text you want to show in said title between inverted commas. Additionally, you can add attributes such as size (x-small, small, medium, large, x-large, xx-large), color (black, red, blue, green, orange, yellow, pink), position(left, center, right), bold, italic, underlined (and they have to be in that order)."
 
-text: "You can type free text with the 'text:' keyword. The attributes for this are the same as in title, except for the
-size, which you cannot set"
+text: "You can type free text with the 'text:' keyword. The attributes for this are the same as in title, except for the size, which you cannot set"
 
-text: "To insert an image or a link, you have to use the 'image:' and 'link:' keywords respectively. They must contain a
-'src=' followed by the link indicating the source of each one."
+text: "To insert an image or a link, you have to use the 'image:' and 'link:' keywords respectively. They must contain a 'src=' followed by the link indicating the source of each one."
 
-text: "You can add a table using the 'table:' keyword and indicating the dimentions for it after the colon. After that,
-you must use the 'row:' and 'endrow' keyworks to indicate the start and end of each row. Finally, inside each row, you
-must use the 'data:' keyword to fill each of the cells."
+text: "You can add a table using the 'table:' keyword and indicating the dimentions for it after the colon. After that, you must use the 'row:' and 'endrow' keyworks to indicate the start and end of each row. Finally, inside each row, you must use the 'data:' keyword to fill each of the cells."
 
-text: "Lastly, every keyword can be identified with an attribute called 'id' and referenced in a link elswhere by typing
-'idref=#' followed by the ID that you want to reference."
+text: "Lastly, every keyword can be identified with an attribute called 'id' and referenced in a link elswhere by typing 'idref=#' followed by the ID that you want to reference."
 end

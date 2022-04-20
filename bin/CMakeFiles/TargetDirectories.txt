@@ -1,3 +1,0 @@
-/mnt/d/Documentos/Facu/TLA/TP/TP-TLA/bin/CMakeFiles/Compiler.dir
-/mnt/d/Documentos/Facu/TLA/TP/TP-TLA/bin/CMakeFiles/edit_cache.dir
-/mnt/d/Documentos/Facu/TLA/TP/TP-TLA/bin/CMakeFiles/rebuild_cache.dir
