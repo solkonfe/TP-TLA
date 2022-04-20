@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/d/Documentos/Facu/TLA/TP/TP-TLA
+CMAKE_SOURCE_DIR = /mnt/wsl/docker-desktop-bind-mounts/Ubuntu/87a10aea14297b3d64285eac2c0f0249598e0a99d5f76069f2ab413ed15776a5/Desktop/Facultad/TLA/TPE
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/d/Documentos/Facu/TLA/TP/TP-TLA/bin
+CMAKE_BINARY_DIR = /mnt/wsl/docker-desktop-bind-mounts/Ubuntu/87a10aea14297b3d64285eac2c0f0249598e0a99d5f76069f2ab413ed15776a5/Desktop/Facultad/TLA/TPE/bin
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/Documentos/Facu/TLA/TP/TP-TLA/bin/CMakeFiles /mnt/d/Documentos/Facu/TLA/TP/TP-TLA/bin//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/wsl/docker-desktop-bind-mounts/Ubuntu/87a10aea14297b3d64285eac2c0f0249598e0a99d5f76069f2ab413ed15776a5/Desktop/Facultad/TLA/TPE/bin/CMakeFiles /mnt/wsl/docker-desktop-bind-mounts/Ubuntu/87a10aea14297b3d64285eac2c0f0249598e0a99d5f76069f2ab413ed15776a5/Desktop/Facultad/TLA/TPE/bin//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/Documentos/Facu/TLA/TP/TP-TLA/bin/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/wsl/docker-desktop-bind-mounts/Ubuntu/87a10aea14297b3d64285eac2c0f0249598e0a99d5f76069f2ab413ed15776a5/Desktop/Facultad/TLA/TPE/bin/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

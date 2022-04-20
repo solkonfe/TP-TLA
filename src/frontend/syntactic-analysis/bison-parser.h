@@ -1,14 +1,14 @@
-/* A Bison parser, made by GNU Bison 2.3.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
-/* Skeleton interface for Bison's Yacc-like parsers in C
+/* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
-   Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Inc.
 
-   This program is free software; you can redistribute it and/or modify
+   This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,9 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -33,57 +31,56 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* Tokens.  */
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
+#ifndef YY_YY_SRC_FRONTEND_SYNTACTIC_ANALYSIS_BISON_PARSER_H_INCLUDED
+# define YY_YY_SRC_FRONTEND_SYNTACTIC_ANALYSIS_BISON_PARSER_H_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     INTEGER = 258,
-     BOX = 259,
-     ENDBOX = 260,
-     START = 261,
-     END = 262,
-     TITLE = 263,
-     TITLE_SIZE = 264,
-     COLOR = 265,
-     POSITION = 266,
-     DEF_DELIMITER = 267,
-     TABLE = 268,
-     MATRIX = 269,
-     SUB = 270,
-     ADD = 271,
-     DIV = 272,
-     MUL = 273
-   };
+  enum yytokentype
+  {
+    INTEGER = 258,
+    BOX = 259,
+    ENDBOX = 260,
+    START = 261,
+    END = 262,
+    TITLE = 263,
+    TITLE_SIZE = 264,
+    COLOR = 265,
+    POSITION = 266,
+    DEF_DELIMITER = 267,
+    COMMA = 268,
+    TABLE = 269,
+    MATRIX = 270,
+    CONTENT = 271,
+    LINK = 272,
+    ADD = 273,
+    SUB = 274,
+    MUL = 275,
+    DIV = 276
+  };
 #endif
-/* Tokens.  */
-#define INTEGER 258
-#define BOX 259
-#define ENDBOX 260
-#define START 261
-#define END 262
-#define TITLE 263
-#define TITLE_SIZE 264
-#define COLOR 265
-#define POSITION 266
-#define DEF_DELIMITER 267
-#define TABLE 268
-#define MATRIX 269
-#define SUB 270
-#define ADD 271
-#define DIV 272
-#define MUL 273
 
-
-
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef int YYSTYPE;
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
-# define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
 #endif
+
 
 extern YYSTYPE yylval;
 
+int yyparse (void);
+
+#endif /* !YY_YY_SRC_FRONTEND_SYNTACTIC_ANALYSIS_BISON_PARSER_H_INCLUDED  */

@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/d/Documentos/Facu/TLA/TP/TP-TLA
+# Install script for directory: /mnt/wsl/docker-desktop-bind-mounts/Ubuntu/87a10aea14297b3d64285eac2c0f0249598e0a99d5f76069f2ab413ed15776a5/Desktop/Facultad/TLA/TPE
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/d/Documentos/Facu/TLA/TP/TP-TLA/bin/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/wsl/docker-desktop-bind-mounts/Ubuntu/87a10aea14297b3d64285eac2c0f0249598e0a99d5f76069f2ab413ed15776a5/Desktop/Facultad/TLA/TPE/bin/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

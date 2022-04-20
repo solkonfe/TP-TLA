@@ -1,0 +1,8 @@
+start 
+    box:
+        title id='t1' : "This is section 1"
+    endbox
+    box:
+        link idref='#t1' : "Go to section 1"
+    endbox
+end

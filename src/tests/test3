@@ -1,0 +1,11 @@
+start
+    box: 
+        title: "This is box 1"
+        box:
+            title: "This is box 2"
+            box:
+                title: "This is box 3"
+            endbox
+        endbox
+    endbox
+end
