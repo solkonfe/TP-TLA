@@ -8,5 +8,47 @@ start
         row:
             data: "R7.1"
         endrow
+
+        row:
+            data: "R7.9"
+            data: "Aceptar"
+            data: "Crear un programa que genere esta misma tabla de casos de uso (usando color, negrita, etc.)."
+        endrow
+
+        row:
+            data: "R7.10"
+            data: "Aceptar"
+            data: "Generar un HTML con 30 begin-boxes que contengan texto e imagenes. Debe ser repsonsive."
+        endrow
+
+        row:
+            data: "R7.11"
+            data: "Rechazar"
+            data: "Un programa mal formado, usando keywords inexistentes."
+        endrow
+
+        row:
+            data: "R7.12"
+            data: "Rechazar"
+            data: "Un programa con begin-boxes desasociados (se abre y no se cierra, o se cierra incorrectamente)."
+        endrow
+
+        row:
+            data: "R7.13"
+            data: "Rechazar"
+            data: "Un programa con atributos de estilo sobre elementos que no lo soportan."
+        endrow
+
+        row:
+            data: "R7.14"
+            data: "Rechazar"
+            data: "Un programa que asigna un texto a un párrafo, o a un enlace de una imagen sin usar comillas."
+        endrow
+
+        row:
+            data: "R7.15"
+            data: "Rechazar"
+            data: "Un programa que liste los estilos sin utilizar comas para separarlos."
+        endrow     
     endtable
 end
