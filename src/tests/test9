@@ -7,8 +7,44 @@ start
         endrow
         row:
             data: "R7.1"
+            data: "Aceptar"
+            data: "Un programa que genere esto: HTML Headings."
         endrow
-
+        row:
+            data: "R7.2"
+            data: "Aceptar"
+            data: "Un programa que genere esto: HTML Links"
+        endrow
+        row:
+            data: "R7.3"
+            data: "Aceptar"
+            data: "Un programa que contenga hasta 3 niveles de anidamiento de bloques (div o similar)."
+        endrow
+        row:
+            data: "R7.4"
+            data: "Aceptar"
+            data: "Generar un post similar a The Magic Behind Compilers, hasta la 2da imagen (inclusive)."
+        endrow
+        row:
+            data: "R7.5"
+            data: "Aceptar"
+            data: " Crear un programa que genere un HTML utilizando todos los estilos."
+        endrow
+        row:
+            data: "R7.6"
+            data: "Aceptar"
+            data: "Crear un programa donde se genere una matriz de 9x9, y sus elementos estén centrados"
+        endrow
+        row:
+            data: "R7.7"
+            data: "Aceptar"
+            data: "Crear un programa donde pueda saltar secciones dentro del HTML usando links."
+        endrow
+        row:
+            data: "R7.8"
+            data: "Aceptar"
+            data: "Crear un programa que genere un tutorial para usar este mismo lenguaje."
+        endrow
         row:
             data: "R7.9"
             data: "Aceptar"
@@ -32,7 +68,7 @@ start
             data: "Rechazar"
             data: "Un programa con begin-boxes desasociados (se abre y no se cierra, o se cierra incorrectamente)."
         endrow
-
+        
         row:
             data: "R7.13"
             data: "Rechazar"
@@ -49,6 +85,6 @@ start
             data: "R7.15"
             data: "Rechazar"
             data: "Un programa que liste los estilos sin utilizar comas para separarlos."
-        endrow     
+        endrow 
     endtable
 end

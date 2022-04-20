@@ -78,6 +78,5 @@ whitespace		[ \f\n\r\t\v]
 
 .											{ return UnknownPatternAction(yytext); }
 
-{digit}+									{ return IntegerPatternAction(yytext); }
 
 %%

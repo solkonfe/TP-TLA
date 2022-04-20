@@ -120,25 +120,39 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    INTEGER = 258,
-    BOX = 259,
-    ENDBOX = 260,
-    START = 261,
-    END = 262,
-    TITLE = 263,
-    TITLE_SIZE = 264,
-    COLOR = 265,
-    POSITION = 266,
-    DEF_DELIMITER = 267,
-    COMMA = 268,
-    TABLE = 269,
-    MATRIX = 270,
-    CONTENT = 271,
-    LINK = 272,
-    ADD = 273,
-    SUB = 274,
-    MUL = 275,
-    DIV = 276
+    BOX = 258,
+    ENDBOX = 259,
+    START = 260,
+    END = 261,
+    TITLE = 262,
+    TITLE_SIZE = 263,
+    COLOR = 264,
+    POSITION = 265,
+    DEF_DELIMITER = 266,
+    COMMA = 267,
+    TABLE = 268,
+    ENDTABLE = 269,
+    LINK = 270,
+    RANDOM = 271,
+    IMAGE = 272,
+    HYPERLINK = 273,
+    ID = 274,
+    IDREF = 275,
+    SOURCE = 276,
+    BOLD = 277,
+    ITALIC = 278,
+    UNDERLINED = 279,
+    NUMBER = 280,
+    ROW = 281,
+    ENDROW = 282,
+    DATA = 283,
+    TIMES = 284,
+    TEXT = 285,
+    CONTENT = 286,
+    ADD = 287,
+    SUB = 288,
+    MUL = 289,
+    DIV = 290
   };
 #endif
 
@@ -255,7 +269,7 @@ typedef int yytype_uint16;
 #define YYSIZEOF(X) YY_CAST (YYPTRDIFF_T, sizeof (X))
 
 /* Stored state numbers (used for stacks). */
-typedef yytype_int8 yy_state_t;
+typedef yytype_int16 yy_state_t;
 
 /* State numbers in computations.  */
 typedef int yy_state_fast_t;
@@ -458,21 +472,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  10
+#define YYFINAL  17
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   68
+#define YYLAST   486
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  22
+#define YYNTOKENS  36
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  8
+#define YYNNTS  20
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  30
+#define YYNRULES  274
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  53
+#define YYNSTATES  414
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   276
+#define YYMAXUTOK   290
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -511,17 +525,43 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_int8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,    31,    31,    34,    35,    36,    37,    38,    41,    42,
-      43,    44,    45,    46,    47,    48,    51,    54,    55,    56,
-      59,    60,    61,    62,    65,    66,    67,    68,    69,    70,
-      71
+       0,    45,    45,    48,    49,    50,    51,    52,    53,    54,
+      55,    58,    59,    63,    64,    65,    68,    71,    72,    73,
+      74,    75,    76,    77,    78,    79,    80,    81,    82,    83,
+      84,    85,    86,    87,    88,    89,    90,    91,    92,    93,
+      94,    95,    96,    97,    98,   101,   102,   103,   104,   105,
+     106,   107,   108,   111,   112,   115,   116,   119,   120,   121,
+     122,   123,   124,   125,   126,   127,   129,   130,   131,   132,
+     133,   134,   135,   136,   138,   139,   140,   141,   142,   143,
+     144,   145,   147,   148,   149,   150,   151,   152,   153,   154,
+     156,   157,   158,   159,   160,   161,   162,   163,   165,   166,
+     167,   168,   169,   170,   171,   172,   174,   175,   176,   177,
+     178,   179,   180,   181,   183,   184,   185,   189,   190,   191,
+     192,   193,   196,   197,   198,   199,   202,   203,   204,   205,
+     206,   207,   208,   209,   211,   212,   213,   214,   215,   216,
+     217,   218,   220,   221,   222,   223,   224,   225,   226,   227,
+     229,   230,   231,   232,   233,   234,   235,   236,   238,   239,
+     240,   241,   242,   243,   244,   245,   248,   249,   250,   251,
+     252,   253,   254,   255,   257,   258,   259,   260,   261,   262,
+     263,   264,   266,   267,   268,   269,   270,   271,   272,   273,
+     276,   277,   278,   279,   280,   281,   282,   283,   285,   286,
+     287,   288,   289,   290,   291,   292,   294,   295,   296,   297,
+     298,   299,   300,   301,   303,   304,   305,   306,   307,   308,
+     309,   310,   312,   313,   314,   315,   316,   317,   318,   319,
+     321,   322,   323,   324,   325,   326,   327,   328,   330,   331,
+     332,   333,   334,   335,   336,   337,   340,   343,   344,   347,
+     350,   351,   354,   355,   358,   359,   360,   361,   362,   364,
+     365,   366,   367,   369,   370,   371,   372,   374,   375,   376,
+     377,   378,   379,   380,   381
 };
 #endif
 
@@ -530,11 +570,16 @@ static const yytype_int8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "INTEGER", "BOX", "ENDBOX", "START",
-  "END", "TITLE", "TITLE_SIZE", "COLOR", "POSITION", "DEF_DELIMITER",
-  "COMMA", "TABLE", "MATRIX", "CONTENT", "LINK", "ADD", "SUB", "MUL",
-  "DIV", "$accept", "program", "web_expression", "div_expression",
-  "div_attrs", "simple_expression", "title_expression", "title_attrs", YY_NULLPTR
+  "$end", "error", "$undefined", "BOX", "ENDBOX", "START", "END", "TITLE",
+  "TITLE_SIZE", "COLOR", "POSITION", "DEF_DELIMITER", "COMMA", "TABLE",
+  "ENDTABLE", "LINK", "RANDOM", "IMAGE", "HYPERLINK", "ID", "IDREF",
+  "SOURCE", "BOLD", "ITALIC", "UNDERLINED", "NUMBER", "ROW", "ENDROW",
+  "DATA", "TIMES", "TEXT", "CONTENT", "ADD", "SUB", "MUL", "DIV",
+  "$accept", "program", "web_expression", "img_expression", "img_attrs",
+  "link_expression", "link_attrs", "div_expression", "div_attrs",
+  "text_expression", "text_attrs", "simple_expression", "title_expression",
+  "title_attrs", "table_expression", "table_resolve", "row_resolve",
+  "row_expression", "row_data", "data_attrs", YY_NULLPTR
 };
 #endif
 
@@ -545,11 +590,12 @@ static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276
+     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
+     285,   286,   287,   288,   289,   290
 };
 # endif
 
-#define YYPACT_NINF (-13)
+#define YYPACT_NINF (-20)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -561,94 +607,336 @@ static const yytype_int16 yytoknum[] =
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
      STATE-NUM.  */
-static const yytype_int8 yypact[] =
+static const yytype_int16 yypact[] =
 {
-       2,    29,    10,    -8,    51,   -13,   -13,    24,   -13,   -13,
-     -13,   -13,    19,     9,    16,    21,   -13,    38,    40,   -13,
-      29,   -13,    37,     1,   -13,    19,    30,     3,   -13,   -13,
-      48,   -13,    41,   -13,    31,     8,    42,    14,    53,   -13,
-     -13,   -13,   -13,   -13,   -13,   -13,    43,   -13,    62,    45,
-     -13,   -13,   -13
+      20,    40,    29,    -1,   182,     2,    25,   -20,    18,    15,
+     120,    10,   -20,   -20,   -20,   -20,   -20,   -20,   -20,    75,
+      34,    39,    51,    59,    67,    -9,    69,    41,   -20,    44,
+      84,   -20,    68,    98,   160,   165,   111,   112,   122,   129,
+     -20,   -20,   -20,   115,   -20,    40,   -20,   -20,    55,   -20,
+      57,   -20,   -20,    75,   126,   136,   175,   -20,   -20,   109,
+      -7,   118,   -20,   -20,   123,   169,   148,   178,   -20,   285,
+     272,   273,   -20,   268,   151,   181,   208,   270,   -20,    90,
+     -20,   292,    93,    95,    73,   286,   288,   290,   291,   293,
+     -20,   294,   295,   296,   297,   -20,   298,   299,   300,   -20,
+     301,   302,   -20,   -20,   -20,   279,   -20,   211,   303,   -20,
+     214,   304,   -20,   -20,   305,   306,   307,   308,   -20,   309,
+     310,   311,   -20,   312,   313,   -20,   -20,   -20,   -20,   -20,
+     110,   -20,   322,   157,   187,   217,    31,   314,   193,   220,
+      65,   315,   223,    72,   316,    92,   317,   289,   319,   320,
+     -20,   -20,   323,   321,   -20,   -20,   199,   226,   114,   324,
+     229,   133,   325,   139,   326,   -20,   -20,   318,   331,   335,
+     339,   -20,   340,   341,   342,   -20,   343,   344,   -20,   345,
+     -20,   -20,   232,   346,   347,   -20,   348,   349,   -20,   350,
+     -20,   -20,   351,   352,   -20,   353,   -20,   -20,   354,   -20,
+     -20,   356,   289,   -20,   355,   -20,   357,   -20,   235,   358,
+     359,   -20,   360,   361,   -20,   362,   -20,   -20,   363,   364,
+     -20,   365,   -20,   -20,   366,   -20,   -20,   205,   238,   145,
+     367,   241,   162,   368,   172,   369,   370,   184,   371,   -20,
+     190,   372,   196,   373,   374,   202,   375,   376,   377,   378,
+     -20,   -20,   -20,   249,   379,   -20,   251,   380,   253,   381,
+     383,   255,   384,   385,   386,   390,   399,   400,   -20,   401,
+     402,   -20,   403,   -20,   -20,   404,   405,   -20,   406,   -20,
+     -20,   407,   -20,   -20,   -20,   396,   -20,   -20,   409,   -20,
+     -20,   410,   -20,   -20,   -20,   411,   -20,   -20,   -20,   -20,
+     142,    14,   -20,   408,   -20,   -20,   412,   -20,   -20,   413,
+     -20,   -20,   -20,   414,   -20,   -20,   -20,   -20,   244,   257,
+     415,   259,   416,   417,   261,   418,   419,   420,   -20,   421,
+     422,   423,   424,   425,   337,   -20,   -20,   -20,   427,   -20,
+     -20,   -20,   426,   428,   429,   436,   437,   -20,   439,   -20,
+     -20,   442,   -20,   -20,   -20,   443,   -20,   -20,   -20,   -20,
+     -20,   -20,   -20,    -3,    96,   -20,   338,   -20,   -20,   -20,
+     263,   432,   433,   434,   435,   448,   449,   450,   451,   452,
+     -20,   453,   -20,   -20,   -20,   -20,   -20,   247,   265,   444,
+     267,   445,   446,   454,   455,   -20,   459,   -20,   -20,   460,
+     -20,   -20,   -20,   269,   456,   457,   458,   461,   -20,   -20,
+     -20,   -20,   462,   -20
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
      Performed when YYTABLE does not specify something else to do.  Zero
      means the default is an error.  */
-static const yytype_int8 yydefact[] =
+static const yytype_int16 yydefact[] =
 {
-       0,     0,     0,     0,     0,     5,     6,     0,     7,     3,
-       1,    16,     0,     0,    27,    29,    30,     0,     0,     2,
-       4,    17,     0,     0,    18,     0,     0,     0,    20,    22,
-       0,     9,     0,    10,     0,    19,     0,     0,    25,    26,
-      28,    21,    23,    12,    14,     8,     0,    11,     0,     0,
-      13,    15,    24
+       0,     0,     0,     0,     0,     0,     0,     9,     0,     0,
+      57,     0,     5,     6,    10,     4,     3,     1,    53,     0,
+       0,     0,   174,   206,   222,     0,   238,     0,    56,     0,
+       0,    14,    13,    11,    17,    38,     0,    74,    90,   106,
+     114,   115,   116,     0,     2,     7,   120,   121,     0,   117,
+       0,   118,    54,     0,     0,     0,     0,   124,   122,     0,
+       0,     0,     8,    15,     0,     0,    18,    21,    23,     0,
+      39,    42,    44,     0,     0,     0,     0,     0,    46,     0,
+      47,     0,   119,     0,     0,   150,   158,   182,   175,   180,
+     181,   190,   214,   207,   212,   213,   230,   223,   228,   229,
+     239,   244,   245,   125,   123,     0,    12,    24,    19,    22,
+      31,    40,    43,    16,    58,    82,    75,    80,    81,    98,
+      91,    96,    97,   107,   112,   113,    55,    49,    51,    45,
+       0,    48,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    25,    28,
+      30,    20,    32,    35,    37,    41,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    50,    52,   126,   142,   151,
+     156,   157,   166,   159,   164,   165,   183,   188,   189,   176,
+     177,   179,   198,   191,   196,   197,   215,   220,   221,   208,
+     209,   211,   231,   236,   237,   224,   225,   227,   240,   241,
+     243,     0,   246,   247,    26,    29,    33,    36,    66,    59,
+      64,    65,    83,    88,    89,    76,    77,    79,    99,   104,
+     105,    92,    93,    95,   108,   109,   111,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,   199,   204,   205,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+     248,    27,    34,    67,    72,    73,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,   134,   127,   132,   133,   143,
+     148,   149,   152,   153,   155,   167,   172,   173,   160,   161,
+     163,   184,   185,   187,   178,   200,   201,   203,   192,   193,
+     195,   216,   217,   219,   210,   232,   233,   235,   226,   242,
+       0,     0,   250,    68,    69,    71,    60,    61,    63,    84,
+      85,    87,    78,   100,   101,   103,    94,   110,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,   202,     0,
+       0,     0,   254,   255,     0,   256,   257,   258,     0,   249,
+     251,    70,     0,     0,     0,   135,   140,   141,   128,   129,
+     131,   144,   145,   147,   154,   168,   169,   171,   162,   186,
+     194,   218,   234,     0,     0,   252,     0,    62,    86,   102,
+       0,     0,     0,     0,     0,   267,     0,     0,     0,     0,
+     253,   136,   137,   139,   130,   146,   170,     0,     0,     0,
+       0,     0,     0,   268,   273,   274,   260,   261,   262,   264,
+     265,   266,   138,     0,     0,     0,     0,   269,   270,   272,
+     259,   263,     0,   271
 };
 
   /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int8 yypgoto[] =
+static const yytype_int16 yypgoto[] =
 {
-     -13,   -13,    67,   -12,   -13,   -10,     0,   -13
+     -20,   -20,   328,     0,   -20,     1,   -20,   -19,   -20,     3,
+     -20,   -16,     4,   -20,   -20,   -20,   130,   -20,    30,   -20
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int8 yydefgoto[] =
+static const yytype_int16 yydefgoto[] =
 {
-      -1,     2,    20,     8,    13,    35,    24,    18
+      -1,     2,    45,    46,    33,    47,    36,    14,    21,    49,
+      43,    82,    51,    27,    30,   202,   203,   301,   302,   338
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
      positive, shift that token.  If negative, reduce the rule whose
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
-static const yytype_int8 yytable[] =
+static const yytype_int16 yytable[] =
 {
-      22,     9,    23,    11,    12,     3,    33,     9,     1,     4,
-      10,    34,    32,    36,    40,    37,     4,    21,     3,    47,
-       9,    25,     4,     3,    21,    48,    46,     4,     3,    26,
-      21,    19,     4,     3,    27,    21,    44,     4,     5,     6,
-      38,    39,    31,     5,     6,     4,    43,    45,    50,     4,
-       4,     4,    30,    21,    28,    29,    52,    21,    21,    21,
-      14,    15,    16,    17,    41,    42,    49,    51,     7
+      48,    12,    13,    50,    15,    16,    57,   375,   103,    18,
+      19,    12,    13,     3,    15,    16,    44,     4,    20,   376,
+     377,     5,    58,     6,   104,     1,     7,     8,     9,    17,
+      34,    81,    79,    28,    83,    35,    29,    84,    31,    32,
+      10,   339,   300,     3,    52,    12,    13,     4,    15,    16,
+      53,     5,    60,     6,   179,   180,     7,     8,     9,    78,
+       3,    80,     4,    54,     4,   132,     5,   130,     5,    61,
+      10,    55,     8,     9,     8,     9,     3,   131,     3,    56,
+       4,    59,     4,    63,     5,    10,     5,    10,   189,   190,
+       8,     9,     8,     9,   127,   195,   196,     4,    62,   129,
+       4,     5,     4,    10,     5,    10,     5,     8,     9,    64,
+       8,     9,     8,     9,   165,   198,   199,     4,   378,   379,
+      10,     5,    73,    10,    74,    10,    77,     8,     9,    37,
+      38,   100,   101,   102,    75,    85,    86,   215,   216,    39,
+      10,    76,    40,    41,    42,    87,    91,   105,    88,    89,
+      90,   332,   333,   334,   106,    92,   221,   222,    93,    94,
+      95,   114,   224,   225,   335,   336,   337,   167,   272,   273,
+     115,   108,    65,   116,   117,   118,   168,    69,   107,   169,
+     170,   171,    66,    67,    68,   278,   279,    70,    71,    72,
+      22,    23,    24,    25,    96,   281,   282,    97,    98,    99,
+     119,    26,   109,   120,   121,   122,   172,   285,   286,   173,
+     174,   175,   182,   288,   289,   183,   184,   185,   208,   291,
+     292,   209,   210,   211,   265,   295,   296,   266,   267,   268,
+     123,   124,   125,   148,   149,   150,   152,   153,   154,   176,
+     177,   178,   186,   187,   188,   192,   193,   194,   212,   213,
+     214,   218,   219,   220,   237,   238,   239,   253,   254,   255,
+     269,   270,   271,   275,   276,   277,   345,   346,   347,   393,
+     394,   395,   303,   304,   306,   307,   309,   310,   313,   314,
+     348,   349,   351,   352,   355,   356,   381,   382,   396,   397,
+     399,   400,   407,   408,   110,   111,   128,   112,   133,   113,
+     134,   126,   135,   136,   147,   137,   138,   139,   140,   141,
+     142,   143,   144,   145,   146,   201,     0,   156,   157,   158,
+     159,   160,   161,   162,   163,   164,   166,   151,   155,    11,
+     227,   340,   250,     0,     0,     0,     0,     0,   181,   191,
+     197,   200,   204,   228,   205,   207,   206,   229,   217,   223,
+     226,   230,   231,   232,   233,   234,   235,   236,   240,   241,
+     242,   243,   244,   245,   246,   247,   248,   249,   365,   380,
+     256,   257,   258,   259,   260,   261,   262,   263,   264,   251,
+       0,   252,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,   274,   280,   283,   284,   287,   290,   293,   294,   297,
+     298,   299,   318,   305,   308,   311,   300,   312,   315,   316,
+     317,   319,   320,   321,   322,   323,   324,   325,   326,   327,
+     328,   329,   330,   331,   342,   343,   344,     0,     0,     0,
+       0,     0,   341,     0,     0,     0,   363,   364,   366,   350,
+     353,   354,   357,   358,   359,   360,   361,   362,   370,   371,
+     367,   372,   368,   369,   373,   374,   383,   384,   385,   386,
+     387,   388,   389,   390,   391,   392,   403,   404,   398,   401,
+     402,   405,   406,   412,     0,     0,     0,     0,     0,     0,
+     409,   410,   411,     0,     0,     0,   413
 };
 
-static const yytype_int8 yycheck[] =
+static const yytype_int16 yycheck[] =
 {
-      12,     1,    12,    11,    12,     4,     5,     7,     6,     8,
-       0,    23,    22,    25,    11,    25,     8,    16,     4,     5,
-      20,    12,     8,     4,    16,    37,    36,     8,     4,    13,
-      16,     7,     8,     4,    13,    16,     5,     8,    14,    15,
-      10,    11,     5,    14,    15,     8,     5,     5,     5,     8,
-       8,     8,    12,    16,    16,    17,    11,    16,    16,    16,
-       9,    10,    11,    12,    16,    17,    13,     5,     1
+      19,     1,     1,    19,     1,     1,    15,    10,    15,    10,
+      11,    11,    11,     3,    11,    11,     6,     7,    19,    22,
+      23,    11,    31,    13,    31,     5,    16,    17,    18,     0,
+      15,    50,    48,    31,    53,    20,    11,    53,    20,    21,
+      30,    27,    28,     3,    10,    45,    45,     7,    45,    45,
+      11,    11,    11,    13,    23,    24,    16,    17,    18,     4,
+       3,     4,     7,    12,     7,    84,    11,    83,    11,    25,
+      30,    12,    17,    18,    17,    18,     3,     4,     3,    12,
+       7,    12,     7,    15,    11,    30,    11,    30,    23,    24,
+      17,    18,    17,    18,     4,    23,    24,     7,    14,     4,
+       7,    11,     7,    30,    11,    30,    11,    17,    18,    11,
+      17,    18,    17,    18,     4,    23,    24,     7,    22,    23,
+      30,    11,    11,    30,    12,    30,    11,    17,    18,     9,
+      10,    22,    23,    24,    12,     9,    10,    23,    24,    19,
+      30,    12,    22,    23,    24,    19,    10,    29,    22,    23,
+      24,     9,    10,    11,    31,    19,    23,    24,    22,    23,
+      24,    10,    23,    24,    22,    23,    24,    10,    23,    24,
+      19,    23,    12,    22,    23,    24,    19,    12,     9,    22,
+      23,    24,    22,    23,    24,    23,    24,    22,    23,    24,
+       8,     9,    10,    11,    19,    23,    24,    22,    23,    24,
+      19,    19,    24,    22,    23,    24,    19,    23,    24,    22,
+      23,    24,    19,    23,    24,    22,    23,    24,    19,    23,
+      24,    22,    23,    24,    19,    23,    24,    22,    23,    24,
+      22,    23,    24,    22,    23,    24,    22,    23,    24,    22,
+      23,    24,    22,    23,    24,    22,    23,    24,    22,    23,
+      24,    22,    23,    24,    22,    23,    24,    22,    23,    24,
+      22,    23,    24,    22,    23,    24,    22,    23,    24,    22,
+      23,    24,    23,    24,    23,    24,    23,    24,    23,    24,
+      23,    24,    23,    24,    23,    24,    23,    24,    23,    24,
+      23,    24,    23,    24,     9,    23,     4,    24,    12,    31,
+      12,    31,    12,    12,    25,    12,    12,    12,    12,    12,
+      12,    12,    12,    12,    12,    26,    -1,    12,    12,    12,
+      12,    12,    12,    12,    12,    12,     4,    24,    24,     1,
+      12,   301,   202,    -1,    -1,    -1,    -1,    -1,    24,    24,
+      24,    24,    23,    12,    24,    24,    23,    12,    24,    24,
+      24,    12,    12,    12,    12,    12,    12,    12,    12,    12,
+      12,    12,    12,    12,    12,    12,    12,    11,    31,    31,
+      12,    12,    12,    12,    12,    12,    12,    12,    12,    24,
+      -1,    24,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    24,    24,    24,    24,    24,    24,    24,    24,    24,
+      24,    24,    12,    24,    24,    24,    28,    24,    24,    24,
+      24,    12,    12,    12,    12,    12,    12,    12,    12,    12,
+      24,    12,    12,    12,    12,    12,    12,    -1,    -1,    -1,
+      -1,    -1,    24,    -1,    -1,    -1,    12,    12,    11,    24,
+      24,    24,    24,    24,    24,    24,    24,    24,    12,    12,
+      24,    12,    24,    24,    12,    12,    24,    24,    24,    24,
+      12,    12,    12,    12,    12,    12,    12,    12,    24,    24,
+      24,    12,    12,    12,    -1,    -1,    -1,    -1,    -1,    -1,
+      24,    24,    24,    -1,    -1,    -1,    24
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     6,    23,     4,     8,    14,    15,    24,    25,    28,
-       0,    11,    12,    26,     9,    10,    11,    12,    29,     7,
-      24,    16,    25,    27,    28,    12,    13,    13,    16,    17,
-      12,     5,    27,     5,    25,    27,    25,    27,    10,    11,
-      11,    16,    17,     5,     5,     5,    27,     5,    25,    13,
-       5,     5,    11
+       0,     5,    37,     3,     7,    11,    13,    16,    17,    18,
+      30,    38,    39,    41,    43,    45,    48,     0,    10,    11,
+      19,    44,     8,     9,    10,    11,    19,    49,    31,    11,
+      50,    20,    21,    40,    15,    20,    42,     9,    10,    19,
+      22,    23,    24,    46,     6,    38,    39,    41,    43,    45,
+      47,    48,    10,    11,    12,    12,    12,    15,    31,    12,
+      11,    25,    14,    15,    11,    12,    22,    23,    24,    12,
+      22,    23,    24,    11,    12,    12,    12,    11,     4,    47,
+       4,    43,    47,    43,    47,     9,    10,    19,    22,    23,
+      24,    10,    19,    22,    23,    24,    19,    22,    23,    24,
+      22,    23,    24,    15,    31,    29,    31,     9,    23,    24,
+       9,    23,    24,    31,    10,    19,    22,    23,    24,    19,
+      22,    23,    24,    22,    23,    24,    31,     4,     4,     4,
+      47,     4,    43,    12,    12,    12,    12,    12,    12,    12,
+      12,    12,    12,    12,    12,    12,    12,    25,    22,    23,
+      24,    24,    22,    23,    24,    24,    12,    12,    12,    12,
+      12,    12,    12,    12,    12,     4,     4,    10,    19,    22,
+      23,    24,    19,    22,    23,    24,    22,    23,    24,    23,
+      24,    24,    19,    22,    23,    24,    22,    23,    24,    23,
+      24,    24,    22,    23,    24,    23,    24,    24,    23,    24,
+      24,    26,    51,    52,    23,    24,    23,    24,    19,    22,
+      23,    24,    22,    23,    24,    23,    24,    24,    22,    23,
+      24,    23,    24,    24,    23,    24,    24,    12,    12,    12,
+      12,    12,    12,    12,    12,    12,    12,    22,    23,    24,
+      12,    12,    12,    12,    12,    12,    12,    12,    12,    11,
+      52,    24,    24,    22,    23,    24,    12,    12,    12,    12,
+      12,    12,    12,    12,    12,    19,    22,    23,    24,    22,
+      23,    24,    23,    24,    24,    22,    23,    24,    23,    24,
+      24,    23,    24,    24,    24,    23,    24,    24,    23,    24,
+      24,    23,    24,    24,    24,    23,    24,    24,    24,    24,
+      28,    53,    54,    23,    24,    24,    23,    24,    24,    23,
+      24,    24,    24,    23,    24,    24,    24,    24,    12,    12,
+      12,    12,    12,    12,    12,    12,    12,    12,    24,    12,
+      12,    12,     9,    10,    11,    22,    23,    24,    55,    27,
+      54,    24,    12,    12,    12,    22,    23,    24,    23,    24,
+      24,    23,    24,    24,    24,    23,    24,    24,    24,    24,
+      24,    24,    24,    12,    12,    31,    11,    24,    24,    24,
+      12,    12,    12,    12,    12,    10,    22,    23,    22,    23,
+      31,    23,    24,    24,    24,    24,    24,    12,    12,    12,
+      12,    12,    12,    22,    23,    24,    23,    24,    24,    23,
+      24,    24,    24,    12,    12,    12,    12,    23,    24,    24,
+      24,    24,    12,    24
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    22,    23,    24,    24,    24,    24,    24,    25,    25,
-      25,    25,    25,    25,    25,    25,    26,    27,    27,    27,
-      28,    28,    28,    28,    29,    29,    29,    29,    29,    29,
-      29
+       0,    36,    37,    38,    38,    38,    38,    38,    38,    38,
+      38,    39,    39,    40,    40,    40,    41,    42,    42,    42,
+      42,    42,    42,    42,    42,    42,    42,    42,    42,    42,
+      42,    42,    42,    42,    42,    42,    42,    42,    42,    42,
+      42,    42,    42,    42,    42,    43,    43,    43,    43,    43,
+      43,    43,    43,    44,    44,    45,    45,    46,    46,    46,
+      46,    46,    46,    46,    46,    46,    46,    46,    46,    46,
+      46,    46,    46,    46,    46,    46,    46,    46,    46,    46,
+      46,    46,    46,    46,    46,    46,    46,    46,    46,    46,
+      46,    46,    46,    46,    46,    46,    46,    46,    46,    46,
+      46,    46,    46,    46,    46,    46,    46,    46,    46,    46,
+      46,    46,    46,    46,    46,    46,    46,    47,    47,    47,
+      47,    47,    48,    48,    48,    48,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    50,    51,    51,    52,
+      53,    53,    54,    54,    55,    55,    55,    55,    55,    55,
+      55,    55,    55,    55,    55,    55,    55,    55,    55,    55,
+      55,    55,    55,    55,    55
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     3,     1,     2,     1,     1,     1,     5,     4,
-       4,     5,     5,     6,     5,     6,     1,     1,     1,     2,
-       3,     4,     3,     4,     5,     3,     3,     1,     3,     1,
-       1
+       0,     2,     3,     1,     1,     1,     1,     2,     3,     1,
+       1,     2,     4,     1,     1,     2,     4,     1,     2,     3,
+       4,     2,     3,     2,     3,     4,     5,     6,     4,     5,
+       4,     3,     4,     5,     6,     4,     5,     4,     1,     2,
+       3,     4,     2,     3,     2,     5,     4,     4,     5,     5,
+       6,     5,     6,     1,     2,     4,     2,     0,     3,     5,
+       7,     7,     9,     7,     5,     5,     5,     6,     7,     7,
+       8,     7,     6,     6,     1,     3,     5,     5,     7,     5,
+       3,     3,     3,     5,     7,     7,     9,     7,     5,     5,
+       1,     3,     5,     5,     7,     5,     3,     3,     3,     5,
+       7,     7,     9,     7,     5,     5,     1,     3,     5,     5,
+       7,     5,     3,     3,     1,     1,     1,     1,     1,     2,
+       1,     1,     3,     4,     3,     4,     5,     7,     9,     9,
+      11,     9,     7,     7,     7,     9,    11,    11,    13,    11,
+       9,     9,     5,     7,     9,     9,    11,     9,     7,     7,
+       3,     5,     7,     7,     9,     7,     5,     5,     3,     5,
+       7,     7,     9,     7,     5,     5,     5,     7,     9,     9,
+      11,     9,     7,     7,     1,     3,     5,     5,     7,     5,
+       3,     3,     3,     5,     7,     7,     9,     7,     5,     5,
+       3,     5,     7,     7,     9,     7,     5,     5,     5,     6,
+       7,     7,     8,     7,     6,     6,     1,     3,     5,     5,
+       7,     5,     3,     3,     3,     5,     7,     7,     9,     7,
+       5,     5,     1,     3,     5,     5,     7,     5,     3,     3,
+       3,     5,     7,     7,     9,     7,     5,     5,     1,     3,
+       5,     5,     7,     5,     3,     3,     5,     1,     2,     4,
+       1,     2,     3,     4,     1,     1,     1,     1,     1,     7,
+       5,     5,     5,     7,     5,     5,     5,     3,     5,     7,
+       7,     9,     7,     5,     5
 };
 
 
@@ -1344,181 +1632,1303 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 31 "../src/frontend/syntactic-analysis/bison-grammar.y"
+#line 45 "../src/frontend/syntactic-analysis/bison-grammar.y"
                                                                 { yyval = ProgramGrammarAction(0); }
-#line 1350 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 1638 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
   case 3:
-#line 34 "../src/frontend/syntactic-analysis/bison-grammar.y"
+#line 48 "../src/frontend/syntactic-analysis/bison-grammar.y"
                                                                 { yyval = WebGrammarAction(0);}
-#line 1356 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 4:
-#line 35 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                { yyval = WebGrammarAction(1);}
-#line 1362 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 1644 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
   case 5:
-#line 36 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                        {}
-#line 1368 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 50 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                { yyval = WebGrammarAction(1);}
+#line 1650 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
   case 6:
-#line 37 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                        {}
-#line 1374 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 51 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                { yyval = WebGrammarAction(2);}
+#line 1656 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
   case 7:
-#line 38 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                {}
-#line 1380 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 52 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                { yyval = WebGrammarAction(3);}
+#line 1662 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
   case 8:
-#line 41 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                {}
-#line 1386 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 53 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                { yyval = WebGrammarAction(4);}
+#line 1668 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
   case 9:
-#line 42 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                                        {}
-#line 1392 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 54 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        { yyval = WebGrammarAction(6);}
+#line 1674 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
   case 10:
-#line 43 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                                {}
-#line 1398 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 55 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                { yyval = WebGrammarAction(7);}
+#line 1680 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
   case 11:
-#line 44 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                        {}
-#line 1404 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 58 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 1686 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
   case 12:
-#line 45 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                        {}
-#line 1410 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 13:
-#line 46 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                        {}
-#line 1416 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 14:
-#line 47 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                        {}
-#line 1422 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 15:
-#line 48 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                        {}
-#line 1428 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 16:
-#line 51 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                                                                {}
-#line 1434 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 17:
-#line 54 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                                                        {}
-#line 1440 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 18:
-#line 55 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                                                                {}
-#line 1446 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 19:
-#line 56 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                                        {}
-#line 1452 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 20:
 #line 59 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                { yyval = TitleGrammarAction(0); }
-#line 1458 "../src/frontend/syntactic-analysis/bison-parser.c"
+                                                        {}
+#line 1692 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
-  case 21:
-#line 60 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                        { yyval = TitleGrammarAction(1); }
-#line 1464 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 22:
-#line 61 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                        { yyval = TitleGrammarAction(0); }
-#line 1470 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 23:
-#line 62 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                        { yyval = TitleGrammarAction(1); }
-#line 1476 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 24:
-#line 65 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                        {}
-#line 1482 "../src/frontend/syntactic-analysis/bison-parser.c"
-    break;
-
-  case 25:
-#line 66 "../src/frontend/syntactic-analysis/bison-grammar.y"
+  case 45:
+#line 101 "../src/frontend/syntactic-analysis/bison-grammar.y"
                                                                                                 {}
-#line 1488 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 1698 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
-  case 26:
-#line 67 "../src/frontend/syntactic-analysis/bison-grammar.y"
-                                                                                                {}
-#line 1494 "../src/frontend/syntactic-analysis/bison-parser.c"
+  case 46:
+#line 102 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                        {}
+#line 1704 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
-  case 27:
-#line 68 "../src/frontend/syntactic-analysis/bison-grammar.y"
+  case 47:
+#line 103 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                {}
+#line 1710 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 48:
+#line 104 "../src/frontend/syntactic-analysis/bison-grammar.y"
                                                                                                         {}
-#line 1500 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 1716 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
-  case 28:
-#line 69 "../src/frontend/syntactic-analysis/bison-grammar.y"
+  case 49:
+#line 105 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 1722 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 50:
+#line 106 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1728 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 51:
+#line 107 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 1734 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 52:
+#line 108 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1740 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 53:
+#line 111 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                                                {}
+#line 1746 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 54:
+#line 112 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                                                {}
+#line 1752 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 58:
+#line 120 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1758 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 59:
+#line 121 "../src/frontend/syntactic-analysis/bison-grammar.y"
                                                                                                 {}
-#line 1506 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 1764 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
-  case 29:
-#line 70 "../src/frontend/syntactic-analysis/bison-grammar.y"
+  case 60:
+#line 122 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1770 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 61:
+#line 123 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1776 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 62:
+#line 124 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1782 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 63:
+#line 125 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1788 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 64:
+#line 126 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1794 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 65:
+#line 127 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1800 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 66:
+#line 129 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 1806 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 67:
+#line 130 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1812 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 68:
+#line 131 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1818 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 69:
+#line 132 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1824 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 70:
+#line 133 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 1830 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 71:
+#line 134 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1836 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 72:
+#line 135 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1842 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 73:
+#line 136 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1848 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 74:
+#line 138 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 1854 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 75:
+#line 139 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 1860 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 76:
+#line 140 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1866 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 77:
+#line 141 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1872 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 78:
+#line 142 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                {}
+#line 1878 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 79:
+#line 143 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 1884 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 80:
+#line 144 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1890 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 81:
+#line 145 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1896 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 82:
+#line 147 "../src/frontend/syntactic-analysis/bison-grammar.y"
                                                                                                                 {}
-#line 1512 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 1902 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
-  case 30:
-#line 71 "../src/frontend/syntactic-analysis/bison-grammar.y"
+  case 83:
+#line 148 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 1908 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 84:
+#line 149 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1914 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 85:
+#line 150 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1920 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 86:
+#line 151 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 1926 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 87:
+#line 152 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1932 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 88:
+#line 153 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 1938 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 89:
+#line 154 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 1944 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 90:
+#line 156 "../src/frontend/syntactic-analysis/bison-grammar.y"
                                                                                                                 {}
-#line 1518 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 1950 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 91:
+#line 157 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 1956 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 92:
+#line 158 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 1962 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 93:
+#line 159 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1968 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 94:
+#line 160 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 1974 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 95:
+#line 161 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 1980 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 96:
+#line 162 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 1986 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 97:
+#line 163 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 1992 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 98:
+#line 165 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 1998 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 99:
+#line 166 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2004 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 100:
+#line 167 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2010 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 101:
+#line 168 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2016 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 102:
+#line 169 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2022 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 103:
+#line 170 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2028 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 104:
+#line 171 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2034 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 105:
+#line 172 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2040 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 106:
+#line 174 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                {}
+#line 2046 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 107:
+#line 175 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2052 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 108:
+#line 176 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2058 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 109:
+#line 177 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2064 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 110:
+#line 178 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                        {}
+#line 2070 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 111:
+#line 179 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2076 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 112:
+#line 180 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2082 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 113:
+#line 181 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2088 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 114:
+#line 183 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2094 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 115:
+#line 184 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2100 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 116:
+#line 185 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                {}
+#line 2106 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 117:
+#line 189 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                                                {}
+#line 2112 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 118:
+#line 190 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                                                {}
+#line 2118 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 119:
+#line 191 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                        {}
+#line 2124 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 120:
+#line 192 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                                                {}
+#line 2130 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 121:
+#line 193 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                                                {}
+#line 2136 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 122:
+#line 196 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                { yyval = TitleGrammarAction(0); }
+#line 2142 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 123:
+#line 197 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        { yyval = TitleGrammarAction(1); }
+#line 2148 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 124:
+#line 198 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        { yyval = TitleGrammarAction(2); }
+#line 2154 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 125:
+#line 199 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        { yyval = TitleGrammarAction(3); }
+#line 2160 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 126:
+#line 202 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2166 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 127:
+#line 203 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2172 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 128:
+#line 204 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2178 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 129:
+#line 205 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2184 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 130:
+#line 206 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2190 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 131:
+#line 207 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2196 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 132:
+#line 208 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2202 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 133:
+#line 209 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2208 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 134:
+#line 211 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2214 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 135:
+#line 212 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2220 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 136:
+#line 213 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2226 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 137:
+#line 214 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2232 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 138:
+#line 215 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2238 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 139:
+#line 216 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2244 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 140:
+#line 217 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2250 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 141:
+#line 218 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2256 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 142:
+#line 220 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                {}
+#line 2262 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 143:
+#line 221 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2268 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 144:
+#line 222 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2274 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 145:
+#line 223 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2280 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 146:
+#line 224 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2286 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 147:
+#line 225 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2292 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 148:
+#line 226 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2298 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 149:
+#line 227 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2304 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 150:
+#line 229 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2310 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 151:
+#line 230 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2316 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 152:
+#line 231 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2322 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 153:
+#line 232 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2328 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 154:
+#line 233 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2334 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 155:
+#line 234 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2340 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 156:
+#line 235 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2346 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 157:
+#line 236 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2352 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 158:
+#line 238 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2358 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 159:
+#line 239 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2364 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 160:
+#line 240 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2370 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 161:
+#line 241 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2376 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 162:
+#line 242 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2382 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 163:
+#line 243 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2388 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 164:
+#line 244 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2394 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 165:
+#line 245 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2400 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 166:
+#line 248 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2406 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 167:
+#line 249 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2412 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 168:
+#line 250 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2418 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 169:
+#line 251 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2424 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 170:
+#line 252 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2430 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 171:
+#line 253 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2436 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 172:
+#line 254 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2442 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 173:
+#line 255 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2448 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 174:
+#line 257 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2454 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 175:
+#line 258 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2460 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 176:
+#line 259 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2466 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 177:
+#line 260 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2472 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 178:
+#line 261 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2478 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 179:
+#line 262 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2484 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 180:
+#line 263 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2490 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 181:
+#line 264 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2496 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 182:
+#line 266 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2502 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 183:
+#line 267 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2508 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 184:
+#line 268 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2514 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 185:
+#line 269 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2520 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 186:
+#line 270 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2526 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 187:
+#line 271 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2532 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 188:
+#line 272 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2538 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 189:
+#line 273 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2544 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 190:
+#line 276 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2550 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 191:
+#line 277 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2556 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 192:
+#line 278 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2562 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 193:
+#line 279 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2568 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 194:
+#line 280 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2574 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 195:
+#line 281 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2580 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 196:
+#line 282 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2586 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 197:
+#line 283 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2592 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 198:
+#line 285 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2598 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 199:
+#line 286 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2604 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 200:
+#line 287 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2610 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 201:
+#line 288 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2616 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 202:
+#line 289 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2622 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 203:
+#line 290 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2628 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 204:
+#line 291 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2634 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 205:
+#line 292 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2640 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 206:
+#line 294 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2646 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 207:
+#line 295 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2652 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 208:
+#line 296 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2658 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 209:
+#line 297 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2664 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 210:
+#line 298 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                {}
+#line 2670 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 211:
+#line 299 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2676 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 212:
+#line 300 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2682 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 213:
+#line 301 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2688 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 214:
+#line 303 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                {}
+#line 2694 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 215:
+#line 304 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2700 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 216:
+#line 305 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2706 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 217:
+#line 306 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2712 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 218:
+#line 307 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2718 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 219:
+#line 308 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2724 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 220:
+#line 309 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2730 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 221:
+#line 310 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2736 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 222:
+#line 312 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                {}
+#line 2742 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 223:
+#line 313 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2748 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 224:
+#line 314 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2754 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 225:
+#line 315 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2760 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 226:
+#line 316 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2766 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 227:
+#line 317 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2772 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 228:
+#line 318 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2778 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 229:
+#line 319 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2784 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 230:
+#line 321 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2790 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 231:
+#line 322 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2796 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 232:
+#line 323 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2802 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 233:
+#line 324 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2808 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 234:
+#line 325 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2814 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 235:
+#line 326 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2820 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 236:
+#line 327 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                        {}
+#line 2826 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 237:
+#line 328 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2832 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 238:
+#line 330 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                                {}
+#line 2838 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 239:
+#line 331 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2844 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 240:
+#line 332 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2850 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 241:
+#line 333 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2856 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 242:
+#line 334 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                        {}
+#line 2862 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 243:
+#line 335 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2868 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 244:
+#line 336 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2874 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 245:
+#line 337 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2880 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 246:
+#line 340 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                        {}
+#line 2886 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 268:
+#line 375 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                                {}
+#line 2892 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 269:
+#line 376 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2898 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 270:
+#line 377 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2904 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 271:
+#line 378 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2910 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 272:
+#line 379 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2916 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 273:
+#line 380 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                        {}
+#line 2922 "../src/frontend/syntactic-analysis/bison-parser.c"
+    break;
+
+  case 274:
+#line 381 "../src/frontend/syntactic-analysis/bison-grammar.y"
+                                                                                {}
+#line 2928 "../src/frontend/syntactic-analysis/bison-parser.c"
     break;
 
 
-#line 1522 "../src/frontend/syntactic-analysis/bison-parser.c"
+#line 2932 "../src/frontend/syntactic-analysis/bison-parser.c"
 
       default: break;
     }
@@ -1750,5 +3160,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 77 "../src/frontend/syntactic-analysis/bison-grammar.y"
+#line 384 "../src/frontend/syntactic-analysis/bison-grammar.y"
 
