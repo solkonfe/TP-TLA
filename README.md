@@ -30,16 +30,14 @@ En un entorno _Microsoft Windows_, en lugar de ejecutar el comando `make`, se de
 
 ## Ejecución
 
-Para compilar un programa, primero cree un archivo vacío denominado `program` con el siguiente contenido:
+Para compilar los testeos, puede correr el programa tester.sh
 
 ```
-123123 + 123 - 2 * (454 + 890 / 89)
+./tester.sh
 ```
 
-Luego, ejecute el compilador desde el directorio raíz del proyecto, inyectando el programa desde la entrada estándard:
+Luego, las salidas de cada test se encuentran dentro de la carpeta:
 
 ```bash
-user@machine:path/ $ cat program | bin/Compiler
+src/logs/testlogs
 ```
-
-Deberia obtener el resultado correcto de evaluar el programa anterior: `122318`.
