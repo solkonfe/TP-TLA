@@ -6,8 +6,8 @@ Fixes de las correcciones hechos:
 
 
 - Modificación del CMakeLists.txt (creo que no lo cambiamos pero ver a que se refiere)
-- Reducir reglas de producción
-- Factorización de producciones. (misma que anterior creo9,)
+- Reducir reglas de producción (creo que hecho)
+- Factorización de producciones. (misma que anterior creo) ((creo que hecho))
 - Modificar hardcodeo del "src=", "id=", "idref="... por un token nuevo "="
-- Cambiar hardocodeo del orden de los atributos
+- Cambiar hardocodeo del orden de los atributos (creo que hecho)
 - Ver regex de los links, problema que ya tuvimos la vez pasada.
