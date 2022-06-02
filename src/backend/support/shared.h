@@ -33,6 +33,24 @@ typedef enum {
 	true = 1
 } boolean;
 
+typedef enum {
+	COLORVAL = 0,
+	POSITIONVAL,
+	BOLDVAL,
+	ITALICVAL, 
+	UNDERLINEDVAL
+} atr_type;
+
+typedef struct tAttribute{
+	atr_type type;
+	char * value;
+} tAttribute;
+
+typedef struct tContent{
+	char * value;
+} tContent;
+
+
 // Estado global de toda la aplicación.
 typedef struct {
 
