@@ -16,8 +16,8 @@
 /* Patrones reutilizables. */
 crlf			\r\n
 /* https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url */
-link            \'https:\/\/.*\..*'
-source          src=\'https:\/\/.*\..*\'
+link            \'https?:\/\/.*\..*'
+source          src=\'https?:\/\/.*\..*\'
 idref           idref=\'#.*\'
 id              id=\'.*\'
 title_size      (x-small|small|medium|large|x-large|xx-large)
