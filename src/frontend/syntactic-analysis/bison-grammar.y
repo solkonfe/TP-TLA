@@ -36,10 +36,6 @@
 %token TEXT
 %token CONTENT
 
-// Reglas de asociatividad y precedencia (de menor a mayor):
-%left ADD SUB
-%left MUL DIV
-
 %%
 
 program: START web_expression END				{ $$ = ProgramGrammarAction(0); }

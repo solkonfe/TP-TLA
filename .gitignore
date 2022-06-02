@@ -53,3 +53,16 @@ dkms.conf
 
 # Bin folder
 bin/
+
+# Project
+bison-parser.c
+bison-parser.h
+flex-scanner.c
+
+# VS Folders
+.vs/
+.vscode/
+
+# Others
+logs/
+.DS_STORE

@@ -1,0 +1,13 @@
+Fixes de las correcciones hechos:
+- Sacar tests de /src
+- Update del .gitignore
+- Eliminación de reglas innecesarias de la calculadora
+- Un par de cosas de los tests
+
+
+- Modificación del CMakeLists.txt (creo que no lo cambiamos pero ver a que se refiere)
+- Reducir reglas de producción
+- Factorización de producciones. (misma que anterior creo9,)
+- Modificar hardcodeo del "src=", "id=", "idref="... por un token nuevo "="
+- Cambiar hardocodeo del orden de los atributos
+- Ver regex de los links, problema que ya tuvimos la vez pasada.
