@@ -41,12 +41,61 @@ typedef enum {
 	UNDERLINEDVAL
 } atr_type;
 
-typedef struct tAttribute{
-	atr_type type;
+typedef struct tAttribute
+{
+	//atr_type type;
 	char * value;
+	struct tAttribute * next;
 } tAttribute;
 
-typedef struct tContent{
+typedef struct tAttributes
+{
+	struct tAttribute * first;
+	int size;
+} tAttributes;
+
+typedef struct tRowData
+{
+	char * value;
+	struct tRowData * nextCell;
+	tAttributes * rowAttrs;
+} tRowData;
+
+typedef struct tRow
+{
+	tRowData * firstCell;
+	struct tRow * nextRow;
+	int size;
+} tRow;
+
+typedef struct tRows
+{
+	tRow * firstRow;
+	int size;
+} tRows;
+
+typedef struct tTable{
+	tRows * firstRow;
+	int colsDeclared;
+	int rowsDeclared;
+} tTable;
+
+typedef struct tTitleAttrs{
+	tAttribute * first;
+	int titleSize;
+	char * ID;
+	int size;
+} tTitleAttrs;
+
+
+typedef struct tTitle{
+	char * value;
+	tTitleAttrs * attrs;
+	int isLink; // If link, isLink = 0. If content, isLink = 1.
+} tTitle;
+
+typedef struct tContent
+{
 	char * value;
 } tContent;
 

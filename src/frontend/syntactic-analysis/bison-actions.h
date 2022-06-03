@@ -17,14 +17,10 @@ int TitleGrammarAction(const int value);
 
 int WebGrammarAction(const int value);
 
-// Expresión.
-int FactorExpressionGrammarAction(const int value);
+tAttribute * DataAttrAction(char * value);
+tAttributes * DataSingleAttrExpression(tAttribute * node);
+tAttributes * LeftAppendAttrExpressionAction(tAttribute * leftNode, tAttributes * attrExpr);
 
-// Factores.
-int ExpressionFactorGrammarAction(const int value);
-int ConstantFactorGrammarAction(const int value);
 
-// Constantes.
-int IntegerConstantGrammarAction(const int value);
 
 #endif

@@ -1,6 +1,8 @@
 #include "../../backend/support/logger.h"
 #include "flex-actions.h"
 #include <stdlib.h>
+#include "../../backend/support/shared.h"
+#include <string.h>
 
 /**
  * Implementación de "flex-rules.h".
@@ -129,54 +131,63 @@ TokenID CommaTokenPattern(const char *lexeme)
 TokenID LinkPatternAction(const char *lexeme)
 {
 	LogDebug("LinkPatternAction: '%s'.", lexeme);
+	//yylval.string = lexeme;
 	return LINK;
 }
 
 TokenID IdrefPatternAction(const char *lexeme)
 {
 	LogDebug("IDrefPatternAction: '%s'.", lexeme);
+	//yylval.string = lexeme;
 	return IDREF;
 }
 
 TokenID IdPatternAction(const char *lexeme)
 {
 	LogDebug("IDPatternAction: '%s'.", lexeme);
+	//yylval.string = lexeme;
 	return ID;
 }
 
 TokenID SourcePatternAction(const char *lexeme)
 {
 	LogDebug("SourcePatternAction: '%s'.", lexeme);
+	//yylval.string = lexeme;
 	return SOURCE;
 }
 
 TokenID ContentPatternAction(const char *lexeme)
 {
 	LogDebug("ContentPatternAction: '%s'.", lexeme);
+	//yylval.string = lexeme;
 	return CONTENT;
 }
 
 TokenID TitleSizePatternAction(const char *lexeme)
 {
 	LogDebug("TitleSizePatternAction: '%s'.", lexeme);
+	//yylval.string = lexeme;
 	return TITLE_SIZE;
 }
 
 TokenID ColorPatternAction(const char *lexeme)
 {
 	LogDebug("ColorPatternAction: '%s'.", lexeme);
+	//yylval.string = lexeme;
 	return COLOR;
 }
 
 TokenID PositionPatternAction(const char *lexeme)
 {
 	LogDebug("PositionPatternAction: '%s'.", lexeme);
+	//yylval.string = lexeme;
 	return POSITION;
 }
 
 TokenID NumberPatternAction(const char *lexeme)
 {
 	LogDebug("NumberPatternAction: '%s'.", lexeme);
+	//yylval.string = lexeme;
 	return NUMBER;
 }
 
