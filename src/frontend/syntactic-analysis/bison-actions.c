@@ -38,7 +38,7 @@ int TitleGrammarAction(const int value){
 	return value;
 }
 
-tAttribute * DataAttrAction(char * value){
+tAttribute * ColorAttrAction(char * value){
 	LogDebug("DataAttrAction with value %s", value);
 	tAttribute * attr = malloc(sizeof(tAttribute));
 	if(attr == NULL){
@@ -48,6 +48,63 @@ tAttribute * DataAttrAction(char * value){
 	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
 	strcpy(attr->value, value);
 	attr->next = NULL;
+	attr->atr_type = COLORVAL;
+	return attr;
+}
+
+tAttribute * PositionAttrAction(char * value){
+	LogDebug("DataAttrAction with value %s", value);
+	tAttribute * attr = malloc(sizeof(tAttribute));
+	if(attr == NULL){
+		LogDebug("Error from malloc\n");
+		return NULL;
+	}
+	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
+	strcpy(attr->value, value);
+	attr->next = NULL;
+	attr->atr_type = POSITIONVAL;
+	return attr;
+}
+
+tAttribute * BoldAttrAction(char * value){
+	LogDebug("DataAttrAction with value %s", value);
+	tAttribute * attr = malloc(sizeof(tAttribute));
+	if(attr == NULL){
+		LogDebug("Error from malloc\n");
+		return NULL;
+	}
+	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
+	strcpy(attr->value, value);
+	attr->next = NULL;
+	attr->atr_type = BOLDVAL;
+	return attr;
+}
+
+tAttribute * ItalicAttrAction(char * value){
+	LogDebug("DataAttrAction with value %s", value);
+	tAttribute * attr = malloc(sizeof(tAttribute));
+	if(attr == NULL){
+		LogDebug("Error from malloc\n");
+		return NULL;
+	}
+	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
+	strcpy(attr->value, value);
+	attr->next = NULL;
+	attr->atr_type = ITALICVAL;
+	return attr;
+}
+
+tAttribute * UnderlinedAttrAction(char * value){
+	LogDebug("DataAttrAction with value %s", value);
+	tAttribute * attr = malloc(sizeof(tAttribute));
+	if(attr == NULL){
+		LogDebug("Error from malloc\n");
+		return NULL;
+	}
+	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
+	strcpy(attr->value, value);
+	attr->next = NULL;
+	attr->atr_type = UNDERLINEDVAL;
 	return attr;
 }
 
@@ -237,4 +294,232 @@ tTitle * TitleGrammarActionWithAttrsLink(tTitleAttrs * attrs, char * value){
 	title->attrs = attrs;
 	title->isLink = 0;
 	return title;
+}
+
+tText * TextExprNoAttrs(char * content){
+	tText * text = malloc(sizeof(tText));
+	if(tText == NULL){
+		return NULL;
+	}
+	text->content = malloc(sizeof(char) * (strlen(content) + 1));
+	strcpy(text->content, content);
+	text->ID = NULL;
+	text->attrs = NULL;
+	return text;
+}
+
+tText TextExprWithAttrs(tAttributes * attrs, char * content){
+	tText * text = malloc(sizeof(tText));
+	if(tText == NULL){
+		return NULL;
+	}
+	text->content = malloc(sizeof(char) * (strlen(content) + 1));
+	strcpy(text->content, content);
+	text->ID = NULL;
+	text->attrs = attrs;
+	return text;
+}
+
+tText TextExprWithAttrsAndID(char * ID, tAttributes * attrs, char * content){
+	tText * text = malloc(sizeof(tText));
+	if(tText == NULL){
+		return NULL;
+	}
+	text->content = malloc(sizeof(char) * (strlen(content) + 1));
+	strcpy(text->content, content);
+	text->ID = malloc(sizeof(char) * (strlen(content) + 1));
+	strcpy(text->ID, ID);
+	text->attrs = attrs;
+	return text;
+}
+
+tDivAttrs * DivAttrsPos(char * pos){
+	tDivAttrs * divA = malloc(sizeof(tDivAttrs));
+	if(divA==NULL)
+		return NULL;
+	divA->pos = malloc(sizeof(char) * (strlen(pos) + 1));
+	strcpy(divA->pos, pos);
+	divA->ID = NULL; 
+	return divA;
+}
+
+tDivAttrs * DivAttrsPosAndID(char * ID, char * pos){
+	tDivAttrs * divA = malloc(sizeof(tDivAttrs));
+	if(divA==NULL)
+		return NULL;
+	divA->pos = malloc(sizeof(char) * (strlen(pos) + 1));
+	strcpy(divA->pos, pos);
+	divA->ID = malloc(sizeof(char) * (strlen(ID)));
+	strcpy(divA->ID, ID); 
+	return divA;
+}
+
+tImage * ImgExprAction(char * src, char * alt){
+	tImage * img = malloc(sizeof(tImage));
+	if(tImage == NULL)
+		return NULL;
+	img->src = malloc(sizeof(char) * (strlen(src) + 1));
+	img->altText = malloc(sizeof(char) * (strlen(alt) + 1));
+	strcpy(img->src, src);
+	strcpy(img->alt, alt);
+	return img;
+}
+
+tImage * ImgExprActionWithIdref(char * src, char * alt, char * idref){
+	tImage * img = malloc(sizeof(tImage));
+	if(tImage == NULL)
+		return NULL;
+	img->src = malloc(sizeof(char) * (strlen(src) + 1));
+	img->altText = malloc(sizeof(char) * (strlen(alt) + 1));
+	img->idref = malloc(sizeof(char) * (strlen(idref) + 1));
+	strcpy(img->src, src);
+	strcpy(img->alt, alt);
+	strcpy(img->idref, idref);
+	return img;
+}
+
+tLink * LinkExpressionWithAttrs(char * src, tAttributes * attrs, char * content){
+	tLink * link = malloc(sizeof(link));
+	if(link == NULL){
+		return NULL;
+	}
+
+	link->ref = malloc(sizeof(char)*(strlen(src) + 1));
+	link->text = malloc(sizeof(char)*(strlen(src)+1));
+	strcpy(link->ref, src);
+	strcpy(link->text, content);
+	link->attrs = attrs;
+	return link;
+}
+
+tLink * LinkExpressionNoAttrs(char * src, char * content){
+	tLink * link = malloc(sizeof(link));
+	if(link == NULL){
+		return NULL;
+	}
+
+	link->ref = malloc(sizeof(char)*(strlen(src) + 1));
+	link->text = malloc(sizeof(char)*(strlen(src)+1));
+	strcpy(link->ref, src);
+	strcpy(link->text, content);
+	link->attrs = NULL;
+	return link;
+}
+
+tWebExpr * TitleExprAction(tTitle * title){
+	tWebExpr * webExp = malloc(sizeof(tWebExpr));
+	if(webExp == NULL)
+		return NULL;
+	webExp->type=TITLEEXPR;
+	webExp->expr = title;
+	webExp->next = NULL;
+	return webExp;
+}
+
+tWebExpr * TextExprAction(tText * text){
+	tWebExpr * webExp = malloc(sizeof(tWebExpr));
+	if(webExp == NULL)
+		return NULL;
+	webExp->type = TEXTEXPR;
+	webExp->expr = text;
+	webExp->next = NULL;
+	return webExp;
+}
+
+tWebExpr * ImgExprAction(tImage * img){
+	tWebExpr * webExp = malloc(sizeof(tWebExpr));
+	if(webExp == NULL)
+		return NULL;
+	webExp->type = IMGEXPR;
+	webExp->expr = img;
+	webExp->next = NULL;
+	return webExp;
+}
+
+tWebExpr * LinkExprAction(tLink * link){
+	tWebExpr * webExp = malloc(sizeof(tWebExpr));
+	if(webExp == NULL)
+		return NULL;
+	webExp->type = LINKEXPR;
+	webExp->expr = link;
+	webExp->next = NULL;
+	return webExp;
+}
+
+tWebExpr * TableExprAction(tTable * table){
+	tWebExpr * webExp = malloc(sizeof(tWebExpr));
+	if(webExp == NULL)
+		return NULL;
+	webExp->type = TABLEEXPR;
+	webExp->expr = table;
+	webExp->next = NULL;
+	return webExp;
+}
+
+tWebExpr * DivExprAction(tDiv * div){
+	tWebExpr * webExp = malloc(sizeof(tWebExpr));
+	if(webExp == NULL)
+		return NULL;
+	webExp->type = DIVEXPR;
+	webExp->expr = div;
+	webExp->next = NULL;
+	return webExp;
+}
+
+tWebExprs * SimpleWebExpressionAction(tWebExpr * exp){
+	tWebExprs * exps = malloc(sizeof(tWebExprs));
+	if(exps == NULL)
+		return NULL;
+	exps->first = exp;
+	exps->size = 1;
+	return exps;
+}
+
+tWebExprs * RightAppendWebExprAction(tWebExprs * exps, tWebExpr * exp){
+	tWebExpr * aux = exps->first;
+	while(aux->next != NULL)
+		aux = aux->next;
+	aux->next = exp;
+	exps->size++;
+	return exps;
+}
+
+tDiv * DivExprWithAttrsSingleWeb(tDivAttrs * attrs, tWebExpr * content){
+	tDiv * div = malloc(sizeof(tDiv));
+	if(div == NULL)
+		return NULL;
+	div->attrs = attrs;
+	div->content = content;
+	div->size = 1;
+	return div;
+}
+
+tDiv * DivExprNoAttrsSingleWeb(tWebExpr * content){
+	tDiv * div = malloc(sizeof(tDiv));
+	if(div == NULL)
+		return NULL;
+	div->attrs = NULL;
+	div->content = content;
+	div->size = 1;
+	return div;
+}
+
+tDiv * DivExprWithAttrsMulExp(tDivAttrs * attrs, tWebExprs * content){
+	tDiv * div = malloc(sizeof(tDiv));
+	if(div == NULL)
+		return NULL;
+	div->attrs = attrs;
+	div->content = content;
+	div->size = content->size;
+	return div;
+}
+
+tDiv * DivExprNoAttrsMulExp(tWebExprs * content){
+	tDiv * div = malloc(sizeof(tDiv));
+	if(div == NULL)
+		return NULL;
+	div->attrs = NULL;
+	div->content = content;
+	div->size = content->size;
+	return div;
 }

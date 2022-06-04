@@ -41,9 +41,18 @@ typedef enum {
 	UNDERLINEDVAL
 } atr_type;
 
+typedef enum expr_type {
+	TITLEEXPR = 0,
+	IMGEXPR,
+	LINKEXPR,
+	TABLEEXPR,
+	DIVEXPR
+} expr_type;
+
 typedef struct tAttribute
 {
 	//atr_type type;
+	atr_type type;
 	char * value;
 	struct tAttribute * next;
 } tAttribute;
@@ -87,17 +96,51 @@ typedef struct tTitleAttrs{
 	int size;
 } tTitleAttrs;
 
-
 typedef struct tTitle{
 	char * value;
 	tTitleAttrs * attrs;
 	int isLink; // If link, isLink = 0. If content, isLink = 1.
 } tTitle;
 
-typedef struct tContent
-{
-	char * value;
-} tContent;
+typedef struct tText{
+	tAttributes attrs;
+	char * ID;
+	char * content;
+} tText;
+
+typedef struct tDivAttrs{
+	char * pos;
+	char * ID;
+} tDivAttrs;
+
+typedef struct tDiv{
+	tDivAttrs * attrs;
+	void * content;
+	int size;
+} tDiv;
+
+typedef struct tImage{
+	char * source;
+	char * idref;
+	char * altText;
+} tImage;
+
+typedef struct tLink{
+	tAttributes * attrs;
+	char * ref;
+	char * text;
+} tLink;
+
+typedef struct tWebExpr{
+	expr_type type;
+	void * expr;
+	struct tWebExpr * next;
+} tWebExpr;
+
+typedef struct tWebExprs{
+	int size;
+	tWebExpr * first;
+} tWebExprs;
 
 
 // Estado global de toda la aplicación.

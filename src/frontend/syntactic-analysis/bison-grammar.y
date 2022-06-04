@@ -45,77 +45,55 @@
 
 %%
 
-program: START web_expression END				{ $$ = ProgramGrammarAction(0); }
+program: START web_expressions END				{ $$ = ProgramGrammarAction(0); }
 	;
 
-web_expression: title_expression				{ $$ = WebGrammarAction(0);}
-	| text_expression
-	| img_expression							{ $$ = WebGrammarAction(1);}
-	| link_expression							{ $$ = WebGrammarAction(2);}
-	| web_expression web_expression				{ $$ = WebGrammarAction(3);}
-	| table_expression							{ $$ = WebGrammarAction(4);}
-	| RANDOM									{ $$ = WebGrammarAction(6);}
-	| div_expression							{ $$ = WebGrammarAction(7);}
+web_expressions: web_expression					{ $$ = SimpleWebExpressionAction($1); }
+	| web_expressions web_expression			{ $$ = RightAppendWebExprAction($1, $2); }
 	;
 
-img_expression: IMAGE img_attrs 					{}
-	| IMAGE img_attrs DEF_DELIMITER CONTENT		{}
-	
+web_expression: title_expression				{ $$ = TitleExprAction($1);}
+	| text_expression							{ $$ = TextExprAction($1);}
+	| img_expression							{ $$ = ImgExprAction($1);}
+	| link_expression							{ $$ = LinkExprAction($1);}
+	| table_expression							{ $$ = TableExprACtion($1);}
+	| RANDOM									{ $$ = WebGrammarAction($1);}
+	| div_expression							{ $$ = DivExprAction($1);}
 	;
 
-img_attrs: SOURCE
-	| IDREF 
-	| SOURCE LINK
+img_expression: IMAGE SOURCE DEF_DELIMITER CONTENT							{ $$ = ImgExprAction($2, $4); }
+	| IMAGE SOURCE IDREF DEF_DELIMITER CONTENT								{ $$ = ImgExprWithIdref($2, $3, $5); }
+	| IMAGE IDREF SOURCE DEF_DELIMITER CONTENT								{ $$ = ImgExprWithIdref($3, $2, $5); }
 	;
 
-link_expression: HYPERLINK link_attrs DEF_DELIMITER CONTENT
+link_expression: HYPERLINK SOURCE link_attrs DEF_DELIMITER CONTENT			{ $$ = LinkExpressionWithAttrs($2, $3, $5); }
+	| HYPERLINK SOURCE DEF_DELIMITER CONTENT 								{ $$ = LinkExpressionNoAttrs($2, $5);}
+	| HYPERLINK IDREF link_attrs DEF_DELIMITER CONTENT						{ $$ = LinkExpressionWithAttrs($2, $3, $5); }
 	;
 
-link_attrs: SOURCE
-	| SOURCE link_attr_expression
-	| IDREF link_attr_expression
+link_attrs: link_attr													{ $$ = DataSingleAttrExpressionAction($1); }												
+	| link_attr COMMA link_attrs										{ $$ = LeftAppendAttrExpressionAction($1, $3); }
 	;
 
-link_attr_expression: link_attr
-	| link_attr COMMA link_attr
-	| link_attr_expression COMMA link_attr
-	| link_attr COMMA link_attr_expression
-	| link_attr_expression COMMA link_attr_expression
+link_attr: BOLD				{ $$ = BoldAttrAction($1); }																
+	| ITALIC 				{ $$ = ItalicAttrAction($1); }																	
+	| UNDERLINED 			{ $$ = UnderlinedAttrAction($1); }																
+	| COLOR					{ $$ = ColorAttrAction($1); }																
 	;
 
-link_attr: BOLD
-	| ITALIC
-	| UNDERLINED
-	| COLOR
+div_expression: BOX div_attrs DEF_DELIMITER web_expression ENDBOX				{ $$ = DivExprWithAttrsSingleWeb($2, $4);}
+	| BOX DEF_DELIMITER web_expression ENDBOX									{ $$ = DivExprNoAttrsSingleWeb($3); }
+	| BOX DEF_DELIMITER web_expressions ENDBOX									{ $$ = DivExprNoAttrsMulExp($3); }
+	| BOX div_attrs DEF_DELIMITER web_expressions ENDBOX						{ $$ = DivExprWithAttrsMulExp($2, $4); }
 	;
 
-div_expression: BOX div_attrs DEF_DELIMITER div_expression ENDBOX				{}
-	| BOX DEF_DELIMITER div_expression ENDBOX									{}
-	| BOX DEF_DELIMITER simple_expression ENDBOX								{}
-	| BOX div_attrs DEF_DELIMITER simple_expression ENDBOX						{}
-	| BOX DEF_DELIMITER div_expression simple_expression ENDBOX					{}
-	| BOX div_attrs DEF_DELIMITER div_expression simple_expression ENDBOX		{}
-	| BOX DEF_DELIMITER simple_expression div_expression ENDBOX					{}
-	| BOX div_attrs DEF_DELIMITER simple_expression div_expression ENDBOX		{}
+div_attrs: POSITION																{ $$ = DivAttrsPos($1); }
+	| ID POSITION																{ $$ = DivAttrsPostAndID($1, $2); }
 	;
 
-div_attrs: POSITION																{}
-	| ID POSITION																{}
-	;
-
-text_expression: TEXT text_attrs DEF_DELIMITER CONTENT
-	| DEF_DELIMITER CONTENT
-	;
-
-text_attrs: data_attrs
-	| ID data_attrs
-	;
-
-simple_expression: text_expression														{}
-	| title_expression															{}
-	| simple_expression simple_expression										{}
-	| img_expression															{}
-	| link_expression															{}
+text_expression: TEXT data_attrs DEF_DELIMITER CONTENT							{ $$ = TextExprWithAttrs($2, $4); }
+	| TEXT ID data_attrs DEF_DELIMITER CONTENT									{ $$ = TextExprWithAttrsAndID($2, $3, $5); }
+	| DEF_DELIMITER CONTENT														{ $$ = TextExprNoAttrs($2); }
 	;
 
 title_expression: TITLE DEF_DELIMITER CONTENT			{ $$ = TitleGrammarActionNoAttrsCont($3); }
@@ -151,10 +129,10 @@ data_attrs: data_attr									{ $$ = DataSingleAttrExpressionAction($1); }
 	| data_attr COMMA data_attrs						{ $$ = LeftAppendAttrExpressionAction($1, $3); }
 	;
 
-data_attr: COLOR										{ $$ = DataAttrAction($1); }
-	| POSITION											{ $$ = DataAttrAction($1); }
-	| BOLD												{ $$ = DataAttrAction($1); }
-	| ITALIC											{ $$ = DataAttrAction($1); }
-	| UNDERLINED										{ $$ = DataAttrAction($1); }
+data_attr: COLOR										{ $$ = ColorAttrAction($1); }
+	| POSITION											{ $$ = PositionAttrAction($1); }
+	| BOLD												{ $$ = BoldAttrAction($1); }
+	| ITALIC											{ $$ = ItalicAttrAction($1); }
+	| UNDERLINED										{ $$ = UnderlinedAttrAction($1); }
 	;
 %%
