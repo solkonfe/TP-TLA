@@ -11,16 +11,63 @@
  */
 
 // Programa.
-int ProgramGrammarAction(const int value);
+void ProgramGrammarAction(tWebExprs * value);
 
-int TitleGrammarAction(const int value);
+tAttribute * ColorAttrAction(char * value);
+tAttribute * PositionAttrAction(char * value);
+tAttribute * BoldAttrAction(char * value);
+tAttribute * ItalicAttrAction(char * value);
+tAttribute * UnderlinedAttrAction(char * value);
 
-int WebGrammarAction(const int value);
-
-tAttribute * DataAttrAction(char * value);
 tAttributes * DataSingleAttrExpression(tAttribute * node);
 tAttributes * LeftAppendAttrExpressionAction(tAttribute * leftNode, tAttributes * attrExpr);
 
+tRowData * RowDataAction(char * content);
+tRowData * RowDataWithAttrsAction(tAttributes * attrs, char * content);
 
+tRow * RowDataUnion(tRowData * r1, tRowData * r2);
+tRow * RowExprUnion(tRow * row, tRowData * cell);
+tRow * RowExpressionAction(tRow * row_content);
 
+tRows * SingleRowAction(tRow * row);
+tRows * RightAppendRowAction(tRows * rows, tRow * row);
+
+tTable * TableExpressionAction(int rows, int cols, tRows * r);
+
+tTitleAttrs  * TitleAttrsPlainAction(tAttributes * attrs);
+tTitleAttrs * TitleAttrsWithSizeAction(int titleSize, tAttributes * attrs);
+tTitleAttrs * TitleAttrsWithIDAction(char * ID, tAttributes * attrs);
+
+tTitle * TitleGrammarActionNoAttrsCont(char * value);
+tTitle * TitleGrammarActionWithAttrsCont(tTitleAttrs * attrs, char * value);
+tTitle * TitleGrammarActionNoAttrsLink(char * value);
+tTitle * TitleGrammarActionWithAttrsLink(tTitleAttrs * attrs, char * value);
+
+tText * TextExprNoAttrs(char * content);
+tText TextExprWithAttrs(tAttributes * attrs, char * content);
+tText TextExprWithAttrsAndID(char * ID, tAttributes * attrs, char * content);
+
+tDivAttrs * DivAttrsPos(char * pos);
+tDivAttrs * DivAttrsPosAndID(char * ID, char * pos);
+
+tImage * ImgExprAction(char * src, char * alt);
+tImage * ImgExprActionWithIdref(char * src, char * alt, char * idref);
+
+tLink * LinkExpressionWithAttrs(char * src, tAttributes * attrs, char * content);
+tLink * LinkExpressionNoAttrs(char * src, char * content);
+
+tWebExpr * TitleExprAction(tTitle * title);
+tWebExpr * TextExprAction(tText * text);
+tWebExpr * ImgExprAction(tImage * img);
+tWebExpr * LinkExprAction(tLink * link);
+tWebExpr * TableExprAction(tTable * table);
+tWebExpr * DivExprAction(tDiv * div);
+
+tWebExprs * SimpleWebExpressionAction(tWebExpr * exp);
+tWebExprs * RightAppendWebExprAction(tWebExprs * exps, tWebExpr * exp);
+
+tDiv * DivExprWithAttrsSingleWeb(tDivAttrs * attrs, tWebExpr * content);
+tDiv * DivExprNoAttrsSingleWeb(tWebExpr * content);
+tDiv * DivExprWithAttrsMulExp(tDivAttrs * attrs, tWebExprs * content);
+tDiv * DivExprNoAttrsMulExp(tWebExprs * content);
 #endif

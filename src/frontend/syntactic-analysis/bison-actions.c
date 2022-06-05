@@ -29,17 +29,6 @@ int ProgramGrammarAction(tWebExprs * exprs) {
 	value->initial = exprs;
 	state.succeed = true;
 	state.result = value;
-	return value;
-}
-
-int WebGrammarAction(const int value){
-	LogDebug("Reconozco patrón. WebGrammarAction(%d)", value);
-	return value;
-}
-
-int TitleGrammarAction(const int value){
-	LogDebug("Reconozco patrón. TitleGrammarAction(%d)", value);
-	return value;
 }
 
 tAttribute * ColorAttrAction(char * value){
