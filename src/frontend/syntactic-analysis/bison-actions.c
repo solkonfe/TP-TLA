@@ -21,8 +21,12 @@ void yyerror(const char * string) {
 	LogErrorRaw("\n\n");
 }
 
-int ProgramGrammarAction(const int value) {
-	LogDebug("Reconozco patrón. ProgramGrammarAction(%d)", value);
+int ProgramGrammarAction(tWebExprs * exprs) {
+	LogDebug("Reconozco patrón. ProgramGrammarAction()");
+	tProgram * value = malloc(sizeof(tProgram));
+	if(value == NULL)
+		return NULL;
+	value->initial = exprs;
 	state.succeed = true;
 	state.result = value;
 	return value;

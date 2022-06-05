@@ -142,6 +142,10 @@ typedef struct tWebExprs{
 	tWebExpr * first;
 } tWebExprs;
 
+typedef struct tProgram{
+	tWebExprs * initial;
+} tProgram;
+
 
 // Estado global de toda la aplicación.
 typedef struct {

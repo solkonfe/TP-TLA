@@ -45,7 +45,7 @@
 
 %%
 
-program: START web_expressions END				{ $$ = ProgramGrammarAction(0); }
+program: START web_expressions END				{ $$ = ProgramGrammarAction($2); }
 	;
 
 web_expressions: web_expression					{ $$ = SimpleWebExpressionAction($1); }
