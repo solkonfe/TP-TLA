@@ -21,11 +21,11 @@ void yyerror(const char * string) {
 	LogErrorRaw("\n\n");
 }
 
-int ProgramGrammarAction(tWebExprs * exprs) {
+void ProgramGrammarAction(tWebExprs * exprs) {
 	LogDebug("Reconozco patrón. ProgramGrammarAction()");
 	tProgram * value = malloc(sizeof(tProgram));
 	if(value == NULL)
-		return NULL;
+		return;
 	value->initial = exprs;
 	state.succeed = true;
 	state.result = value;
@@ -41,7 +41,7 @@ tAttribute * ColorAttrAction(char * value){
 	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
 	strcpy(attr->value, value);
 	attr->next = NULL;
-	attr->atr_type = COLORVAL;
+	attr->type = COLORVAL;
 	return attr;
 }
 
@@ -55,7 +55,7 @@ tAttribute * PositionAttrAction(char * value){
 	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
 	strcpy(attr->value, value);
 	attr->next = NULL;
-	attr->atr_type = POSITIONVAL;
+	attr->type = POSITIONVAL;
 	return attr;
 }
 
@@ -69,7 +69,7 @@ tAttribute * BoldAttrAction(char * value){
 	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
 	strcpy(attr->value, value);
 	attr->next = NULL;
-	attr->atr_type = BOLDVAL;
+	attr->type = BOLDVAL;
 	return attr;
 }
 
@@ -83,7 +83,7 @@ tAttribute * ItalicAttrAction(char * value){
 	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
 	strcpy(attr->value, value);
 	attr->next = NULL;
-	attr->atr_type = ITALICVAL;
+	attr->type = ITALICVAL;
 	return attr;
 }
 
@@ -97,7 +97,7 @@ tAttribute * UnderlinedAttrAction(char * value){
 	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
 	strcpy(attr->value, value);
 	attr->next = NULL;
-	attr->atr_type = UNDERLINEDVAL;
+	attr->type = UNDERLINEDVAL;
 	return attr;
 }
 
@@ -199,9 +199,9 @@ tTable * TableExpressionAction(int rows, int cols, tRows * r){
 	if(newTable == NULL)
 		return NULL;
 
-	newTable->firstRow = rows;
+	newTable->firstRow = r;
 	newTable->colsDeclared = cols;
-	newTable->rowsDeclared = r;
+	newTable->rowsDeclared = rows;
 	return newTable;
 }
 
@@ -291,7 +291,7 @@ tTitle * TitleGrammarActionWithAttrsLink(tTitleAttrs * attrs, char * value){
 
 tText * TextExprNoAttrs(char * content){
 	tText * text = malloc(sizeof(tText));
-	if(tText == NULL){
+	if(text == NULL){
 		return NULL;
 	}
 	text->content = malloc(sizeof(char) * (strlen(content) + 1));
@@ -301,9 +301,9 @@ tText * TextExprNoAttrs(char * content){
 	return text;
 }
 
-tText TextExprWithAttrs(tAttributes * attrs, char * content){
+tText * TextExprWithAttrs(tAttributes * attrs, char * content){
 	tText * text = malloc(sizeof(tText));
-	if(tText == NULL){
+	if(text == NULL){
 		return NULL;
 	}
 	text->content = malloc(sizeof(char) * (strlen(content) + 1));
@@ -313,9 +313,9 @@ tText TextExprWithAttrs(tAttributes * attrs, char * content){
 	return text;
 }
 
-tText TextExprWithAttrsAndID(char * ID, tAttributes * attrs, char * content){
+tText * TextExprWithAttrsAndID(char * ID, tAttributes * attrs, char * content){
 	tText * text = malloc(sizeof(tText));
-	if(tText == NULL){
+	if(text == NULL){
 		return NULL;
 	}
 	text->content = malloc(sizeof(char) * (strlen(content) + 1));
@@ -349,24 +349,24 @@ tDivAttrs * DivAttrsPosAndID(char * ID, char * pos){
 
 tImage * ImgExprAction(char * src, char * alt){
 	tImage * img = malloc(sizeof(tImage));
-	if(tImage == NULL)
+	if(img == NULL)
 		return NULL;
-	img->src = malloc(sizeof(char) * (strlen(src) + 1));
+	img->source = malloc(sizeof(char) * (strlen(src) + 1));
 	img->altText = malloc(sizeof(char) * (strlen(alt) + 1));
-	strcpy(img->src, src);
-	strcpy(img->alt, alt);
+	strcpy(img->source, src);
+	strcpy(img->altText, alt);
 	return img;
 }
 
 tImage * ImgExprActionWithIdref(char * src, char * alt, char * idref){
 	tImage * img = malloc(sizeof(tImage));
-	if(tImage == NULL)
+	if(img == NULL)
 		return NULL;
-	img->src = malloc(sizeof(char) * (strlen(src) + 1));
+	img->source = malloc(sizeof(char) * (strlen(src) + 1));
 	img->altText = malloc(sizeof(char) * (strlen(alt) + 1));
 	img->idref = malloc(sizeof(char) * (strlen(idref) + 1));
-	strcpy(img->src, src);
-	strcpy(img->alt, alt);
+	strcpy(img->source, src);
+	strcpy(img->altText, alt);
 	strcpy(img->idref, idref);
 	return img;
 }
@@ -419,7 +419,7 @@ tWebExpr * TextExprAction(tText * text){
 	return webExp;
 }
 
-tWebExpr * ImgExprAction(tImage * img){
+tWebExpr * ImgExpressionAction(tImage * img){
 	tWebExpr * webExp = malloc(sizeof(tWebExpr));
 	if(webExp == NULL)
 		return NULL;

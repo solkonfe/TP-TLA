@@ -44,8 +44,8 @@ tTitle * TitleGrammarActionNoAttrsLink(char * value);
 tTitle * TitleGrammarActionWithAttrsLink(tTitleAttrs * attrs, char * value);
 
 tText * TextExprNoAttrs(char * content);
-tText TextExprWithAttrs(tAttributes * attrs, char * content);
-tText TextExprWithAttrsAndID(char * ID, tAttributes * attrs, char * content);
+tText * TextExprWithAttrs(tAttributes * attrs, char * content);
+tText * TextExprWithAttrsAndID(char * ID, tAttributes * attrs, char * content);
 
 tDivAttrs * DivAttrsPos(char * pos);
 tDivAttrs * DivAttrsPosAndID(char * ID, char * pos);
@@ -58,7 +58,7 @@ tLink * LinkExpressionNoAttrs(char * src, char * content);
 
 tWebExpr * TitleExprAction(tTitle * title);
 tWebExpr * TextExprAction(tText * text);
-tWebExpr * ImgExprAction(tImage * img);
+tWebExpr * ImgExpressionAction(tImage * img);
 tWebExpr * LinkExprAction(tLink * link);
 tWebExpr * TableExprAction(tTable * table);
 tWebExpr * DivExprAction(tDiv * div);

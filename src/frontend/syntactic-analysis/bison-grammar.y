@@ -8,40 +8,60 @@
 	tAttributes * data_attrs;
 	tAttribute * data_attr;
 
+	tWebExprs * web_expressions;
+	tWebExpr * web_expression;
+
+	tImage * img_expression;
+	tLink * link_expression;
+	tAttribute * link_attr;
+	tAttributes * link_attrs;
+	tDiv * div_expression;
+	tDivAttrs * div_attrs;
+	tText * text_expression;
+	tTitle * title_expression;
+	tTitleAttrs * title_attrs;
+	tTable * table_expression;
+	tRows * table_resolve;
+	tRow * row_resolve;
+	tRow * row_cell_union;
+	tRowData * row_data;
+
 	char * string;
+	int token;
+	int integer;
 }
 
 // IDs de los tokens generados desde Flex:
 
-%token BOX
-%token ENDBOX
-%token START
-%token END
-%token TITLE
-%token TITLE_SIZE
-%token COLOR
-%token POSITION
-%token DEF_DELIMITER
-%token COMMA
-%token TABLE
-%token ENDTABLE
-%token LINK
-%token RANDOM
-%token IMAGE
-%token HYPERLINK
-%token ID
-%token IDREF
-%token SOURCE
-%token BOLD
-%token ITALIC
-%token UNDERLINED
-%token NUMBER
-%token ROW
-%token ENDROW
-%token DATA
-%token TIMES
-%token TEXT
-%token CONTENT
+%token <token> BOX
+%token <token> ENDBOX
+%token <token> START
+%token <token> END
+%token <token> TITLE
+%token <string> TITLE_SIZE
+%token <string> COLOR
+%token <string> POSITION
+%token <token> DEF_DELIMITER
+%token <token> COMMA
+%token <token> TABLE
+%token <token> ENDTABLE
+%token <string> LINK
+%token <token> RANDOM
+%token <token> IMAGE
+%token <string> HYPERLINK
+%token <string> ID
+%token <string> IDREF
+%token <string> SOURCE
+%token <token> BOLD
+%token <token> ITALIC
+%token <token> UNDERLINED
+%token <integer> NUMBER
+%token <token> ROW
+%token <token> ENDROW
+%token <token> DATA
+%token <token> TIMES
+%token <string> TEXT
+%token <string> CONTENT
 
 %%
 
@@ -54,7 +74,7 @@ web_expressions: web_expression					{ $$ = SimpleWebExpressionAction($1); }
 
 web_expression: title_expression				{ $$ = TitleExprAction($1);}
 	| text_expression							{ $$ = TextExprAction($1);}
-	| img_expression							{ $$ = ImgExprAction($1);}
+	| img_expression							{ $$ = ImgExpressionAction($1);}
 	| link_expression							{ $$ = LinkExprAction($1);}
 	| table_expression							{ $$ = TableExprACtion($1);}
 	| RANDOM									{ $$ = WebGrammarAction($1);}
@@ -88,7 +108,7 @@ div_expression: BOX div_attrs DEF_DELIMITER web_expression ENDBOX				{ $$ = DivE
 	;
 
 div_attrs: POSITION																{ $$ = DivAttrsPos($1); }
-	| ID POSITION																{ $$ = DivAttrsPostAndID($1, $2); }
+	| ID POSITION																{ $$ = DivAttrsPosAndID($1, $2); }
 	;
 
 text_expression: TEXT data_attrs DEF_DELIMITER CONTENT							{ $$ = TextExprWithAttrs($2, $4); }

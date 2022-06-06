@@ -46,7 +46,8 @@ typedef enum expr_type {
 	IMGEXPR,
 	LINKEXPR,
 	TABLEEXPR,
-	DIVEXPR
+	DIVEXPR,
+	TEXTEXPR
 } expr_type;
 
 typedef struct tAttribute
@@ -103,7 +104,7 @@ typedef struct tTitle{
 } tTitle;
 
 typedef struct tText{
-	tAttributes attrs;
+	tAttributes * attrs;
 	char * ID;
 	char * content;
 } tText;
