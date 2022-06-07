@@ -2,11 +2,12 @@
 #define FLEX_ACTIONS_HEADER
 
 #include "../../backend/support/shared.h"
+#include "../syntactic-analysis/bison-parser.h"
 
 /**
  * Se definen los diferentes IDs de cada token disponible para el scanner Flex.
  */
-typedef enum TokenID
+/*typedef enum yytoken_kind_t
 {
 
 	// Por defecto, el valor "0" hace fallar el analizador sintáctico.
@@ -49,7 +50,8 @@ typedef enum TokenID
 	TIMES,
 	TEXT,
 	CONTENT
-} TokenID;
+} yytoken_kind_t;
+*/
 
 /**
  * Se definen las acciones a ejecutar sobre cada patrón hallado mediante el
@@ -58,45 +60,45 @@ typedef enum TokenID
  * (a.k.a. DFA), como mecanismo de escaneo y reconocimiento.
  */
 
-TokenID StartTokenPattern(const char *lexeme);
-TokenID EndTokenPattern(const char *lexeme);
+yytoken_kind_t StartTokenPattern(const char *lexeme);
+yytoken_kind_t EndTokenPattern(const char *lexeme);
 
-TokenID BoxTokenPattern(const char *lexeme);
-TokenID EndBoxTokenPattern(const char *lexeme);
+yytoken_kind_t BoxTokenPattern(const char *lexeme);
+yytoken_kind_t EndBoxTokenPattern(const char *lexeme);
 
-TokenID TitleTokenPattern(const char *lexeme);
-TokenID TableTokenPattern(const char *lexeme);
-TokenID EndTableTokenPattern(const char *lexeme);
-TokenID RandomTokenPattern(const char *lexeme);
-TokenID ImageTokenPattern(const char *lexeme);
-TokenID HyperlinkTokenPattern(const char *lexeme);
+yytoken_kind_t TitleTokenPattern(const char *lexeme);
+yytoken_kind_t TableTokenPattern(const char *lexeme);
+yytoken_kind_t EndTableTokenPattern(const char *lexeme);
+yytoken_kind_t RandomTokenPattern(const char *lexeme);
+yytoken_kind_t ImageTokenPattern(const char *lexeme);
+yytoken_kind_t HyperlinkTokenPattern(const char *lexeme);
 
-TokenID BoldTokenPattern(const char *lexeme);
-TokenID ItalicTokenPattern(const char *lexeme);
-TokenID UnderlinedTokenPattern(const char *lexeme);
+yytoken_kind_t BoldTokenPattern(const char *lexeme);
+yytoken_kind_t ItalicTokenPattern(const char *lexeme);
+yytoken_kind_t UnderlinedTokenPattern(const char *lexeme);
 
-TokenID RowTokenPattern(const char *lexeme);
-TokenID EndRowTokenPattern(const char *lexeme);
-TokenID DataTokenPattern(const char *lexeme);
-TokenID TextTokenPattern(const char *lexeme);
+yytoken_kind_t RowTokenPattern(const char *lexeme);
+yytoken_kind_t EndRowTokenPattern(const char *lexeme);
+yytoken_kind_t DataTokenPattern(const char *lexeme);
+yytoken_kind_t TextTokenPattern(const char *lexeme);
 
-TokenID TimesTokenPattern(const char *lexeme);
-TokenID DefDelimiterTokenPattern(const char *lexeme);
-TokenID CommaTokenPattern(const char *lexeme);
+yytoken_kind_t TimesTokenPattern(const char *lexeme);
+yytoken_kind_t DefDelimiterTokenPattern(const char *lexeme);
+yytoken_kind_t CommaTokenPattern(const char *lexeme);
 
-TokenID LinkPatternAction(const char *lexeme);
-TokenID IdrefPatternAction(const char *lexeme);
-TokenID IdPatternAction(const char *lexeme);
-TokenID SourcePatternAction(const char *lexeme);
-TokenID ContentPatternAction(const char *lexeme);
+yytoken_kind_t LinkPatternAction(const char *lexeme);
+yytoken_kind_t IdrefPatternAction(const char *lexeme);
+yytoken_kind_t IdPatternAction(const char *lexeme);
+yytoken_kind_t SourcePatternAction(const char *lexeme);
+yytoken_kind_t ContentPatternAction(const char *lexeme);
 
-TokenID TitleSizePatternAction(const char *lexeme);
-TokenID ColorPatternAction(const char *lexeme);
-TokenID PositionPatternAction(const char *lexeme);
-TokenID NumberPatternAction(const char *lexeme);
+yytoken_kind_t TitleSizePatternAction(const char *lexeme);
+yytoken_kind_t ColorPatternAction(const char *lexeme);
+yytoken_kind_t PositionPatternAction(const char *lexeme);
+yytoken_kind_t NumberPatternAction(const char *lexeme);
 
-TokenID UnknownPatternAction(const char *lexeme);
+yytoken_kind_t UnknownPatternAction(const char *lexeme);
 
-// TokenID WordPatternAction(const char *lexeme);
+// yytoken_kind_t WordPatternAction(const char *lexeme);
 
 #endif

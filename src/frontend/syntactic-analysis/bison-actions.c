@@ -101,7 +101,7 @@ tAttribute * UnderlinedAttrAction(char * value){
 	return attr;
 }
 
-tAttributes * DataSingleAttrExpression(tAttribute * node){
+tAttributes * DataSingleAttrExpressionAction(tAttribute * node){
 	if(node == NULL){
 		LogDebug("Error with node parameter");
 		return NULL;

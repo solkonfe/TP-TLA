@@ -96,18 +96,17 @@
 		| text_expression							{ $$ = TextExprAction($1);}
 		| img_expression							{ $$ = ImgExpressionAction($1);}
 		| link_expression							{ $$ = LinkExprAction($1);}
-		| table_expression							{ $$ = TableExprACtion($1);}
-		| RANDOM									{ $$ = WebGrammarAction($1);}
+		| table_expression							{ $$ = TableExprAction($1);}
 		| div_expression							{ $$ = DivExprAction($1);}
 		;
 
 	img_expression: IMAGE SOURCE DEF_DELIMITER CONTENT							{ $$ = ImgExprAction($2, $4); }
-		| IMAGE SOURCE IDREF DEF_DELIMITER CONTENT								{ $$ = ImgExprWithIdref($2, $3, $5); }
-		| IMAGE IDREF SOURCE DEF_DELIMITER CONTENT								{ $$ = ImgExprWithIdref($3, $2, $5); }
+		| IMAGE SOURCE IDREF DEF_DELIMITER CONTENT								{ $$ = ImgExprActionWithIdref($2, $3, $5); }
+		| IMAGE IDREF SOURCE DEF_DELIMITER CONTENT								{ $$ = ImgExprActionWithIdref($3, $2, $5); }
 		;
 
 	link_expression: HYPERLINK SOURCE link_attrs DEF_DELIMITER CONTENT			{ $$ = LinkExpressionWithAttrs($2, $3, $5); }
-		| HYPERLINK SOURCE DEF_DELIMITER CONTENT 								{ $$ = LinkExpressionNoAttrs($2, $5);}
+		| HYPERLINK SOURCE DEF_DELIMITER CONTENT 								{ $$ = LinkExpressionNoAttrs($2, $4);}
 		| HYPERLINK IDREF link_attrs DEF_DELIMITER CONTENT						{ $$ = LinkExpressionWithAttrs($2, $3, $5); }
 		;
 

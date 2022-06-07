@@ -19,7 +19,7 @@ tAttribute * BoldAttrAction(char * value);
 tAttribute * ItalicAttrAction(char * value);
 tAttribute * UnderlinedAttrAction(char * value);
 
-tAttributes * DataSingleAttrExpression(tAttribute * node);
+tAttributes * DataSingleAttrExpressionAction(tAttribute * node);
 tAttributes * LeftAppendAttrExpressionAction(tAttribute * leftNode, tAttributes * attrExpr);
 
 tRowData * RowDataAction(char * content);
