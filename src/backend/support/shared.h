@@ -156,7 +156,7 @@ typedef struct {
 	boolean succeed;
 
 	// Indica el resultado de la compilación:
-	int result;
+	tProgram * result;
 
 	// Agregar una pila para almacenar tokens/nodos.
 	// Agregar un nodo hacia la raíz del árbol de sintaxis abstracta.

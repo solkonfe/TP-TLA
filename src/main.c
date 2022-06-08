@@ -25,7 +25,7 @@ const int main(const int argumentCount, const char ** arguments) {
 		case 0:
 			if (state.succeed) {
 				LogInfo("La compilacion fue exitosa.");
-				Generator(state.result);
+				printf("%s", Generator(state.result));
 			}
 			else {
 				LogError("Se produjo un error en la aplicacion.");
