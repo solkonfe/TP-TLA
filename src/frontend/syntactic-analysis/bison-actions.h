@@ -21,7 +21,7 @@ tAttribute * UnderlinedAttrAction(char * value);
 
 tAttributes * DataSingleAttrExpressionAction(tAttribute * node);
 tAttributes * LeftAppendAttrExpressionAction(tAttribute * leftNode, tAttributes * attrExpr);
-tAttributes * RightAppendAttrExpressionAction(tAttributes * attrExpr, tAttribute * rightNode)
+tAttributes * RightAppendAttrExpressionAction(tAttributes * attrExpr, tAttribute * rightNode);
 
 tRowData * RowDataAction(char * content);
 tRowData * RowDataWithAttrsAction(tAttributes * attrs, char * content);
