@@ -21,6 +21,7 @@ tAttribute * UnderlinedAttrAction(char * value);
 
 tAttributes * DataSingleAttrExpressionAction(tAttribute * node);
 tAttributes * LeftAppendAttrExpressionAction(tAttribute * leftNode, tAttributes * attrExpr);
+tAttributes * RightAppendAttrExpressionAction(tAttributes * attrExpr, tAttribute * rightNode)
 
 tRowData * RowDataAction(char * content);
 tRowData * RowDataWithAttrsAction(tAttributes * attrs, char * content);
@@ -35,7 +36,7 @@ tRows * RightAppendRowAction(tRows * rows, tRow * row);
 tTable * TableExpressionAction(int rows, int cols, tRows * r);
 
 tTitleAttrs  * TitleAttrsPlainAction(tAttributes * attrs);
-tTitleAttrs * TitleAttrsWithSizeAction(int titleSize, tAttributes * attrs);
+tTitleAttrs * TitleAttrsWithSizeAction(char * titleSize, tAttributes * attrs);
 tTitleAttrs * TitleAttrsWithIDAction(char * ID, tAttributes * attrs);
 
 tTitle * TitleGrammarActionNoAttrsCont(char * value);

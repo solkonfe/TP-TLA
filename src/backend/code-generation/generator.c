@@ -39,7 +39,7 @@ void printHTML(tWebExpr * result, char * text){
 		case TITLEEXPR:
 			//printf("Title expr...");
 			printTitle(current->expr);
-			breaK;
+			break;
 		case IMGEXPR:
             printImage(current->expr);
 			break;
@@ -62,8 +62,12 @@ void printHTML(tWebExpr * result, char * text){
 	}
 }
 
-char possibleSizes[6] = {"x-small", "small", "medium", "large", "x-large", "xx-large"}
-#define MAX_SIZE 6
+void printText(tText * text){}
+void printTable(tTable * table){}
+void printDiv(tDiv * div){}
+
+char * possibleSizes[6] = {"x-small", "small", "medium", "large", "x-large", "xx-large"};
+#define MAX_SIZES 6
 
 char * getSizeOfTitle(char * sizeName){
 	for(int i = 0; i < MAX_SIZES; i++){
@@ -79,7 +83,7 @@ void printTitle(tTitle * title){
 	if (title->attrs != NULL){
 
 		char * size = getSizeOfTitle(title->attrs->titleSize);
-		print("%s ", size)
+		printf("%s ", size);
 
 		//printf("size=%d ", title->attrs->titleSize);
 

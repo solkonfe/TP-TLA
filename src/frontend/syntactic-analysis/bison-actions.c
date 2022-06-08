@@ -129,8 +129,8 @@ tAttributes * LeftAppendAttrExpressionAction(tAttribute * leftNode, tAttributes 
 	return attrExpr;
 }
 
-tAttributs * RightAppendAttrExpressionAction(tAttributes * attrExpr, tAttribute * rightNode){
-	if(leftNode == NULL || attrExpr == NULL){
+tAttributes * RightAppendAttrExpressionAction(tAttributes * attrExpr, tAttribute * rightNode){
+	if(rightNode == NULL || attrExpr == NULL){
 		LogDebug("Error with parameters on LeftAppend");
 		return NULL;
 	}
