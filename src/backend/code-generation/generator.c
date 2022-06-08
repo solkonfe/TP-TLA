@@ -62,7 +62,52 @@ void printHTML(tWebExpr * result, char * text){
 	}
 }
 
-void printText(tText * text){}
+void printText(tText * text){
+	printf("<p ");
+	printf("id= %s", text->ID); 
+	int bold = 0, italic = 0, underlined = 0;
+	if(text->attrs != NULL){
+		tAttribute * current= text->attrs->first;
+		while(current != NULL){
+			switch (current->type){
+				case COLORVAL:
+					printf("color=%s ", current->value);
+					break;
+				case POSITIONVAL:
+					printf("position=%s ", current->value);
+					break;
+				case BOLDVAL:
+					bold = 1;
+					break;
+				case ITALICVAL:
+					italic = 1;
+					break;
+				case UNDERLINEDVAL:
+					underlined = 1;
+					break;
+			}
+			current = current->next;
+		}
+	}
+	printf(">");
+	if (bold == 1)
+		printf("<b>");
+	if (italic == 1)
+		printf("<i>");
+	if (underlined == 1)
+		printf("<u>");
+	
+	printf("%s", text->content);
+	
+	if (bold == 1)
+		printf("</b>");
+	if (italic == 1)
+		printf("</i>");
+	if (underlined == 1)
+		printf("</u>");
+
+	printf("</p>");
+}
 void printTable(tTable * table){}
 void printDiv(tDiv * div){}
 
