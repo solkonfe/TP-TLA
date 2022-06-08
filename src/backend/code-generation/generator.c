@@ -37,24 +37,52 @@ void printHTML(tWebExpr * result, char * text){
 
 	switch (current->type) {
 		case TITLEEXPR:
+			//printf("Title expr...");
 			printTitle(current->expr);
+			breaK;
 		case IMGEXPR:
             printImage(current->expr);
+			break;
 		case LINKEXPR:
             printLink(current->expr);
+			break;
 		case TABLEEXPR:
+			printTable(current->expr); //TODO
+			break;
 		case DIVEXPR:
+			//printf("Div expr...");
+			printDiv(current->expr); //TODO
+			break;
 		case TEXTEXPR:
+			printText(current->expr); //TODO
+			break;
 		default:
+			printf("\nNone matched\n");
 			break;
 	}
 }
 
+char possibleSizes[6] = {"x-small", "small", "medium", "large", "x-large", "xx-large"}
+#define MAX_SIZE 6
+
+char * getSizeOfTitle(char * sizeName){
+	for(int i = 0; i < MAX_SIZES; i++){
+		if(strcmp(sizeName, possibleSizes[i]) == 0)
+			return MAX_SIZES-i;
+	}
+	return -1;
+}
+
 void printTitle(tTitle * title){
-	printf("<title ");
+	printf("<h");
 	int bold = 0, italic = 0, underlined = 0;
 	if (title->attrs != NULL){
-		printf("size=%d ", title->attrs->titleSize);
+
+		char * size = getSizeOfTitle(title->attrs->titleSize);
+		print("%s ", size)
+
+		//printf("size=%d ", title->attrs->titleSize);
+
 		if (title->attrs->ID != NULL)
 			printf("id=\"%s\" ", title->attrs->ID);
 		

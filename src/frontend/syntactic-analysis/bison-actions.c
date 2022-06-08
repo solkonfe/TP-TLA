@@ -122,9 +122,22 @@ tAttributes * LeftAppendAttrExpressionAction(tAttribute * leftNode, tAttributes 
 		LogDebug("Error with parameters on LeftAppend");
 		return NULL;
 	}
-	LogDebug("DataSingleAttrExpression with node value %s and expr size %d", leftNode->value, attrExpr->size);
+	LogDebug("LeftAppendAttrExpressionAction with node value %s and expr size %d", leftNode->value, attrExpr->size);
 	leftNode->next = attrExpr->first;
 	attrExpr->first = leftNode;
+	attrExpr->size++;
+	return attrExpr;
+}
+
+tAttributs * RightAppendAttrExpressionAction(tAttributes * attrExpr, tAttribute * rightNode){
+	if(leftNode == NULL || attrExpr == NULL){
+		LogDebug("Error with parameters on LeftAppend");
+		return NULL;
+	}
+	tAttribute * aux = attrExpr->first;
+	while(aux->next != NULL)
+		aux = aux->next;
+	aux->next = rightNode;
 	attrExpr->size++;
 	return attrExpr;
 }
@@ -218,12 +231,13 @@ tTitleAttrs  * TitleAttrsPlainAction(tAttributes * attrs){
 	return aux;
 }
 
-tTitleAttrs * TitleAttrsWithSizeAction(int titleSize, tAttributes * attrs){
+tTitleAttrs * TitleAttrsWithSizeAction(char * titleSize, tAttributes * attrs){
 	tTitleAttrs * aux = malloc(sizeof(tTitleAttrs));
 	if(aux == NULL){
 		return NULL;
 	}
-	aux->titleSize = titleSize;
+	aux->titleSize = malloc(sizeof(char) * (strlen(titleSize) + 1));
+	strcpy(aux->titleSize, titleSize);
 	aux->first = attrs->first;
 	aux->size = attrs->size + 1; //TitleSize cuenta como attr pero no está declarado como tal
 	return aux;

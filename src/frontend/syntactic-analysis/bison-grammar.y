@@ -111,7 +111,7 @@
 		;
 
 	link_attrs: link_attr													{ $$ = DataSingleAttrExpressionAction($1); }												
-		| link_attr COMMA link_attrs										{ $$ = LeftAppendAttrExpressionAction($1, $3); }
+		| link_attrs COMMA link_attr										{ $$ = RightAppendAttrExpressionAction($1, $3); }
 		;
 
 	link_attr: BOLD				{ $$ = BoldAttrAction($1); }																

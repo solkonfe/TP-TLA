@@ -93,7 +93,7 @@ typedef struct tTable{
 
 typedef struct tTitleAttrs{
 	tAttribute * first;
-	int titleSize;
+	char * titleSize;
 	char * ID;
 	int size;
 } tTitleAttrs;
