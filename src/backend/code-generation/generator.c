@@ -121,19 +121,19 @@ void printLink(tLink * link){
 		tAttribute * current= link->attrs->first;
 		while(current != NULL){
 			switch (current->type){
-				case atr_type.COLORVAL:
+				case COLORVAL:
 					printf("color=%s ", current->value);
 					break;
-				case atr_type.POSITIONVAL:
+				case POSITIONVAL:
 					printf("position=%s ", current->value);
 					break;
-				case atr_type.BOLDVAL:
+				case BOLDVAL:
 					bold = 1;
 					break;
-				case atr_type.ITALICVAL:
+				case ITALICVAL:
 					italic = 1;
 					break;
-				case atr_type.UNDERLINEDVAL:
+				case UNDERLINEDVAL:
 					underlined = 1;
 					break;
 			}
