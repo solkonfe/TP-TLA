@@ -36,7 +36,7 @@ void printHTML(tWebExpr * result, char * text){
 
 	switch (current->type) {
 		case expr_type.TITLEEXPR:
-			printTitle(current->expr)
+			printTitle(current->expr);
 		case expr_type.IMGEXPR:
 		case expr_type.LINKEXPR:
 		case expr_type.TABLEEXPR:
@@ -50,37 +50,37 @@ void printTitle(tTitle * title){
 	int bold = 0, italic = 0, underlined = 0;
 	if (title->attrs != NULL){
 		printf("size=%d ", title->attrs->titleSize);
-			if (title->attrs->ID != NULL)
-				printf("id=\"%s\" ", title->attrs->ID);
+		if (title->attrs->ID != NULL)
+			printf("id=\"%s\" ", title->attrs->ID);
 		
 		tAttribute * currAttr = title->attrs->first;
 		while (currAttr != NULL){
 			switch (currAttr->type){
-			case atr_type.COLORVAL:
-				printf("color=%s ", currAttr->value);
-				break;
-			case atr_type.POSITIONVAL:
-				printf("position=%s ", currAttr->value);
-				break;
-			case atr_type.BOLDVAL:
-				bold = 1;
-				break;
-			case atr_type.ITALICVAL:
-				italic = 1;
-				break;
-			case atr_type.UNDERLINEDVAL:
-				underlined = 1;
-				break;
+				case atr_type.COLORVAL:
+					printf("color=%s ", currAttr->value);
+					break;
+				case atr_type.POSITIONVAL:
+					printf("position=%s ", currAttr->value);
+					break;
+				case atr_type.BOLDVAL:
+					bold = 1;
+					break;
+				case atr_type.ITALICVAL:
+					italic = 1;
+					break;
+				case atr_type.UNDERLINEDVAL:
+					underlined = 1;
+					break;
 			}	
 		}
 	}
 	printf(">");
 	if (bold == 1)
-		printf("<b>");
+		printf("</b>");
 	if (italic == 1)
-		printf("<i>");
+		printf("</i>");
 	if (underlined == 1)
-		printf("<u>");
+		printf("</u>");
 	
 	printf("%s", title->value);
 	
