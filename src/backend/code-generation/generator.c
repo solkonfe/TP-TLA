@@ -41,20 +41,20 @@ void printHTML(tWebExpr * result, char * text){
 			printTitle(current->expr);
 			break;
 		case IMGEXPR:
-            printImage(current->expr);
+            //printImage(current->expr);
 			break;
 		case LINKEXPR:
-            printLink(current->expr);
+            //printLink(current->expr);
 			break;
 		case TABLEEXPR:
-			printTable(current->expr); //TODO
+			//printTable(current->expr); //TODO
 			break;
 		case DIVEXPR:
 			//printf("Div expr...");
-			printDiv(current->expr); //TODO
+			//printDiv(current->expr); //TODO
 			break;
 		case TEXTEXPR:
-			printText(current->expr); //TODO
+			//printText(current->expr); //TODO
 			break;
 		default:
 			printf("\nNone matched\n");
@@ -80,10 +80,11 @@ char * getSizeOfTitle(char * sizeName){
 void printTitle(tTitle * title){
 	printf("<h");
 	int bold = 0, italic = 0, underlined = 0;
-	if (title->attrs != NULL){
 
-		char * size = getSizeOfTitle(title->attrs->titleSize);
-		printf("%s ", size);
+	char * size = getSizeOfTitle(title->attrs->titleSize);
+	printf("%s ", size);
+
+	if (title->attrs != NULL){
 
 		//printf("size=%d ", title->attrs->titleSize);
 
@@ -129,7 +130,7 @@ void printTitle(tTitle * title){
 	if (underlined == 1)
 		printf("</u>");
 
-	printf("</title>");
+	printf("</h>");
 }
 
 
