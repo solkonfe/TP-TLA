@@ -10,7 +10,7 @@
 /**
  * Se definen los diferentes IDs de cada token disponible para el scanner Flex.
  */
-/*typedef enum unsigned
+/*typedef enum TokenID
 {
 
 	// Por defecto, el valor "0" hace fallar el analizador sintáctico.
