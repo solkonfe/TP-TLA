@@ -1,5 +1,6 @@
 #include "../support/logger.h"
 #include "generator.h"
+#include <stdlib.h>
 
 /**
  * Implementación de "generator.h".
@@ -12,7 +13,7 @@ char * Generator(tProgram * result) {
 
 	if (result == NULL){
 		LogInfo("El resultado de la compilacion es nulo.");
-		return;
+		return NULL;
 	}
 
 	//Abro HTML
@@ -20,7 +21,7 @@ char * Generator(tProgram * result) {
 	printf("<!DOCTYPE html>\n<html>\n<body>");
 
 	//strcat(toPrint, printHTML(result->initial->first));
-	printHTML(result->initial->first)
+	printHTML(result->initial->first, toPrint);
 
 	//toPrint = realloc(toPrint, 50);
 	//strcat(toPrint, "</body>\n</html>");
@@ -35,13 +36,15 @@ void printHTML(tWebExpr * result, char * text){
 	text = realloc(text, 50);
 
 	switch (current->type) {
-		case expr_type.TITLEEXPR:
+		case TITLEEXPR:
 			printTitle(current->expr);
-		case expr_type.IMGEXPR:
-		case expr_type.LINKEXPR:
-		case expr_type.TABLEEXPR:
-		case expr_type.DIVEXPR:
-		case expr_type.TEXTEXPR:
+		case IMGEXPR:
+		case LINKEXPR:
+		case TABLEEXPR:
+		case DIVEXPR:
+		case TEXTEXPR:
+		default:
+			break;
 	}
 }
 
@@ -56,19 +59,19 @@ void printTitle(tTitle * title){
 		tAttribute * currAttr = title->attrs->first;
 		while (currAttr != NULL){
 			switch (currAttr->type){
-				case atr_type.COLORVAL:
+				case COLORVAL:
 					printf("color=%s ", currAttr->value);
 					break;
-				case atr_type.POSITIONVAL:
+				case POSITIONVAL:
 					printf("position=%s ", currAttr->value);
 					break;
-				case atr_type.BOLDVAL:
+				case BOLDVAL:
 					bold = 1;
 					break;
-				case atr_type.ITALICVAL:
+				case ITALICVAL:
 					italic = 1;
 					break;
-				case atr_type.UNDERLINEDVAL:
+				case UNDERLINEDVAL:
 					underlined = 1;
 					break;
 			}	
