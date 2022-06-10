@@ -18,7 +18,7 @@ char * Generator(tProgram * result) {
 
 	//Abro HTML
 	//strcat(toPrint, "<!DOCTYPE html>\n<html>\n<body>");
-	printf("<!DOCTYPE html>\n<html>\n<body>");
+	printf("<!DOCTYPE html>\n<html>\n\t<head>\n\t<meta charset=\"utf-8\">\n</head>\n<body>\n\t");
 
 	//strcat(toPrint, printHTML(result->initial->first));
 	printHTML(result->initial->first, toPrint);
@@ -54,7 +54,7 @@ void printHTML(tWebExpr * result, char * text){
 			//printDiv(current->expr); //TODO
 			break;
 		case TEXTEXPR:
-			//printText(current->expr); //TODO
+			printText(current->expr); //TODO
 			break;
 		default:
 			printf("\nNone matched\n");
@@ -126,7 +126,9 @@ void printTitle(tTitle * title){
 	printf("<h");
 	int bold = 0, italic = 0, underlined = 0;
 
-	char * size = getSizeOfTitle(title->attrs->titleSize);
+	int size = getSizeOfTitle(title->attrs->titleSize);
+	if(size == -1)
+		size = 6; // El mas chico
 	printf("%s ", size);
 
 	if (title->attrs != NULL){
