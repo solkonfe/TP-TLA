@@ -3,6 +3,7 @@
 #include <stdlib.h>
 //#include "../../backend/support/shared.h"
 #include <string.h>
+#include <math.h>
 //#include "shared.h"
 
 /**
@@ -188,7 +189,7 @@ unsigned PositionPatternAction(const char *lexeme)
 unsigned NumberPatternAction(const char *lexeme)
 {
 	LogDebug("NumberPatternAction: '%s'.", lexeme);
-	yylval.string = lexeme;
+	yylval.integer = atoi(lexeme);
 	return NUMBER;
 }
 

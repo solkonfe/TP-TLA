@@ -46,7 +46,7 @@ tAttribute * ColorAttrAction(char * value){
 }
 
 tAttribute * PositionAttrAction(char * value){
-	LogDebug("DataAttrAction with value %s", value);
+	LogDebug("[BISON] DataAttrAction with value %s", value);
 	tAttribute * attr = malloc(sizeof(tAttribute));
 	if(attr == NULL){
 		LogDebug("Error from malloc\n");
@@ -134,6 +134,7 @@ tAttributes * RightAppendAttrExpressionAction(tAttributes * attrExpr, tAttribute
 		LogDebug("Error with parameters on LeftAppend");
 		return NULL;
 	}
+	LogDebug("[BISON] RightAppendAttrExprAction with value %s", rightNode->value);
 	tAttribute * aux = attrExpr->first;
 	while(aux->next != NULL)
 		aux = aux->next;
@@ -147,6 +148,7 @@ tRowData * RowDataAction(char * content){
 	if(rData == NULL){
 		return NULL;
 	}
+	LogDebug("[BISON] RowDataAction");
 	rData->value = malloc(sizeof(char) * (strlen(content) + 1));
 	strcpy(rData->value, content);
 	rData->nextCell = NULL;
@@ -159,6 +161,7 @@ tRowData * RowDataWithAttrsAction(tAttributes * attrs, char * content){
 	if(rData == NULL){
 		return NULL;
 	}
+	LogDebug("[BISON] RowDataWithAttrsAction");
 	rData->value = malloc(sizeof(char) * (strlen(content) + 1));
 	strcpy(rData->value, content);
 	rData->nextCell = NULL;
@@ -166,11 +169,23 @@ tRowData * RowDataWithAttrsAction(tAttributes * attrs, char * content){
 	return rData; 
 }
 
+tRow * SingleRowDataAction(tRowData * r1){
+	tRow * row = malloc(sizeof(tRow));
+	if(row == NULL){
+		return NULL;
+	}
+	LogDebug("[BISON] singleRowDataExprAction");
+	row->firstCell = r1;
+	row->size = 1;
+	return row;
+}
+
 tRow * RowDataUnion(tRowData * r1, tRowData * r2){
 	tRow * newRow = malloc(sizeof(tRow));
 	if(newRow == NULL){
 		return NULL;
 	}
+	LogDebug("[BISON] RowDataUnion");
 	newRow->firstCell = r1;
 	r1->nextCell = r2;
 	newRow->size = 2;
@@ -181,6 +196,7 @@ tRow * RowExprUnion(tRow * row, tRowData * cell){
 	cell->nextCell = row->firstCell;
 	row->firstCell = cell;
 	row->size++;
+	LogDebug("[BISON] RowExprAction");
 	return row;
 }
 

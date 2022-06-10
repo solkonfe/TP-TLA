@@ -18,7 +18,7 @@ char * Generator(tProgram * result) {
 
 	//Abro HTML
 	//strcat(toPrint, "<!DOCTYPE html>\n<html>\n<body>");
-	printf("<!DOCTYPE html>\n<html>\n\t<head>\n\t<meta charset=\"utf-8\">\n</head>\n<body>\n\t");
+	printf("<!DOCTYPE html>\n<html>\n\t<head>\n\t<meta charset=\"utf-8\">\n</head>\n<body>\n");
 
 	//strcat(toPrint, printHTML(result->initial->first));
 	printHTML(result->initial->first, toPrint);
@@ -28,6 +28,76 @@ char * Generator(tProgram * result) {
 	printf("</body>\n</html>");
 
 	return toPrint;
+}
+
+void printCellInformation(tRowData * data){ //TODO: Reduce this function, está copiada en otra función
+	int bold = 0, italic = 0, underlined = 0;
+	if(data->rowAttrs != NULL){
+		tAttribute * current = data->rowAttrs->first;
+		while(current != NULL){
+			switch (current->type){
+				case COLORVAL:
+					printf("color=%s ", current->value);
+					break;
+				case POSITIONVAL:
+					printf("align=%s ", current->value);
+					break;
+				case BOLDVAL:
+					bold = 1;
+					break;
+				case ITALICVAL:
+					italic = 1;
+					break;
+				case UNDERLINEDVAL:
+					underlined = 1;
+					break;
+			}
+			current = current->next;
+		}
+	}
+	printf(">\n\t<td>");
+	if (bold == 1)
+		printf("<b>");
+	if (italic == 1)
+		printf("<i>");
+	if (underlined == 1)
+		printf("<u>");
+	
+	printf("%s", data->value);
+	
+	if (bold == 1)
+		printf("</b>");
+	if (italic == 1)
+		printf("</i>");
+	if (underlined == 1)
+		printf("</u>");
+}
+
+void printTable(tTable * table){
+	printf("<table>\n\t");
+	printf("rows: %d, cols: %d\n", table->rowsDeclared, table->colsDeclared);
+	tRow * auxRowPtr = table->firstRow->firstRow;
+	for(int row = 0; row < table->rowsDeclared; row++){
+		printf("\t<tr");
+		if(auxRowPtr != NULL){
+			tRowData * auxDataPtr = auxRowPtr->firstCell;
+			for(int col = 0; col < table->colsDeclared; col++){
+				if(auxDataPtr != NULL){
+					printCellInformation(auxDataPtr);
+					auxDataPtr = auxDataPtr->nextCell;
+				}
+				else{
+					printf(">\n\t<td>");
+				}
+				printf("</td>\n");
+			}
+			auxRowPtr = auxRowPtr->nextRow;
+		}
+		else
+			printf(">");
+		printf("</tr>\n\t");
+	}
+	printf("</table>\n");
 }
 
 void printHTML(tWebExpr * result, char * text){
@@ -41,13 +111,14 @@ void printHTML(tWebExpr * result, char * text){
 			printTitle(current->expr);
 			break;
 		case IMGEXPR:
-            //printImage(current->expr);
+            printImage(current->expr);
 			break;
 		case LINKEXPR:
-            //printLink(current->expr);
+            printLink(current->expr);
 			break;
 		case TABLEEXPR:
-			//printTable(current->expr); //TODO
+			//printf("Reconozco table...");
+			printTable(current->expr); //TODO
 			break;
 		case DIVEXPR:
 			//printf("Div expr...");
@@ -108,7 +179,6 @@ void printText(tText * text){
 
 	printf("</p>");
 }
-void printTable(tTable * table){}
 void printDiv(tDiv * div){}
 
 char * possibleSizes[6] = {"x-small", "small", "medium", "large", "x-large", "xx-large"};
@@ -183,9 +253,9 @@ void printTitle(tTitle * title){
 
 void printImage(tImage* image){
 	printf("<img ");
-	printf("src=\"%s\" ", image->source); //habria que ver si ya lo estamos guardando con comillas
+	printf("%s ", image->source); //habria que ver si ya lo estamos guardando con comillas
 	if(image->idref != NULL){
-		printf("id=\"%s\" ", image->idref);
+		printf("%s ", image->idref);
 	}
 	if(image->altText != NULL){
 		printf("alt=\"%s\" ", image->altText);

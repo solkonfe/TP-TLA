@@ -26,6 +26,7 @@ tAttributes * RightAppendAttrExpressionAction(tAttributes * attrExpr, tAttribute
 tRowData * RowDataAction(char * content);
 tRowData * RowDataWithAttrsAction(tAttributes * attrs, char * content);
 
+tRow * SingleRowDataExprAction(tRowData * r1);
 tRow * RowDataUnion(tRowData * r1, tRowData * r2);
 tRow * RowExprUnion(tRow * row, tRowData * cell);
 tRow * RowExpressionAction(tRow * row_content);

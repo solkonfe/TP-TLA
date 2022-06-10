@@ -156,7 +156,8 @@
 	row_resolve: ROW DEF_DELIMITER row_cell_union ENDROW	{ $$ = RowExpressionAction($3); }
 		;
 
-	row_cell_union: row_data row_data						{ $$ = RowDataUnion($1, $2); }
+	row_cell_union: row_data								{ $$ = SingleRowDataAction($1); }
+		| row_data row_data									{ $$ = RowDataUnion($1, $2);}
 		| row_cell_union row_data							{ $$ = RowExprUnion($1, $2); }
 		;
 
