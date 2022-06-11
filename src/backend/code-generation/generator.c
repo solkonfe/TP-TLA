@@ -107,7 +107,6 @@ void printHTML(tWebExpr * result, char * text){
 
 	switch (current->type) {
 		case TITLEEXPR:
-			//printf("Title expr...");
 			printTitle(current->expr);
 			break;
 		case IMGEXPR:
@@ -179,6 +178,7 @@ void printText(tText * text){
 
 	printf("</p>");
 }
+void printTable(tTable * table){}
 void printDiv(tDiv * div){}
 
 char * possibleSizes[6] = {"x-small", "small", "medium", "large", "x-large", "xx-large"};
@@ -193,7 +193,6 @@ char * getSizeOfTitle(char * sizeName){
 }
 
 void printTitle(tTitle * title){
-	printf("<h");
 	int bold = 0, italic = 0, underlined = 0;
 
 	int size = getSizeOfTitle(title->attrs->titleSize);
@@ -247,7 +246,7 @@ void printTitle(tTitle * title){
 	if (underlined == 1)
 		printf("</u>");
 
-	printf("</h>");
+	printf("</h%s>", size);
 }
 
 
@@ -308,4 +307,8 @@ void printLink(tLink * link){
 		printf("</u>");
 
 	printf("</link>");
+}
+
+void printDiv(tDiv * div){
+	
 }
