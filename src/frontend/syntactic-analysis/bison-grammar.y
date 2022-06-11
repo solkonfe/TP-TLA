@@ -108,6 +108,7 @@
 	link_expression: HYPERLINK SOURCE link_attrs DEF_DELIMITER CONTENT			{ $$ = LinkExpressionWithAttrs($2, $3, $5); }
 		| HYPERLINK SOURCE DEF_DELIMITER CONTENT 								{ $$ = LinkExpressionNoAttrs($2, $4);}
 		| HYPERLINK IDREF link_attrs DEF_DELIMITER CONTENT						{ $$ = LinkExpressionWithAttrs($2, $3, $5); }
+		| HYPERLINK IDREF DEF_DELIMITER CONTENT									{ $$ = LinkExpressionNoAttrsIDREF($2, $4);}
 		;
 
 	link_attrs: link_attr													{ $$ = DataSingleAttrExpressionAction($1); }												
@@ -130,9 +131,9 @@
 		| ID POSITION																{ $$ = DivAttrsPosAndID($1, $2); }
 		;
 
-	text_expression: TEXT data_attrs DEF_DELIMITER CONTENT							{ $$ = TextExprWithAttrs($2, $4); }
+	text_expression: TEXT data_attrs DEF_DELIMITER CONTENT							{ $$ = TextExprWithAttrs($2, $4); } 
 		| TEXT ID data_attrs DEF_DELIMITER CONTENT									{ $$ = TextExprWithAttrsAndID($2, $3, $5); }
-		| DEF_DELIMITER CONTENT														{ $$ = TextExprNoAttrs($2); }
+		| TEXT DEF_DELIMITER CONTENT												{ $$ = TextExprNoAttrs($3); }
 		;
 
 	title_expression: TITLE DEF_DELIMITER CONTENT			{ $$ = TitleGrammarActionNoAttrsCont($3); }
@@ -144,6 +145,8 @@
 	title_attrs: data_attrs									{ $$ = TitleAttrsPlainAction($1); }
 		| TITLE_SIZE data_attrs								{ $$ = TitleAttrsWithSizeAction($1, $2); }
 		| ID data_attrs										{ $$ = TitleAttrsWithIDAction($1, $2); }
+		| TITLE_SIZE										{ $$ = TitleAttrsOnlySizeAction($1); }
+		| ID												{ $$ = TitleAttrsOnlyIDAction($1);}
 		;
 
 	table_expression: TABLE DEF_DELIMITER NUMBER TIMES NUMBER table_resolve	ENDTABLE { $$ = TableExpressionAction($3, $5, $6); }

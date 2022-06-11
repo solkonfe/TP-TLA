@@ -1,6 +1,6 @@
 start
     box:
-        title xx-large, bold: "This is a bold xx-large title"
+        title bold: "This is a bold xx-large title"
         title medium, italic: "This is a medium title in italics"
         title id='titleItalics': "This is a title with an id"
         text underlined: "This is underlined text"

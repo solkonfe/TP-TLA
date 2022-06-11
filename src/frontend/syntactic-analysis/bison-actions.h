@@ -39,6 +39,9 @@ tTable * TableExpressionAction(int rows, int cols, tRows * r);
 tTitleAttrs  * TitleAttrsPlainAction(tAttributes * attrs);
 tTitleAttrs * TitleAttrsWithSizeAction(char * titleSize, tAttributes * attrs);
 tTitleAttrs * TitleAttrsWithIDAction(char * ID, tAttributes * attrs);
+tTitleAttrs * TitleAttrsOnlySizeAction(char * titleSize);
+tTitleAttrs * TitleAttrsOnlyIDAction(char * ID);
+
 
 tTitle * TitleGrammarActionNoAttrsCont(char * value);
 tTitle * TitleGrammarActionWithAttrsCont(tTitleAttrs * attrs, char * value);
@@ -57,6 +60,7 @@ tImage * ImgExprActionWithIdref(char * src, char * alt, char * idref);
 
 tLink * LinkExpressionWithAttrs(char * src, tAttributes * attrs, char * content);
 tLink * LinkExpressionNoAttrs(char * src, char * content);
+tLink *LinkExpressionNoAttrsIDREF(char * idref, char * content);
 
 tWebExpr * TitleExprAction(tTitle * title);
 tWebExpr * TextExprAction(tText * text);

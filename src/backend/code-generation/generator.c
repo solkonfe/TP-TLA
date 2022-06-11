@@ -178,8 +178,6 @@ void printText(tText * text){
 
 	printf("</p>");
 }
-void printTable(tTable * table){}
-void printDiv(tDiv * div){}
 
 char * possibleSizes[6] = {"x-small", "small", "medium", "large", "x-large", "xx-large"};
 #define MAX_SIZES 6

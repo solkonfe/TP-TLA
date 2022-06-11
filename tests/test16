@@ -1,0 +1,6 @@
+start
+    box:
+        title id='#hola':"https://hola.com"
+        link idref='#hola':"hola"
+    endbox
+end

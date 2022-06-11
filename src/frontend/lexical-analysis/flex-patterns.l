@@ -50,8 +50,8 @@ whitespace		[ \f\n\r\t\v]
 "data"                                      { return DataTokenPattern(yytext); }
 "text"                                      { return TextTokenPattern(yytext); }
 
-"x"                                         {return TimesTokenPattern(yytext);}
-":"                                         { return DefDelimiterTokenPattern(yytext); }
+"x"                                         { return TimesTokenPattern(yytext);}
+":"                                         { LogDebug("DefDelimiterTokenPattern: ':'"); return DEF_DELIMITER; }
 ","                                         { return CommaTokenPattern(yytext); }
 
 

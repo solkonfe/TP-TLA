@@ -259,6 +259,18 @@ tTitleAttrs * TitleAttrsWithSizeAction(char * titleSize, tAttributes * attrs){
 	return aux;
 }
 
+tTitleAttrs * TitleAttrsOnlySizeAction(char * titleSize){
+	tTitleAttrs * aux = malloc(sizeof(tTitleAttrs));
+	if(aux == NULL){
+		return NULL;
+	}
+	aux->titleSize = malloc(sizeof(char) * (strlen(titleSize) + 1));
+	strcpy(aux->titleSize, titleSize);
+	aux->first = NULL;
+	aux->size = 1; //TitleSize cuenta como attr pero no está declarado como tal
+	return aux;
+}
+
 tTitleAttrs * TitleAttrsWithIDAction(char * ID, tAttributes * attrs){
 	tTitleAttrs * aux = malloc(sizeof(tTitleAttrs));
 	if(aux == NULL){
@@ -268,6 +280,18 @@ tTitleAttrs * TitleAttrsWithIDAction(char * ID, tAttributes * attrs){
 	strcpy(aux->ID, ID);
 	aux->first = attrs->first;
 	aux->size = attrs->size + 1; //ID cuenta como attr pero no está declarado como tal
+	return aux;
+}
+
+tTitleAttrs * TitleAttrsOnlyIDAction(char * ID){
+	tTitleAttrs * aux = malloc(sizeof(tTitleAttrs));
+	if(aux == NULL){
+		return NULL;
+	}
+	aux->ID = malloc(sizeof(char) * (strlen(ID) + 1));
+	strcpy(aux->ID, ID);
+	aux->first = NULL;
+	aux->size = 1; //ID cuenta como attr pero no está declarado como tal
 	return aux;
 }
 
@@ -424,6 +448,20 @@ tLink * LinkExpressionNoAttrs(char * src, char * content){
 	link->ref = malloc(sizeof(char)*(strlen(src) + 1));
 	link->text = malloc(sizeof(char)*(strlen(src)+1));
 	strcpy(link->ref, src);
+	strcpy(link->text, content);
+	link->attrs = NULL;
+	return link;
+}
+
+tLink *LinkExpressionNoAttrsIDREF(char * idref, char * content){
+	tLink * link = malloc(sizeof(link));
+	if(link == NULL){
+		return NULL;
+	}
+
+	link->ref = malloc(sizeof(char)*(strlen(idref) + 1));
+	link->text = malloc(sizeof(char)*(strlen(idref)+1));
+	strcpy(link->ref, idref);
 	strcpy(link->text, content);
 	link->attrs = NULL;
 	return link;

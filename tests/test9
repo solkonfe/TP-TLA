@@ -1,9 +1,9 @@
 start
     table: 16x3
         row:
-            data bold: "id"
-            data bold: "debe"
-            data bold: "casos de uso"
+            data: "id"
+            data: "debe"
+            data: "casos de uso"
         endrow
         row:
             data: "R7.1"

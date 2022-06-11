@@ -1,15 +1,15 @@
 start
     box:
         title xx-large: "The Magic Behind Compilers - Part 1"
-        image src='https://miro.medium.com/max/1400/1*McLYEFaMXdYiZ0Y5O3VaBQ.png'
+        image src='https://miro.medium.com/max/1400/1*McLYEFaMXdYiZ0Y5O3VaBQ.png': "This is alt text"
         text: "We all know the struggle of not understanding a new language. Have you ever wondered how computer understands its programs? Yes. Our computers are not as intelligent as us regarding the language skills. They only comprehend their binary codes."
         text: "But… In real, we use a handful of programming languages to communicate with computers; like Java, Python, C#, Ballerina… It’s a never ending list. So, there must be someone who does the translation work for the computers to understand these languages. Thankfully, we have compilers for the rescue here. So let us have a keen look at how these compilers accomplish this task."
 
-        title medium, bold: "What is a compiler?"
+        title medium: "What is a compiler?"
         text: "A compiler is the program that translates a source code into a target language which is understandable/executable in a computer. Basically, the source language is the higher level one which a developer uses to program and the target language can be Assembly or machine language."
 
-        title medium, bold: "How compilers work?"
+        title medium: "How compilers work?"
         text: "With various source languages with different syntax & semantics, clearly we can understand the compiling is not done in on go. Yes. Though the compilers of these languages do the compilation in their own way, the common structure of a compiler always sticks to the following structure."
-        image src='https://miro.medium.com/max/1390/1*7UqgDsmIuDVWYYsdUlOH4g.png'
+        image src='https://miro.medium.com/max/1390/1*7UqgDsmIuDVWYYsdUlOH4g.png': "Alt text"
     endbox
 end
