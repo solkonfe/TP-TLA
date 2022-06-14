@@ -120,8 +120,7 @@ void printHTML(tWebExpr * result, char * text){
 			printTable(current->expr); //TODO
 			break;
 		case DIVEXPR:
-			//printf("Div expr...");
-			//printDiv(current->expr); //TODO
+			printDiv(current->expr);
 			break;
 		case TEXTEXPR:
 			printText(current->expr); //TODO
@@ -304,9 +303,12 @@ void printLink(tLink * link){
 	if (underlined == 1)
 		printf("</u>");
 
-	printf("</link>");
+	printf("</link>\n");
 }
 
 void printDiv(tDiv * div){
-	
+	printf("<div>\n");
+	char * toPrint = NULL;
+	printHTML(div->content, toPrint);
+	printf("</div>\n");
 }
