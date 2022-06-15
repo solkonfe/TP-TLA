@@ -24,7 +24,7 @@ const int main(const int argumentCount, const char ** arguments) {
 	switch (result) {
 		case 0:
 			if (state.succeed) {
-				LogInfo("La compilacion fue exitosa.");
+				LogInfo("La compilacion fue exitosa. El output generado es:\n\n");
 				Generator(state.result);
 			}
 			else {
@@ -41,6 +41,6 @@ const int main(const int argumentCount, const char ** arguments) {
 		default:
 			LogError("Error desconocido mientras se ejecutaba el analizador Bison (codigo %d).", result);
 	}
-	LogInfo("Fin.");
+	//LogInfo("Fin.");
 	return result;
 }

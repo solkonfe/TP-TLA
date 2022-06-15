@@ -25,7 +25,7 @@ char * Generator(tProgram * result) {
 
 	//toPrint = realloc(toPrint, 50);
 	//strcat(toPrint, "</body>\n</html>");
-	printf("</body>\n</html>");
+	printf("</body>\n</html>\n\n");
 
 	return toPrint;
 }
@@ -39,16 +39,19 @@ void printPage(tWebExprs * expressions){
 }
 
 void printCellInformation(tRowData * data){ //TODO: Reduce this function, está copiada en otra función
-	int bold = 0, italic = 0, underlined = 0;
+	int bold = 0, italic = 0, underlined = 0, color = 0, align = 0;
+	printf("\n\t<td");
 	if(data->rowAttrs != NULL){
 		tAttribute * current = data->rowAttrs->first;
 		while(current != NULL){
 			switch (current->type){
 				case COLORVAL:
-					printf("color=\"%s\"", current->value);
+					printf(" color=%s", current->value);
+					color = 1;
 					break;
 				case POSITIONVAL:
-					printf("align=\"%s\"", current->value);
+					printf(" align=%s", current->value);
+					align = 1;
 					break;
 				case BOLDVAL:
 					bold = 1;
@@ -63,7 +66,7 @@ void printCellInformation(tRowData * data){ //TODO: Reduce this function, está 
 			current = current->next;
 		}
 	}
-	printf("\n\t<td>");
+	printf(">");
 	if (bold == 1)
 		printf("<b>");
 	if (italic == 1)
@@ -83,11 +86,11 @@ void printCellInformation(tRowData * data){ //TODO: Reduce this function, está 
 }
 
 void printTable(tTable * table){
-	printf("<table>\n\t");
-	printf("rows: %d, cols: %d\n", table->rowsDeclared, table->colsDeclared);
+	printf("<table>\n");
+	//printf("rows: %d, cols: %d\n", table->rowsDeclared, table->colsDeclared);
 	tRow * auxRowPtr = table->firstRow->firstRow;
 	for(int row = 0; row < table->rowsDeclared; row++){
-		printf("\t<tr>");
+		printf("<tr>");
 		if(auxRowPtr != NULL){
 			tRowData * auxDataPtr = auxRowPtr->firstCell;
 			for(int col = 0; col < table->colsDeclared; col++){
@@ -102,7 +105,10 @@ void printTable(tTable * table){
 			}
 			auxRowPtr = auxRowPtr->nextRow;
 		}
-		printf("</tr>\n\t");
+		else{
+			printf(">");
+		}
+		printf("</tr>\n");
 	}
 	printf("</table>\n");
 }
@@ -132,7 +138,7 @@ void printHTML(tWebExpr * result, char * text){
 			printText(current->expr); //TODO
 			break;
 		default:
-			printf("\nNone matched\n");
+			//printf("\nNone matched\n");
 			break;
 	}
 }
