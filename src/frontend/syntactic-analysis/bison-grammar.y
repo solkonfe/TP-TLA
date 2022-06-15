@@ -142,11 +142,11 @@
 		| TITLE title_attrs DEF_DELIMITER LINK				{ $$ = TitleGrammarActionWithAttrsLink($2, $4); }
 		;
 
-	title_attrs: TITLE_SIZE									{ $$ = TitleAttrsOnlySizeAction($1); }
-		| ID												{ $$ = TitleAttrsOnlyIDAction($1);}
-		| TITLE_SIZE data_attrs								{ $$ = TitleAttrsWithSizeAction($1, $2); }
-		| ID data_attrs										{ $$ = TitleAttrsWithIDAction($1, $2); }
+	title_attrs: ID												{ $$ = TitleAttrsOnlyIDAction($1);}
+		| TITLE_SIZE COMMA data_attrs						{ $$ = TitleAttrsWithSizeAction($1, $3); }
+		| ID COMMA data_attrs								{ $$ = TitleAttrsWithIDAction($1, $3); }
 		| data_attrs										{ $$ = TitleAttrsPlainAction($1); }
+		| TITLE_SIZE									{ $$ = TitleAttrsOnlySizeAction($1); }
 		;
 
 	table_expression: TABLE DEF_DELIMITER NUMBER TIMES NUMBER table_resolve	ENDTABLE { $$ = TableExpressionAction($3, $5, $6); }

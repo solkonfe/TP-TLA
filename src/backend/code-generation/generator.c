@@ -45,10 +45,10 @@ void printCellInformation(tRowData * data){ //TODO: Reduce this function, está 
 		while(current != NULL){
 			switch (current->type){
 				case COLORVAL:
-					printf("color=%s ", current->value);
+					printf("color=\"%s\"", current->value);
 					break;
 				case POSITIONVAL:
-					printf("align=%s ", current->value);
+					printf("align=\"%s\"", current->value);
 					break;
 				case BOLDVAL:
 					bold = 1;
@@ -63,7 +63,7 @@ void printCellInformation(tRowData * data){ //TODO: Reduce this function, está 
 			current = current->next;
 		}
 	}
-	printf(">\n\t<td>");
+	printf("\n\t<td>");
 	if (bold == 1)
 		printf("<b>");
 	if (italic == 1)
@@ -73,12 +73,13 @@ void printCellInformation(tRowData * data){ //TODO: Reduce this function, está 
 	
 	printf("%s", data->value);
 	
-	if (bold == 1)
-		printf("</b>");
-	if (italic == 1)
-		printf("</i>");
 	if (underlined == 1)
 		printf("</u>");
+	if (italic == 1)
+		printf("</i>");
+	if (bold == 1)
+		printf("</b>");
+	
 }
 
 void printTable(tTable * table){
@@ -86,7 +87,7 @@ void printTable(tTable * table){
 	printf("rows: %d, cols: %d\n", table->rowsDeclared, table->colsDeclared);
 	tRow * auxRowPtr = table->firstRow->firstRow;
 	for(int row = 0; row < table->rowsDeclared; row++){
-		printf("\t<tr");
+		printf("\t<tr>");
 		if(auxRowPtr != NULL){
 			tRowData * auxDataPtr = auxRowPtr->firstCell;
 			for(int col = 0; col < table->colsDeclared; col++){
@@ -95,14 +96,12 @@ void printTable(tTable * table){
 					auxDataPtr = auxDataPtr->nextCell;
 				}
 				else{
-					printf(">\n\t<td>");
+					printf("\n\t<td>");
 				}
 				printf("</td>\n");
 			}
 			auxRowPtr = auxRowPtr->nextRow;
 		}
-		else
-			printf(">");
 		printf("</tr>\n\t");
 	}
 	printf("</table>\n");
@@ -115,27 +114,21 @@ void printHTML(tWebExpr * result, char * text){
 
 	switch (current->type) {
 		case TITLEEXPR:
-			printf("TITLEEXPR\n");
 			printTitle(current->expr);
 			break;
 		case IMGEXPR:
-			printf("IMGEXPR\n");
             printImage(current->expr);
 			break;
 		case LINKEXPR:
-			printf("LINKEXPR\n");
             printLink(current->expr);
 			break;
 		case TABLEEXPR:
-			printf("TABLEEXPR\n");
 			printTable(current->expr); //TODO
 			break;
 		case DIVEXPR:
-			printf("DIVEXPR\n");
 			printDiv(current->expr);
 			break;
 		case TEXTEXPR:
-			printf("TEXTEXPR\n");
 			printText(current->expr); //TODO
 			break;
 		default:
@@ -145,7 +138,7 @@ void printHTML(tWebExpr * result, char * text){
 }
 
 void printText(tText * text){
-	printf("<p ");
+	printf("<p");
 	if (text->ID != NULL)
 		printf("id= %s", text->ID); 
 	int bold = 0, italic = 0, underlined = 0;
@@ -154,10 +147,10 @@ void printText(tText * text){
 		while(current != NULL){
 			switch (current->type){
 				case COLORVAL:
-					printf("color=%s ", current->value);
+					printf(" color=\"%s\"", current->value);
 					break;
 				case POSITIONVAL:
-					printf("position=%s ", current->value);
+					printf(" position=\"%s\"", current->value);
 					break;
 				case BOLDVAL:
 					bold = 1;
@@ -182,21 +175,21 @@ void printText(tText * text){
 	
 	printf("%s", text->content);
 	
-	if (bold == 1)
-		printf("</b>");
-	if (italic == 1)
-		printf("</i>");
 	if (underlined == 1)
 		printf("</u>");
+	if (italic == 1)
+		printf("</i>");
+	if (bold == 1)
+		printf("</b>");
+	
 
 	printf("</p>\n");
 }
 
-char * possibleSizes[6] = {"x-small", "small", "medium", "large", "x-large", "xx-large"};
+char * possibleSizes[6] = {"x-small", "small:", "medium", "large", "x-large", "xx-large"};
 #define MAX_SIZES 6
 
 int getSizeOfTitle(char * sizeName){
-	printf("%s\n", sizeName);
 	for(int i = 0; i < MAX_SIZES; i++){
 		if(strcmp(sizeName, possibleSizes[i]) == 0){
 			int aux = MAX_SIZES-i;
@@ -209,14 +202,10 @@ int getSizeOfTitle(char * sizeName){
 void printTitle(tTitle * title){
 	int bold = 0, italic = 0, underlined = 0;
 
-	if (title == NULL){
-		printf("im null\n");
-		return;
-	}
-
 	int size = 6;
-	if (title->attrs != NULL)
+	if (title->attrs != NULL && title->attrs->titleSize != NULL){
 		size = getSizeOfTitle(title->attrs->titleSize);
+	}
 
 	printf("<h%d", size);
 
@@ -271,15 +260,15 @@ void printTitle(tTitle * title){
 
 
 void printImage(tImage* image){
-	printf("<img ");
-	printf("%s ", image->source); //habria que ver si ya lo estamos guardando con comillas
+	printf("<img");
+	printf(" %s", image->source); //habria que ver si ya lo estamos guardando con comillas
 	if(image->idref != NULL){
-		printf("%s ", image->idref);
+		printf(" %s ", image->idref);
 	}
 	if(image->altText != NULL){
-		printf("alt=\"%s\" ", image->altText);
+		printf("alt=%s", image->altText);
 	}
-	printf("/img>\n");
+	printf(">\n");
 }
 
 void printLink(tLink * link){
