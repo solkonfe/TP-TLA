@@ -15,9 +15,9 @@ void ProgramGrammarAction(tWebExprs * value);
 
 tAttribute * ColorAttrAction(char * value);
 tAttribute * PositionAttrAction(char * value);
-tAttribute * BoldAttrAction(char * value);
-tAttribute * ItalicAttrAction(char * value);
-tAttribute * UnderlinedAttrAction(char * value);
+tAttribute * BoldAttrAction();
+tAttribute * ItalicAttrAction();
+tAttribute * UnderlinedAttrAction();
 
 tAttributes * DataSingleAttrExpressionAction(tAttribute * node);
 tAttributes * LeftAppendAttrExpressionAction(tAttribute * leftNode, tAttributes * attrExpr);

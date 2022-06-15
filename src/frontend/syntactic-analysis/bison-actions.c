@@ -45,6 +45,7 @@ tAttribute * ColorAttrAction(char * value){
 	return attr;
 }
 
+
 tAttribute * PositionAttrAction(char * value){
 	LogDebug("[BISON] DataAttrAction with value %s", value);
 	tAttribute * attr = malloc(sizeof(tAttribute));
@@ -59,43 +60,40 @@ tAttribute * PositionAttrAction(char * value){
 	return attr;
 }
 
-tAttribute * BoldAttrAction(char * value){
-	LogDebug("DataAttrAction with value %s", value);
+tAttribute * BoldAttrAction(){
 	tAttribute * attr = malloc(sizeof(tAttribute));
 	if(attr == NULL){
 		LogDebug("Error from malloc\n");
 		return NULL;
 	}
-	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
-	strcpy(attr->value, value);
+	attr->value = malloc(sizeof(char) * (strlen("bold") + 1));
+	strcpy(attr->value, "bold");
 	attr->next = NULL;
 	attr->type = BOLDVAL;
 	return attr;
 }
 
-tAttribute * ItalicAttrAction(char * value){
-	LogDebug("DataAttrAction with value %s", value);
+tAttribute * ItalicAttrAction(){
 	tAttribute * attr = malloc(sizeof(tAttribute));
 	if(attr == NULL){
 		LogDebug("Error from malloc\n");
 		return NULL;
 	}
-	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
-	strcpy(attr->value, value);
+	attr->value = malloc(sizeof(char) * (strlen("italic") + 1));
+	strcpy(attr->value, "italic");
 	attr->next = NULL;
 	attr->type = ITALICVAL;
 	return attr;
 }
 
-tAttribute * UnderlinedAttrAction(char * value){
-	LogDebug("DataAttrAction with value %s", value);
+tAttribute * UnderlinedAttrAction(){
 	tAttribute * attr = malloc(sizeof(tAttribute));
 	if(attr == NULL){
 		LogDebug("Error from malloc\n");
 		return NULL;
 	}
-	attr->value = malloc(sizeof(char) * (strlen(value) + 1));
-	strcpy(attr->value, value);
+	attr->value = malloc(sizeof(char) * (strlen("underlined") + 1));
+	strcpy(attr->value, "underlined");
 	attr->next = NULL;
 	attr->type = UNDERLINEDVAL;
 	return attr;
@@ -241,13 +239,14 @@ tTitleAttrs  * TitleAttrsPlainAction(tAttributes * attrs){
 	}
 	aux->first = attrs->first;
 	aux->size = attrs->size;
-	aux->titleSize = -1;
+	aux->titleSize = NULL;
 	aux->ID = NULL;
 
 	return aux;
 }
 
 tTitleAttrs * TitleAttrsWithSizeAction(char * titleSize, tAttributes * attrs){
+	printf("%s\n", titleSize);
 	tTitleAttrs * aux = malloc(sizeof(tTitleAttrs));
 	if(aux == NULL){
 		return NULL;
@@ -260,6 +259,7 @@ tTitleAttrs * TitleAttrsWithSizeAction(char * titleSize, tAttributes * attrs){
 }
 
 tTitleAttrs * TitleAttrsOnlySizeAction(char * titleSize){
+	printf("%s\n", titleSize);
 	tTitleAttrs * aux = malloc(sizeof(tTitleAttrs));
 	if(aux == NULL){
 		return NULL;
@@ -354,6 +354,7 @@ tText * TextExprNoAttrs(char * content){
 	text->attrs = NULL;
 	return text;
 }
+
 
 tText * TextExprWithAttrs(tAttributes * attrs, char * content){
 	tText * text = malloc(sizeof(tText));
@@ -468,7 +469,6 @@ tLink *LinkExpressionNoAttrsIDREF(char * idref, char * content){
 }
 
 tWebExpr * TitleExprAction(tTitle * title){
-	printf("TitleExprAction\n");
 	tWebExpr * webExp = malloc(sizeof(tWebExpr));
 	if(webExp == NULL)
 		return NULL;
@@ -499,7 +499,6 @@ tWebExpr * ImgExpressionAction(tImage * img){
 }
 
 tWebExpr * LinkExprAction(tLink * link){
-	printf("LinkExprAction\n");
 	tWebExpr * webExp = malloc(sizeof(tWebExpr));
 	if(webExp == NULL)
 		return NULL;
@@ -548,7 +547,6 @@ tWebExprs * RightAppendWebExprAction(tWebExprs * exps, tWebExpr * exp){
 }
 
 tDiv * DivExprWithAttrsSingleWeb(tDivAttrs * attrs, tWebExprs * content){
-	printf("DivExprWithAttrsSingleWeb\n");
 	tDiv * div = malloc(sizeof(tDiv));
 	if(div == NULL)
 		return NULL;
@@ -559,7 +557,6 @@ tDiv * DivExprWithAttrsSingleWeb(tDivAttrs * attrs, tWebExprs * content){
 }
 
 tDiv * DivExprNoAttrsSingleWeb(tWebExprs * content){
-	printf("DivExprNoAttrsSingleWeb\n");
 	tDiv * div = malloc(sizeof(tDiv));
 	if(div == NULL)
 		return NULL;
@@ -570,7 +567,6 @@ tDiv * DivExprNoAttrsSingleWeb(tWebExprs * content){
 }
 
 tDiv * DivExprWithAttrsMulExp(tDivAttrs * attrs, tWebExprs * content){
-	printf("DivExprWithAttrsMulExp\n");
 	tDiv * div = malloc(sizeof(tDiv));
 	if(div == NULL)
 		return NULL;
@@ -581,7 +577,6 @@ tDiv * DivExprWithAttrsMulExp(tDivAttrs * attrs, tWebExprs * content){
 }
 
 tDiv * DivExprNoAttrsMulExp(tWebExprs * content){
-	printf("DivExprNoAttrsMulExp\n");
 	tDiv * div = malloc(sizeof(tDiv));
 	if(div == NULL)
 		return NULL;

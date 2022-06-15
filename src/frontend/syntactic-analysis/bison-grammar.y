@@ -72,9 +72,9 @@
 %token <string> ID
 %token <string> IDREF
 %token <string> SOURCE
-%token <token> BOLD
-%token <token> ITALIC
-%token <token> UNDERLINED
+%token <string> BOLD
+%token <string> ITALIC
+%token <string> UNDERLINED
 %token <integer> NUMBER
 %token <token> ROW
 %token <token> ENDROW
@@ -131,9 +131,9 @@
 		| ID POSITION																{ $$ = DivAttrsPosAndID($1, $2); }
 		;
 
-	text_expression: TEXT data_attrs DEF_DELIMITER CONTENT							{ $$ = TextExprWithAttrs($2, $4); } 
-		| TEXT ID data_attrs DEF_DELIMITER CONTENT									{ $$ = TextExprWithAttrsAndID($2, $3, $5); }
-		| TEXT DEF_DELIMITER CONTENT												{ $$ = TextExprNoAttrs($3); }
+	text_expression: TEXT DEF_DELIMITER CONTENT								{ $$ = TextExprNoAttrs($3); } 
+		| TEXT data_attrs DEF_DELIMITER CONTENT								{ $$ = TextExprWithAttrs($2, $4); }
+		| TEXT ID data_attrs DEF_DELIMITER CONTENT							{ $$ = TextExprWithAttrsAndID($2, $3, $5); }
 		;
 
 	title_expression: TITLE DEF_DELIMITER CONTENT			{ $$ = TitleGrammarActionNoAttrsCont($3); }
@@ -142,11 +142,11 @@
 		| TITLE title_attrs DEF_DELIMITER LINK				{ $$ = TitleGrammarActionWithAttrsLink($2, $4); }
 		;
 
-	title_attrs: data_attrs									{ $$ = TitleAttrsPlainAction($1); }
+	title_attrs: TITLE_SIZE									{ $$ = TitleAttrsOnlySizeAction($1); }
+		| ID												{ $$ = TitleAttrsOnlyIDAction($1);}
 		| TITLE_SIZE data_attrs								{ $$ = TitleAttrsWithSizeAction($1, $2); }
 		| ID data_attrs										{ $$ = TitleAttrsWithIDAction($1, $2); }
-		| TITLE_SIZE										{ $$ = TitleAttrsOnlySizeAction($1); }
-		| ID												{ $$ = TitleAttrsOnlyIDAction($1);}
+		| data_attrs										{ $$ = TitleAttrsPlainAction($1); }
 		;
 
 	table_expression: TABLE DEF_DELIMITER NUMBER TIMES NUMBER table_resolve	ENDTABLE { $$ = TableExpressionAction($3, $5, $6); }
@@ -174,8 +174,8 @@
 
 	data_attr: COLOR										{ $$ = ColorAttrAction($1); }
 		| POSITION											{ $$ = PositionAttrAction($1); }
-		| BOLD												{ $$ = BoldAttrAction($1); }
-		| ITALIC											{ $$ = ItalicAttrAction($1); }
-		| UNDERLINED										{ $$ = UnderlinedAttrAction($1); }
+		| BOLD												{ $$ = BoldAttrAction(); }
+		| ITALIC											{ $$ = ItalicAttrAction(); }
+		| UNDERLINED										{ $$ = UnderlinedAttrAction(); }
 		;
 %%

@@ -146,7 +146,8 @@ void printHTML(tWebExpr * result, char * text){
 
 void printText(tText * text){
 	printf("<p ");
-	printf("id= %s", text->ID); 
+	if (text->ID != NULL)
+		printf("id= %s", text->ID); 
 	int bold = 0, italic = 0, underlined = 0;
 	if(text->attrs != NULL){
 		tAttribute * current= text->attrs->first;
@@ -188,16 +189,19 @@ void printText(tText * text){
 	if (underlined == 1)
 		printf("</u>");
 
-	printf("</p>");
+	printf("</p>\n");
 }
 
 char * possibleSizes[6] = {"x-small", "small", "medium", "large", "x-large", "xx-large"};
 #define MAX_SIZES 6
 
-char * getSizeOfTitle(char * sizeName){
+int getSizeOfTitle(char * sizeName){
+	printf("%s\n", sizeName);
 	for(int i = 0; i < MAX_SIZES; i++){
-		if(strcmp(sizeName, possibleSizes[i]) == 0)
-			return MAX_SIZES-i;
+		if(strcmp(sizeName, possibleSizes[i]) == 0){
+			int aux = MAX_SIZES-i;
+			return aux;
+		}
 	}
 	return -1;
 }
@@ -205,26 +209,30 @@ char * getSizeOfTitle(char * sizeName){
 void printTitle(tTitle * title){
 	int bold = 0, italic = 0, underlined = 0;
 
-	int size = getSizeOfTitle(title->attrs->titleSize);
-	if(size == -1)
-		size = 6; // El mas chico
-	printf("%s ", size);
+	if (title == NULL){
+		printf("im null\n");
+		return;
+	}
+
+	int size = 6;
+	if (title->attrs != NULL)
+		size = getSizeOfTitle(title->attrs->titleSize);
+
+	printf("<h%d", size);
 
 	if (title->attrs != NULL){
 
-		//printf("size=%d ", title->attrs->titleSize);
-
 		if (title->attrs->ID != NULL)
-			printf("id=\"%s\" ", title->attrs->ID);
+			printf(" id=\"%s\" ", title->attrs->ID);
 		
 		tAttribute * currAttr = title->attrs->first;
 		while (currAttr != NULL){
 			switch (currAttr->type){
 				case COLORVAL:
-					printf("color=%s ", currAttr->value);
+					printf(" color=%s ", currAttr->value);
 					break;
 				case POSITIONVAL:
-					printf("position=%s ", currAttr->value);
+					printf(" position=%s ", currAttr->value);
 					break;
 				case BOLDVAL:
 					bold = 1;
@@ -246,8 +254,10 @@ void printTitle(tTitle * title){
 		printf("<i>");
 	if (underlined == 1)
 		printf("<u>");
+
 	
 	printf("%s", title->value);
+
 	
 	if (bold == 1)
 		printf("</b>");
@@ -256,7 +266,7 @@ void printTitle(tTitle * title){
 	if (underlined == 1)
 		printf("</u>");
 
-	printf("</h%s>", size);
+	printf("</h%d>\n", size);
 }
 
 
@@ -269,7 +279,7 @@ void printImage(tImage* image){
 	if(image->altText != NULL){
 		printf("alt=\"%s\" ", image->altText);
 	}
-	printf("/img>");
+	printf("/img>\n");
 }
 
 void printLink(tLink * link){
