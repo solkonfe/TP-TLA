@@ -12,12 +12,16 @@
 
 /* Dispone una variable global "yylineno" con el número de línea actual. */
 %option yylineno
+/* Dejo regexs viejas aca por las dudas: */
+/* link            \'https?:\/\/.*\..*' */
+/* source          src=\'https?:\/\/.*\..*\' */
+
 
 /* Patrones reutilizables. */
 crlf			\r\n
 /* https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url */
-link            \'https?:\/\/.*\..*'
-source          src=\'https?:\/\/.*\..*\'
+link            \'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\'
+source          src=\'https?:\/\/(www\.)?.*\.(png|svg|jpg|jpeg)\'
 idref           idref=\'#.*\'
 id              id=\'.*\'
 title_size      (x-small|small|medium|large|x-large|xx-large)

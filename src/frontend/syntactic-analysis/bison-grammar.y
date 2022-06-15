@@ -144,7 +144,7 @@
 
 	title_attrs: TITLE_SIZE									{ $$ = TitleAttrsOnlySizeAction($1); }
 		| ID												{ $$ = TitleAttrsOnlyIDAction($1);}
-		| TITLE_SIZE data_attrs								{ $$ = TitleAttrsWithSizeAction($1, $2); }
+		| TITLE_SIZE COMMA data_attrs								{ $$ = TitleAttrsWithSizeAction($1, $3); }
 		| ID data_attrs										{ $$ = TitleAttrsWithIDAction($1, $2); }
 		| data_attrs										{ $$ = TitleAttrsPlainAction($1); }
 		;
