@@ -468,6 +468,7 @@ tLink *LinkExpressionNoAttrsIDREF(char * idref, char * content){
 }
 
 tWebExpr * TitleExprAction(tTitle * title){
+	printf("TitleExprAction\n");
 	tWebExpr * webExp = malloc(sizeof(tWebExpr));
 	if(webExp == NULL)
 		return NULL;
@@ -498,6 +499,7 @@ tWebExpr * ImgExpressionAction(tImage * img){
 }
 
 tWebExpr * LinkExprAction(tLink * link){
+	printf("LinkExprAction\n");
 	tWebExpr * webExp = malloc(sizeof(tWebExpr));
 	if(webExp == NULL)
 		return NULL;
@@ -545,7 +547,8 @@ tWebExprs * RightAppendWebExprAction(tWebExprs * exps, tWebExpr * exp){
 	return exps;
 }
 
-tDiv * DivExprWithAttrsSingleWeb(tDivAttrs * attrs, tWebExpr * content){
+tDiv * DivExprWithAttrsSingleWeb(tDivAttrs * attrs, tWebExprs * content){
+	printf("DivExprWithAttrsSingleWeb\n");
 	tDiv * div = malloc(sizeof(tDiv));
 	if(div == NULL)
 		return NULL;
@@ -555,7 +558,8 @@ tDiv * DivExprWithAttrsSingleWeb(tDivAttrs * attrs, tWebExpr * content){
 	return div;
 }
 
-tDiv * DivExprNoAttrsSingleWeb(tWebExpr * content){
+tDiv * DivExprNoAttrsSingleWeb(tWebExprs * content){
+	printf("DivExprNoAttrsSingleWeb\n");
 	tDiv * div = malloc(sizeof(tDiv));
 	if(div == NULL)
 		return NULL;
@@ -566,6 +570,7 @@ tDiv * DivExprNoAttrsSingleWeb(tWebExpr * content){
 }
 
 tDiv * DivExprWithAttrsMulExp(tDivAttrs * attrs, tWebExprs * content){
+	printf("DivExprWithAttrsMulExp\n");
 	tDiv * div = malloc(sizeof(tDiv));
 	if(div == NULL)
 		return NULL;
@@ -576,6 +581,7 @@ tDiv * DivExprWithAttrsMulExp(tDivAttrs * attrs, tWebExprs * content){
 }
 
 tDiv * DivExprNoAttrsMulExp(tWebExprs * content){
+	printf("DivExprNoAttrsMulExp\n");
 	tDiv * div = malloc(sizeof(tDiv));
 	if(div == NULL)
 		return NULL;

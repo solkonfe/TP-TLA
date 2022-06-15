@@ -72,8 +72,8 @@ tWebExpr * DivExprAction(tDiv * div);
 tWebExprs * SimpleWebExpressionAction(tWebExpr * exp);
 tWebExprs * RightAppendWebExprAction(tWebExprs * exps, tWebExpr * exp);
 
-tDiv * DivExprWithAttrsSingleWeb(tDivAttrs * attrs, tWebExpr * content);
-tDiv * DivExprNoAttrsSingleWeb(tWebExpr * content);
+tDiv * DivExprWithAttrsSingleWeb(tDivAttrs * attrs, tWebExprs * content);
+tDiv * DivExprNoAttrsSingleWeb(tWebExprs * content);
 tDiv * DivExprWithAttrsMulExp(tDivAttrs * attrs, tWebExprs * content);
 tDiv * DivExprNoAttrsMulExp(tWebExprs * content);
 #endif

@@ -14,5 +14,6 @@ void printLink(tLink * link);
 void printText(tText * text);
 void printTable(tTable * table);
 void printDiv(tDiv * div);
+void printPage(tWebExprs * expression);
 
 #endif

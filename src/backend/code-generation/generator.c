@@ -21,13 +21,21 @@ char * Generator(tProgram * result) {
 	printf("<!DOCTYPE html>\n<html>\n\t<head>\n\t<meta charset=\"utf-8\">\n</head>\n<body>\n");
 
 	//strcat(toPrint, printHTML(result->initial->first));
-	printHTML(result->initial->first, toPrint);
+	printPage(result->initial);
 
 	//toPrint = realloc(toPrint, 50);
 	//strcat(toPrint, "</body>\n</html>");
 	printf("</body>\n</html>");
 
 	return toPrint;
+}
+
+void printPage(tWebExprs * expressions){
+	tWebExpr * current = expressions->first;
+	while (current != NULL){
+		printHTML(current, NULL);
+		current = current->next;
+	}
 }
 
 void printCellInformation(tRowData * data){ //TODO: Reduce this function, está copiada en otra función
@@ -107,22 +115,27 @@ void printHTML(tWebExpr * result, char * text){
 
 	switch (current->type) {
 		case TITLEEXPR:
+			printf("TITLEEXPR\n");
 			printTitle(current->expr);
 			break;
 		case IMGEXPR:
+			printf("IMGEXPR\n");
             printImage(current->expr);
 			break;
 		case LINKEXPR:
+			printf("LINKEXPR\n");
             printLink(current->expr);
 			break;
 		case TABLEEXPR:
-			//printf("Reconozco table...");
+			printf("TABLEEXPR\n");
 			printTable(current->expr); //TODO
 			break;
 		case DIVEXPR:
+			printf("DIVEXPR\n");
 			printDiv(current->expr);
 			break;
 		case TEXTEXPR:
+			printf("TEXTEXPR\n");
 			printText(current->expr); //TODO
 			break;
 		default:
@@ -309,6 +322,6 @@ void printLink(tLink * link){
 void printDiv(tDiv * div){
 	printf("<div>\n");
 	char * toPrint = NULL;
-	printHTML(div->content, toPrint);
+	printPage(div->content);
 	printf("</div>\n");
 }

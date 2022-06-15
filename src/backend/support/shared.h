@@ -115,12 +115,6 @@ typedef struct tDivAttrs{
 	char * ID;
 } tDivAttrs;
 
-typedef struct tDiv{
-	tDivAttrs * attrs;
-	void * content;
-	int size;
-} tDiv;
-
 typedef struct tImage{
 	char * source;
 	char * idref;
@@ -143,6 +137,12 @@ typedef struct tWebExprs{
 	int size;
 	tWebExpr * first;
 } tWebExprs;
+
+typedef struct tDiv{
+	tDivAttrs * attrs;
+	tWebExprs * content;
+	int size;
+} tDiv;
 
 typedef struct tProgram{
 	tWebExprs * initial;
