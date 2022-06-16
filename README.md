@@ -1,8 +1,6 @@
-[![✗](https://img.shields.io/badge/Release-v0.1.0-ffb600.svg?style=for-the-badge)](https://github.com/agustin-golmar/Flex-Bison-Compiler/releases)
+# Trabajo Práctico Especial - "72.39 - Autómatas, Teoría de Lenguajes y Compiladores"
 
-# Compilador Flex/Bison
-
-Un compilador vacío construido con Flex y Bison.
+Este lenguaje propone una capa de abstracción para quienes desean incursionar en el mundo de la programaicón web y, mas precisamente, HTML pero encuentran que su sintaxis es engorrosa para iniciarse. El mismo permtie, con *keywords* muy simples, generar un output en HTML para que el usuario deba preocuparse únicamente por lo que espera de su página, y no por la sintaxis de la misma. 
 
 ## Requerimientos
 
@@ -25,6 +23,11 @@ user@machine:path/ $ cmake -S . -B bin
 user@machine:path/ $ cd bin
 user@machine:path/ $ make
 ```
+También fue creado el archivo `compileIt.sh`, que hace esto mismo. Solo es necesario correr el archivo de la siguiente manera:
+
+```
+./compileIt.sh
+```
 
 En un entorno _Microsoft Windows_, en lugar de ejecutar el comando `make`, se deberá abrir la solución generada `bin/Compiler.sln` con el IDE _Microsoft Visual Studio 2022_. Los ejecutables que este sistema construye se depositan dentro del directorio `bin/Debug` y `bin/Release` según corresponda.
 
@@ -41,3 +44,17 @@ Luego, las salidas de cada test se encuentran dentro de la carpeta:
 ```bash
 src/logs/testlogs
 ```
+
+Es posible también que, ante el fallo de alguno de los tests, el output no se guarde en los logs dado que pudo haber finalizado de manera abrupta. Es por eso que se recomienda ejecutar los testeos **individualmente** de la siguiente manera:
+```
+cat tests/test{i} | bin/Compiler
+```
+donde _i_ es un índice para el número de test.
+
+## Integrantes
+Nombre | Legajo
+-------|--------
+[De Luca, Juan Manuel](https://github.com/juandl14) | 60103
+[Konfederak, Sol](https://github.com/solkonfe) | 60255
+[Dizenhaus, Manuel](https://github.com/ManuelDizen) | 61101
+[Cornidez, Milagros](https://github.com/mcornidez) | 61432
