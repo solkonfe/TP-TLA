@@ -26,12 +26,12 @@ char * Generator(tProgram * result) {
 	//toPrint = realloc(toPrint, 50);
 	//strcat(toPrint, "</body>\n</html>");
 	printf("</body>\n</html>\n\n");
-
+/*
 	if(result->initial->size > 1)
 		freeAllMemory(result->initial->first);
 	freeExpression(result->initial->first);
 	free(result->initial);
-
+*/
 	return toPrint;
 }
 
@@ -134,16 +134,16 @@ void printHTML(tWebExpr * result, char * text){
             printLink(current->expr);
 			break;
 		case TABLEEXPR:
-			printTable(current->expr); //TODO
+			printTable(current->expr);
 			break;
 		case DIVEXPR:
 			printDiv(current->expr);
 			break;
 		case TEXTEXPR:
-			printText(current->expr); //TODO
+			printText(current->expr);
 			break;
 		default:
-			//printf("\nNone matched\n");
+			printf("\nNone matched\n");
 			break;
 	}
 }
@@ -151,7 +151,7 @@ void printHTML(tWebExpr * result, char * text){
 void printText(tText * text){
 	printf("<p");
 	if (text->ID != NULL)
-		printf("id= %s", text->ID); 
+		printf(" id= %s", text->ID); 
 	int bold = 0, italic = 0, underlined = 0;
 	if(text->attrs != NULL){
 		tAttribute * current= text->attrs->first;
@@ -223,16 +223,16 @@ void printTitle(tTitle * title){
 	if (title->attrs != NULL){
 
 		if (title->attrs->ID != NULL)
-			printf(" id=\"%s\" ", title->attrs->ID);
+			printf(" id=\"%s\"", title->attrs->ID);
 		
 		tAttribute * currAttr = title->attrs->first;
 		while (currAttr != NULL){
 			switch (currAttr->type){
 				case COLORVAL:
-					printf(" color=%s ", currAttr->value);
+					printf(" color=%s", currAttr->value);
 					break;
 				case POSITIONVAL:
-					printf(" position=%s ", currAttr->value);
+					printf(" position=%s", currAttr->value);
 					break;
 				case BOLDVAL:
 					bold = 1;
@@ -258,13 +258,13 @@ void printTitle(tTitle * title){
 	
 	printf("%s", title->value);
 
-	
-	if (bold == 1)
-		printf("</b>");
-	if (italic == 1)
-		printf("</i>");
 	if (underlined == 1)
 		printf("</u>");
+	if (italic == 1)
+		printf("</i>");
+	if (bold == 1)
+		printf("</b>");
+	
 
 	printf("</h%d>\n", size);
 }
@@ -274,27 +274,27 @@ void printImage(tImage* image){
 	printf("<img");
 	printf(" %s", image->source); //habria que ver si ya lo estamos guardando con comillas
 	if(image->idref != NULL){
-		printf(" %s ", image->idref);
+		printf(" %s", image->idref);
 	}
 	if(image->altText != NULL){
-		printf("alt=%s", image->altText);
+		printf(" alt=%s", image->altText);
 	}
 	printf(">\n");
 }
 
 void printLink(tLink * link){
-	printf("<link ");
-	printf("href=\"%s\"", link->ref); //fijarse lo de las comillas
+	printf("<link");
+	printf(" href=\"%s\"", link->ref); //fijarse lo de las comillas
 	int bold = 0, italic = 0, underlined = 0;
 	if(link->attrs != NULL){
 		tAttribute * current= link->attrs->first;
 		while(current != NULL){
 			switch (current->type){
 				case COLORVAL:
-					printf("color=%s ", current->value);
+					printf(" color=%s", current->value);
 					break;
 				case POSITIONVAL:
-					printf("position=%s ", current->value);
+					printf(" position=%s", current->value);
 					break;
 				case BOLDVAL:
 					bold = 1;
@@ -319,12 +319,13 @@ void printLink(tLink * link){
 	
 	printf("%s", link->text);
 	
-	if (bold == 1)
-		printf("</b>");
-	if (italic == 1)
-		printf("</i>");
 	if (underlined == 1)
 		printf("</u>");
+	if (italic == 1)
+		printf("</i>");
+	if (bold == 1)
+		printf("</b>");
+	
 
 	printf("</link>\n");
 }

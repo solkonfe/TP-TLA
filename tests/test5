@@ -1,6 +1,6 @@
 start
     box:
-        title bold: "This is a bold xx-large title"
+        title xx-large, bold: "This is a bold xx-large title"
         title medium, italic: "This is a medium title in italics"
         title id='titleItalics': "This is a title with an id"
         text underlined: "This is underlined text"
@@ -8,7 +8,7 @@ start
     endbox
     box:
         link idref='#titleItalics': "Clicking here takes you to the title in italics. It has an idref"
-        image src='https://www.medium.com/max/1400/1*McLYEFaMXdYiZ0Y5O3VaBQ.png': "This is an alternative text if the image source doesnt work"
+        image src='https://miro.medium.com/max/1400/1*McLYEFaMXdYiZ0Y5O3VaBQ.png' 'https://medium.com/swlh/the-magic-behind-compilers-part-1-f99bf45688f7' : "This is an alternative text if the image source doesnt work"
         text: "Clicking on the above image takes you to the article "The magic behind compilers"
     endbox
 end

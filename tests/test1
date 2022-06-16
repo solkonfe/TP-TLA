@@ -1,3 +1,8 @@
 start
-    title small, bold: "This is heading 1"
+    title xx-large: "This is heading 1"
+    title x-large: "This is heading 2"
+    title large: "This is heading 3"
+    title medium: "This is heading 4"
+    title small: "This is heading 5"
+    title x-small: "This is heading 6"
 end

@@ -1,10 +1,10 @@
 start
     box: 
-        text: "This is box 1"
+        title: "This is box 1"
         box:
-            text: "This is box 2"
+            title: "This is box 2"
             box:
-                text: "This is box 3"
+                title: "This is box 3"
             endbox
         endbox
     endbox

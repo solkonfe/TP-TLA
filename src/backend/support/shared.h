@@ -9,7 +9,8 @@ extern FILE * yyin;
 // Descriptor del archivo de salida que utiliza Bison.
 extern FILE * yyout;
 
-// Variable global que contiene el número escaneado.
+// Variable global que contiene la longitud de yytext.
+extern int yyleng;
 
 // extern int yylval;
 

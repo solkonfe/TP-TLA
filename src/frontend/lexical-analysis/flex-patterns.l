@@ -21,7 +21,7 @@
 crlf			\r\n
 /* https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url */
 link            \'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\'
-source          src=\'https?:\/\/(www\.)?.*\.(png|svg|jpg|jpeg)\'
+source          src=\'https?:\/\/(www\.)?.*\.*\'
 idref           idref=\'#.*\'
 id              id=\'.*\'
 title_size      (x-small|small|medium|large|x-large|xx-large)
@@ -60,21 +60,21 @@ whitespace		[ \f\n\r\t\v]
 
 
 
-{link}                                      { return LinkPatternAction(yytext); }
+{link}                                      { return LinkPatternAction(yytext, yyleng); }
 
-{idref}                                     { return IdrefPatternAction(yytext); }
+{idref}                                     { return IdrefPatternAction(yytext, yyleng); }
 
-{id}                                        { return IdPatternAction(yytext); }
+{id}                                        { return IdPatternAction(yytext, yyleng); }
 
-{source}                                   { return SourcePatternAction(yytext); }
+{source}                                   { return SourcePatternAction(yytext, yyleng); }
 
-{content}                                   { return ContentPatternAction(yytext); }
+{content}                                   { return ContentPatternAction(yytext, yyleng); }
 
-{title_size}                                { return TitleSizePatternAction(yytext); }
+{title_size}                                { return TitleSizePatternAction(yytext, yyleng); }
 
-{color}                                     { return ColorPatternAction(yytext);}
+{color}                                     { return ColorPatternAction(yytext, yyleng);}
 
-{position}                                  { return PositionPatternAction(yytext);}
+{position}                                  { return PositionPatternAction(yytext, yyleng);}
 
 {number}                                    { return NumberPatternAction(yytext);}
 

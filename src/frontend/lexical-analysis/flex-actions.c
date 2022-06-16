@@ -130,59 +130,83 @@ unsigned CommaTokenPattern(const char *lexeme)
 	return COMMA;
 }
 
-unsigned LinkPatternAction(const char *lexeme)
+unsigned LinkPatternAction(const char *lexeme, int length)
 {
 	LogDebug("LinkPatternAction: '%s'.", lexeme);
-	yylval.string = lexeme;
+	char * aux = malloc(length+1);
+	strncpy(aux, lexeme, length);
+	yylval.string = aux;
+	//free(aux);
 	return LINK;
 }
 
-unsigned IdrefPatternAction(const char *lexeme)
+unsigned IdrefPatternAction(const char *lexeme, int length)
 {
 	LogDebug("IDrefPatternAction: '%s'.", lexeme);
-	yylval.string = lexeme;
+	char * aux = malloc(length+1);
+	strncpy(aux, lexeme, length);
+	yylval.string = aux;
+	//free(aux);
 	return IDREF;
 }
 
-unsigned IdPatternAction(const char *lexeme)
+unsigned IdPatternAction(const char *lexeme, int length)
 {
 	LogDebug("IDPatternAction: '%s'.", lexeme);
-	yylval.string = lexeme;
+	char * aux = malloc(length+1);
+	strncpy(aux, lexeme, length);
+	yylval.string = aux;
+	//free(aux);
 	return ID;
 }
 
-unsigned SourcePatternAction(const char *lexeme)
+unsigned SourcePatternAction(const char *lexeme, int length)
 {
 	LogDebug("SourcePatternAction: '%s'.", lexeme);
-	yylval.string = lexeme;
+	char * aux = malloc(length+1);
+	strncpy(aux, lexeme, length);
+	yylval.string = aux;
+	//free(aux);
 	return SOURCE;
 }
 
-unsigned ContentPatternAction(const char *lexeme)
+unsigned ContentPatternAction(const char *lexeme, int length)
 {
 	LogDebug("ContentPatternAction: '%s'.", lexeme);
-	yylval.string = lexeme;
+	char * aux = malloc(length+1);
+	strncpy(aux, lexeme, length);
+	yylval.string = aux;
+	//free(aux);
 	return CONTENT;
 }
 
-unsigned TitleSizePatternAction(const char *lexeme)
+unsigned TitleSizePatternAction(const char *lexeme, int length)
 {
 	LogDebug("TitleSizePatternAction: '%s'.", lexeme);
-	yylval.string = lexeme;
+	char * aux = malloc(length+1);
+	strncpy(aux, lexeme, length);
+	yylval.string = aux;
+	//free(aux);
 	return TITLE_SIZE;
 }
 
-unsigned ColorPatternAction(const char *lexeme)
+unsigned ColorPatternAction(const char *lexeme, int length)
 {
 	LogDebug("ColorPatternAction: '%s'.", lexeme);
-	yylval.string = lexeme;
+	char * aux = malloc(length+1);
+	strncpy(aux, lexeme, length);
+	yylval.string = aux;
+	//free(aux);
 	return COLOR;
 }
 
-unsigned PositionPatternAction(const char *lexeme)
+unsigned PositionPatternAction(const char *lexeme, int length)
 {
 	LogDebug("PositionPatternAction: '%s'.", lexeme);
-	yylval.string = lexeme;
+	char * aux = malloc(length+1);
+	strncpy(aux, lexeme, length);
+	yylval.string = aux;
+	//free(aux);
 	return POSITION;
 }
 

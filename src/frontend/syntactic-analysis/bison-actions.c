@@ -246,8 +246,6 @@ tTitleAttrs  * TitleAttrsPlainAction(tAttributes * attrs){
 }
 
 tTitleAttrs * TitleAttrsWithSizeAction(char * titleSize, tAttributes * attrs){
-	printf("TItleATtrsWithSizeACtion with titleSize: %s\n", titleSize);
-	printf("attrs->first->value: %s\n", attrs->first->value);
 	tTitleAttrs * aux = malloc(sizeof(tTitleAttrs));
 	if(aux == NULL){
 		return NULL;
@@ -260,7 +258,6 @@ tTitleAttrs * TitleAttrsWithSizeAction(char * titleSize, tAttributes * attrs){
 }
 
 tTitleAttrs * TitleAttrsOnlySizeAction(char * titleSize){
-	printf("%s\n", titleSize);
 	tTitleAttrs * aux = malloc(sizeof(tTitleAttrs));
 	if(aux == NULL){
 		return NULL;

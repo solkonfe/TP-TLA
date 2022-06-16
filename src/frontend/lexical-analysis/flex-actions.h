@@ -89,15 +89,15 @@ unsigned TimesTokenPattern(const char *lexeme);
 unsigned DefDelimiterTokenPattern(const char *lexeme);
 unsigned CommaTokenPattern(const char *lexeme);
 
-unsigned LinkPatternAction(const char *lexeme);
-unsigned IdrefPatternAction(const char *lexeme);
-unsigned IdPatternAction(const char *lexeme);
-unsigned SourcePatternAction(const char *lexeme);
-unsigned ContentPatternAction(const char *lexeme);
+unsigned LinkPatternAction(const char *lexeme, int length);
+unsigned IdrefPatternAction(const char *lexeme, int length);
+unsigned IdPatternAction(const char *lexeme, int length);
+unsigned SourcePatternAction(const char *lexeme, int length);
+unsigned ContentPatternAction(const char *lexeme, int length);
 
-unsigned TitleSizePatternAction(const char *lexeme);
-unsigned ColorPatternAction(const char *lexeme);
-unsigned PositionPatternAction(const char *lexeme);
+unsigned TitleSizePatternAction(const char *lexeme, int length);
+unsigned ColorPatternAction(const char *lexeme, int length);
+unsigned PositionPatternAction(const char *lexeme, int length);
 unsigned NumberPatternAction(const char *lexeme);
 
 unsigned UnknownPatternAction(const char *lexeme);
