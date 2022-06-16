@@ -134,9 +134,12 @@ unsigned LinkPatternAction(const char *lexeme, int length)
 {
 	LogDebug("LinkPatternAction: '%s'.", lexeme);
 	char * aux = malloc(length+1);
+	if (aux == NULL){
+		printf("Error in malloc\n");
+		return NULL;
+	}
 	strncpy(aux, lexeme, length);
 	yylval.string = aux;
-	//free(aux);
 	return LINK;
 }
 
@@ -144,6 +147,10 @@ unsigned IdrefPatternAction(const char *lexeme, int length)
 {
 	LogDebug("IDrefPatternAction: '%s'.", lexeme);
 	char * aux = malloc(length+1);
+	if (aux == NULL){
+		printf("Error in malloc\n");
+		return NULL;
+	}
 	strncpy(aux, lexeme, length);
 	yylval.string = aux;
 	//free(aux);
@@ -154,6 +161,10 @@ unsigned IdPatternAction(const char *lexeme, int length)
 {
 	LogDebug("IDPatternAction: '%s'.", lexeme);
 	char * aux = malloc(length+1);
+	if (aux == NULL){
+		printf("Error in malloc\n");
+		return NULL;
+	}
 	strncpy(aux, lexeme, length);
 	yylval.string = aux;
 	//free(aux);
@@ -164,6 +175,10 @@ unsigned SourcePatternAction(const char *lexeme, int length)
 {
 	LogDebug("SourcePatternAction: '%s'.", lexeme);
 	char * aux = malloc(length+1);
+	if (aux == NULL){
+		printf("Error in malloc\n");
+		return NULL;
+	}
 	strncpy(aux, lexeme, length);
 	yylval.string = aux;
 	//free(aux);
@@ -172,9 +187,13 @@ unsigned SourcePatternAction(const char *lexeme, int length)
 
 unsigned ContentPatternAction(const char *lexeme, int length)
 {
-	LogDebug("ContentPatternAction: '%s'.", lexeme);
-	char * aux = malloc(length+1);
-	strncpy(aux, lexeme, length);
+	LogDebug("ContentPatternAction: '%s'. %d", lexeme, length);
+	char * aux = calloc(length+1, sizeof(char));
+	if (aux == NULL){
+		printf("Error in malloc\n");
+		return NULL;
+	}
+	strncpy(aux, lexeme, length+1);
 	yylval.string = aux;
 	//free(aux);
 	return CONTENT;

@@ -5,6 +5,7 @@ start
             title: "This is box 2"
             box:
                 title: "This is box 3"
+                image src='https://media.makeameme.org/created/I-think-it-v0gir5.jpg':"Alt Text"
             endbox
         endbox
     endbox

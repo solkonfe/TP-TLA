@@ -274,8 +274,8 @@ tTitleAttrs * TitleAttrsWithIDAction(char * ID, tAttributes * attrs){
 	if(aux == NULL){
 		return NULL;
 	}
-	aux->ID = malloc(sizeof(char) * (strlen(ID) + 1));
-	strcpy(aux->ID, ID);
+	aux->ID = malloc(sizeof(char) * (strlen(ID) - 3));
+	strncpy(aux->ID, ID + 4, strlen(ID) - 5);
 	aux->first = attrs->first;
 	aux->size = attrs->size + 1; //ID cuenta como attr pero no está declarado como tal
 	return aux;
@@ -286,8 +286,8 @@ tTitleAttrs * TitleAttrsOnlyIDAction(char * ID){
 	if(aux == NULL){
 		return NULL;
 	}
-	aux->ID = malloc(sizeof(char) * (strlen(ID) + 1));
-	strcpy(aux->ID, ID);
+	aux->ID = malloc(sizeof(char) * (strlen(ID) - 3));
+	strncpy(aux->ID, ID + 4, strlen(ID) - 5);
 	aux->first = NULL;
 	aux->size = 1; //ID cuenta como attr pero no está declarado como tal
 	return aux;
@@ -373,6 +373,10 @@ tText * TextExprWithAttrsAndID(char * ID, tAttributes * attrs, char * content){
 	}
 	text->content = malloc(sizeof(char) * (strlen(content) + 1));
 	strcpy(text->content, content);
+	// aux->ID = malloc(sizeof(char) * (strlen(ID) - 3));
+	// strncpy(aux->ID, ID + 4, strlen(ID) - 5);
+
+	
 	text->ID = malloc(sizeof(char) * (strlen(content) + 1));
 	strcpy(text->ID, ID);
 	text->attrs = attrs;
@@ -430,9 +434,9 @@ tLink * LinkExpressionWithAttrs(char * src, tAttributes * attrs, char * content)
 		return NULL;
 	}
 
-	link->ref = malloc(sizeof(char)*(strlen(src) + 1));
-	link->text = malloc(sizeof(char)*(strlen(src)+1));
-	strcpy(link->ref, src);
+	link->ref = malloc(sizeof(char)*(strlen(src) - 4));
+	link->text = malloc(sizeof(char)*(strlen(content) + 1));
+	strncpy(link->ref, src + 5, strlen(src) - 7);
 	strcpy(link->text, content);
 	link->attrs = attrs;
 	return link;
@@ -444,9 +448,9 @@ tLink * LinkExpressionNoAttrs(char * src, char * content){
 		return NULL;
 	}
 
-	link->ref = malloc(sizeof(char)*(strlen(src) + 1));
-	link->text = malloc(sizeof(char)*(strlen(src)+1));
-	strcpy(link->ref, src);
+	link->ref = malloc(sizeof(char)*(strlen(src) - 4));
+	link->text = malloc(sizeof(char)*(strlen(content) + 1));
+	strncpy(link->ref, src + 5, strlen(src) - 6);
 	strcpy(link->text, content);
 	link->attrs = NULL;
 	return link;
@@ -458,9 +462,9 @@ tLink *LinkExpressionNoAttrsIDREF(char * idref, char * content){
 		return NULL;
 	}
 
-	link->ref = malloc(sizeof(char)*(strlen(idref) + 1));
-	link->text = malloc(sizeof(char)*(strlen(idref)+1));
-	strcpy(link->ref, idref);
+	link->ref = malloc(sizeof(char)*(strlen(idref) - 6));
+	link->text = malloc(sizeof(char)*(strlen(content)+1));
+	strncpy(link->ref, idref + 7, strlen(idref) - 8);
 	strcpy(link->text, content);
 	link->attrs = NULL;
 	return link;
@@ -530,6 +534,7 @@ tWebExprs * SimpleWebExpressionAction(tWebExpr * exp){
 	tWebExprs * exps = malloc(sizeof(tWebExprs));
 	if(exps == NULL)
 		return NULL;
+	exp->next = NULL;
 	exps->first = exp;
 	exps->size = 1;
 	return exps;

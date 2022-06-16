@@ -7,7 +7,7 @@
 #define BLOCK 200
 
 char * Generator(tProgram * result);
-void printHTML(tWebExpr * result, char * text);
+void printHTML(tWebExpr * result);
 void printTitle(tTitle * title);
 void printImage(tImage* image);
 void printLink(tLink * link);

@@ -6,10 +6,12 @@
  * Implementación de "generator.h".
  */
 
+FILE * file;
+
 char * Generator(tProgram * result) {
 	//LogInfo("El resultado de la expresion computada es: '%d'.", result);
 
-	char * toPrint = NULL;
+	file = fopen("out.html", "w+");
 
 	if (result == NULL || result->initial == NULL){
 		LogInfo("El resultado de la compilacion es nulo.");
@@ -18,44 +20,45 @@ char * Generator(tProgram * result) {
 
 	//Abro HTML
 	//strcat(toPrint, "<!DOCTYPE html>\n<html>\n<body>");
-	printf("<!DOCTYPE html>\n<html>\n\t<head>\n\t<meta charset=\"utf-8\">\n</head>\n<body>\n");
+	fprintf(file, "<!DOCTYPE html>\n<html>\n\t<head>\n\t<meta charset=\"utf-8\">\n</head>\n<body>\n");
 
 	//strcat(toPrint, printHTML(result->initial->first));
 	printPage(result->initial);
 
 	//toPrint = realloc(toPrint, 50);
 	//strcat(toPrint, "</body>\n</html>");
-	printf("</body>\n</html>\n\n");
+	fprintf(file, "</body>\n</html>\n\n");
 /*
 	if(result->initial->size > 1)
 		freeAllMemory(result->initial->first);
 	freeExpression(result->initial->first);
 	free(result->initial);
 */
-	return toPrint;
+	fclose(file);
+	return NULL;
 }
 
 void printPage(tWebExprs * expressions){
 	tWebExpr * current = expressions->first;
 	while (current != NULL){
-		printHTML(current, NULL);
+		printHTML(current);
 		current = current->next;
 	}
 }
 
 void printCellInformation(tRowData * data){ //TODO: Reduce this function, está copiada en otra función
 	int bold = 0, italic = 0, underlined = 0, color = 0, align = 0;
-	printf("\n\t<td");
+	fprintf(file, "\n\t<td");
 	if(data->rowAttrs != NULL){
 		tAttribute * current = data->rowAttrs->first;
 		while(current != NULL){
 			switch (current->type){
 				case COLORVAL:
-					printf(" color=%s", current->value);
+					fprintf(file, " color=%s", current->value);
 					color = 1;
 					break;
 				case POSITIONVAL:
-					printf(" align=%s", current->value);
+					fprintf(file, " style=\"text-align:%s;\"", current->value);
 					align = 1;
 					break;
 				case BOLDVAL:
@@ -71,31 +74,30 @@ void printCellInformation(tRowData * data){ //TODO: Reduce this function, está 
 			current = current->next;
 		}
 	}
-	printf(">");
+	fprintf(file, ">");
 	if (bold == 1)
-		printf("<b>");
+		fprintf(file, "<b>");
 	if (italic == 1)
-		printf("<i>");
+		fprintf(file, "<i>");
 	if (underlined == 1)
-		printf("<u>");
+		fprintf(file, "<u>");
 	
-	printf("%s", data->value);
+	fprintf(file, "%s", data->value);
 	
 	if (underlined == 1)
-		printf("</u>");
+		fprintf(file, "</u>");
 	if (italic == 1)
-		printf("</i>");
+		fprintf(file, "</i>");
 	if (bold == 1)
-		printf("</b>");
+		fprintf(file, "</b>");
 	
 }
 
 void printTable(tTable * table){
-	printf("<table>\n");
-	//printf("rows: %d, cols: %d\n", table->rowsDeclared, table->colsDeclared);
+	fprintf(file, "<table style=\"border:1px solid black;\">\n");
 	tRow * auxRowPtr = table->firstRow->firstRow;
 	for(int row = 0; row < table->rowsDeclared; row++){
-		printf("<tr>");
+		fprintf(file, "<tr>");
 		if(auxRowPtr != NULL){
 			tRowData * auxDataPtr = auxRowPtr->firstCell;
 			for(int col = 0; col < table->colsDeclared; col++){
@@ -104,24 +106,20 @@ void printTable(tTable * table){
 					auxDataPtr = auxDataPtr->nextCell;
 				}
 				else{
-					printf("\n\t<td>");
+					fprintf(file, "\n\t<td>");
 				}
-				printf("</td>\n");
+				fprintf(file, "</td>\n");
 			}
 			auxRowPtr = auxRowPtr->nextRow;
 		}
-		else{
-			printf(">");
-		}
-		printf("</tr>\n");
+		fprintf(file, "</tr>\n");
 	}
-	printf("</table>\n");
+	fprintf(file, "</table>\n");
 }
 
-void printHTML(tWebExpr * result, char * text){
+void printHTML(tWebExpr * result){
 
 	tWebExpr * current = result;
-	text = realloc(text, 50);
 
 	switch (current->type) {
 		case TITLEEXPR:
@@ -143,25 +141,25 @@ void printHTML(tWebExpr * result, char * text){
 			printText(current->expr);
 			break;
 		default:
-			printf("\nNone matched\n");
+			fprintf(file, "\nNone matched\n");
 			break;
 	}
 }
 
 void printText(tText * text){
-	printf("<p");
+	fprintf(file, "<p");
 	if (text->ID != NULL)
-		printf(" id= %s", text->ID); 
+		fprintf(file, " %s", text->ID); 
 	int bold = 0, italic = 0, underlined = 0;
 	if(text->attrs != NULL){
 		tAttribute * current= text->attrs->first;
 		while(current != NULL){
 			switch (current->type){
 				case COLORVAL:
-					printf(" color=\"%s\"", current->value);
+					fprintf(file, " color=\"%s\"", current->value);
 					break;
 				case POSITIONVAL:
-					printf(" position=\"%s\"", current->value);
+					fprintf(file, " style=\"text-align:%s;\"", current->value);
 					break;
 				case BOLDVAL:
 					bold = 1;
@@ -176,28 +174,28 @@ void printText(tText * text){
 			current = current->next;
 		}
 	}
-	printf(">");
+	fprintf(file, ">");
 	if (bold == 1)
-		printf("<b>");
+		fprintf(file, "<b>");
 	if (italic == 1)
-		printf("<i>");
+		fprintf(file, "<i>");
 	if (underlined == 1)
-		printf("<u>");
+		fprintf(file, "<u>");
 	
-	printf("%s", text->content);
+	fprintf(file, "%s", text->content);
 	
 	if (underlined == 1)
-		printf("</u>");
+		fprintf(file, "</u>");
 	if (italic == 1)
-		printf("</i>");
+		fprintf(file, "</i>");
 	if (bold == 1)
-		printf("</b>");
+		fprintf(file, "</b>");
 	
 
-	printf("</p>\n");
+	fprintf(file, "</p>\n");
 }
 
-char * possibleSizes[6] = {"x-small", "small:", "medium", "large", "x-large", "xx-large"};
+char * possibleSizes[6] = {"x-small", "small", "medium", "large", "x-large", "xx-large"};
 #define MAX_SIZES 6
 
 int getSizeOfTitle(char * sizeName){
@@ -218,21 +216,21 @@ void printTitle(tTitle * title){
 		size = getSizeOfTitle(title->attrs->titleSize);
 	}
 
-	printf("<h%d", size);
+	fprintf(file, "<h%d", size);
 
 	if (title->attrs != NULL){
 
 		if (title->attrs->ID != NULL)
-			printf(" id=\"%s\"", title->attrs->ID);
+			fprintf(file, " id=\"%s\"", title->attrs->ID);
 		
 		tAttribute * currAttr = title->attrs->first;
 		while (currAttr != NULL){
 			switch (currAttr->type){
 				case COLORVAL:
-					printf(" color=%s", currAttr->value);
+					fprintf(file, " color=%s", currAttr->value);
 					break;
 				case POSITIONVAL:
-					printf(" position=%s", currAttr->value);
+					fprintf(file, " style=\"text-align:%s;\"", currAttr->value);
 					break;
 				case BOLDVAL:
 					bold = 1;
@@ -247,54 +245,54 @@ void printTitle(tTitle * title){
 			currAttr = currAttr->next;
 		}
 	}
-	printf(">");
+	fprintf(file, ">");
 	if (bold == 1)
-		printf("<b>");
+		fprintf(file, "<b>");
 	if (italic == 1)
-		printf("<i>");
+		fprintf(file, "<i>");
 	if (underlined == 1)
-		printf("<u>");
+		fprintf(file, "<u>");
 
 	
-	printf("%s", title->value);
+	fprintf(file, "%s", title->value);
 
 	if (underlined == 1)
-		printf("</u>");
+		fprintf(file, "</u>");
 	if (italic == 1)
-		printf("</i>");
+		fprintf(file, "</i>");
 	if (bold == 1)
-		printf("</b>");
+		fprintf(file, "</b>");
 	
 
-	printf("</h%d>\n", size);
+	fprintf(file, "</h%d>\n", size);
 }
 
 
 void printImage(tImage* image){
-	printf("<img");
-	printf(" %s", image->source); //habria que ver si ya lo estamos guardando con comillas
+	fprintf(file, "<img");
+	fprintf(file, " %s", image->source); //habria que ver si ya lo estamos guardando con comillas
 	if(image->idref != NULL){
-		printf(" %s", image->idref);
+		fprintf(file, " %s", image->idref);
 	}
 	if(image->altText != NULL){
-		printf(" alt=%s", image->altText);
+		fprintf(file, " alt=%s", image->altText);
 	}
-	printf(">\n");
+	fprintf(file, ">\n");
 }
 
 void printLink(tLink * link){
-	printf("<link");
-	printf(" href=\"%s\"", link->ref); //fijarse lo de las comillas
+	fprintf(file, "<a");
+	fprintf(file, " href=\"%s\"", link->ref); //fijarse lo de las comillas
 	int bold = 0, italic = 0, underlined = 0;
 	if(link->attrs != NULL){
 		tAttribute * current= link->attrs->first;
 		while(current != NULL){
 			switch (current->type){
 				case COLORVAL:
-					printf(" color=%s", current->value);
+					fprintf(file, " color=%s", current->value);
 					break;
 				case POSITIONVAL:
-					printf(" position=%s", current->value);
+					fprintf(file, " style=\"text-align:%s;\"", current->value);
 					break;
 				case BOLDVAL:
 					bold = 1;
@@ -309,32 +307,31 @@ void printLink(tLink * link){
 			current = current->next;
 		}
 	}
-	printf(">");
+	fprintf(file, ">");
 	if (bold == 1)
-		printf("<b>");
+		fprintf(file, "<b>");
 	if (italic == 1)
-		printf("<i>");
+		fprintf(file, "<i>");
 	if (underlined == 1)
-		printf("<u>");
+		fprintf(file, "<u>");
 	
-	printf("%s", link->text);
+	fprintf(file, "%s", link->text);
 	
 	if (underlined == 1)
-		printf("</u>");
+		fprintf(file, "</u>");
 	if (italic == 1)
-		printf("</i>");
+		fprintf(file, "</i>");
 	if (bold == 1)
-		printf("</b>");
+		fprintf(file, "</b>");
 	
 
-	printf("</link>\n");
+	fprintf(file, "</a>\n");
 }
 
 void printDiv(tDiv * div){
-	printf("<div>\n");
-	char * toPrint = NULL;
+	fprintf(file, "<div>\n");
 	printPage(div->content);
-	printf("</div>\n");
+	fprintf(file, "</div>\n");
 }
 
 

@@ -1,8 +1,10 @@
 start 
     box:
         title id='t1' : "This is section 1"
+        text: "Try clicking the text below"
     endbox
     box:
         link idref='#t1' : "Go to section 1"
+        text: "Easy right?"
     endbox
 end
