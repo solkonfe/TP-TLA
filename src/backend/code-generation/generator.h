@@ -16,4 +16,12 @@ void printTable(tTable * table);
 void printDiv(tDiv * div);
 void printPage(tWebExprs * expression);
 
+void freeAllMemory(tWebExpr * expr);
+void freeAttributes(tAttribute * attrs);
+void freeAttrsWrp(tAttributes * result);
+void freeTAttrsWrp(tTitleAttrs * result);
+void freeRows(tRow * row);
+void freeExpression(tWebExpr * expr);
+
+
 #endif

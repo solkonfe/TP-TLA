@@ -11,7 +11,7 @@ char * Generator(tProgram * result) {
 
 	char * toPrint = NULL;
 
-	if (result == NULL){
+	if (result == NULL || result->initial == NULL){
 		LogInfo("El resultado de la compilacion es nulo.");
 		return NULL;
 	}
@@ -26,6 +26,11 @@ char * Generator(tProgram * result) {
 	//toPrint = realloc(toPrint, 50);
 	//strcat(toPrint, "</body>\n</html>");
 	printf("</body>\n</html>\n\n");
+
+	if(result->initial->size > 1)
+		freeAllMemory(result->initial->first);
+	freeExpression(result->initial->first);
+	free(result->initial);
 
 	return toPrint;
 }
@@ -329,4 +334,156 @@ void printDiv(tDiv * div){
 	char * toPrint = NULL;
 	printPage(div->content);
 	printf("</div>\n");
+}
+
+
+
+/*
+			FREEING MEMORY FUNCTIONS
+*/
+
+
+
+void freeAllMemory(tWebExpr * expr){
+	if(expr == NULL){
+		printf("error");
+		return;
+	}
+	else if(expr->next->next == NULL){
+		freeExpression(expr->next);
+		tWebExpr * prev = expr->next;
+		expr->next = NULL;
+		free(prev);
+		return;
+	}
+	else{
+		freeAllMemory(expr->next);
+		freeExpression(expr->next);
+		tWebExpr * prev = expr->next;
+		expr->next = NULL;
+		free(prev);
+		return;
+	}
+}
+
+void freeAttributes(tAttribute * attrs){
+	if(attrs == NULL){
+		return;
+	}
+	else if(attrs->next->next == NULL){
+		free(attrs->next->value);
+		tAttribute * prev = attrs->next;
+		attrs->next = NULL;
+		free(prev);
+		return;
+	}
+	else{
+		freeAttributes(attrs->next);
+		free(attrs->next->value);
+		tAttribute * prev = attrs->next;
+		attrs->next = NULL;
+		free(prev);
+		return;
+	}
+}
+
+void freeAttrsWrp(tAttributes * result){
+	if(result == NULL)
+		return;
+
+	if(result->size > 1)
+		freeAttributes(result->first);
+	free(result->first->value);
+	free(result->first->next);
+	free(result->first);
+}
+
+void freeTAttrsWrp(tTitleAttrs * result){
+	if(result == NULL)
+		return;
+
+	if(result->size > 1)
+		freeAttributes(result->first);
+	free(result->first->value);
+	free(result->first->next);
+	free(result->first);
+}
+
+void freeRows(tRow * row){
+
+}
+
+void freeExpression(tWebExpr * expr){
+	switch(expr->type){
+		case TITLEEXPR:
+		{
+			tTitle * aux = (tTitle *) expr->expr;
+			free(aux->value);
+			freeTAttrsWrp(aux->attrs); // TODO: freeTAttributes(tTitleAttrs * attrs);
+			free(aux->attrs->titleSize);
+			free(aux->attrs->ID);
+			free(aux->attrs);
+			free(aux);
+			free(expr);
+			return;
+		}
+		case IMGEXPR:
+		{
+			tImage * aux = (tImage *) expr->expr;
+			free(aux->source);
+			free(aux->idref);
+			free(aux->altText);
+			free(aux);
+			free(expr);
+			return;
+		}
+		case LINKEXPR:
+		{
+			tLink * aux = (tLink *) expr->expr;
+			free(aux->ref);
+			free(aux->text);
+			freeAttrsWrp(aux->attrs);
+			free(aux->attrs);
+			free(aux);
+			free(expr);
+			return;
+		}
+		case TABLEEXPR:
+		{
+			tTable * aux = (tTable *) expr->expr;
+			// expr->expr->firstRow->firstRow->firstCell->value
+			freeRows(aux->firstRow->firstRow); // tRow *
+			// TODO: freeRows(tRow * row);
+			// Desde aca puedo liberar todas las filas
+			free(aux->firstRow->firstRow);
+			free(aux->firstRow);
+			free(aux);
+			free(expr);
+			return;
+		}
+		case DIVEXPR:
+		{
+			tDiv * aux = (tDiv *) expr->expr;
+			free(aux->attrs->pos);// TODO: freeDAttributes(tDivAttrs * attrs);
+			free(aux->attrs->ID);
+			freeAllMemory(aux->content->first);
+			free(aux->content);
+			free(aux);
+			free(expr);
+			return;
+		}
+		case TEXTEXPR:
+		{
+			tText * aux = (tText *) expr->expr;
+			freeAttrsWrp(aux->attrs); // TODO: freeAttributes(tAttributes * attrs);
+			free(aux->ID);
+			free(aux->content);
+			free(aux);
+			free(expr);
+			return;
+		}
+		default:
+			free(expr);
+			break;
+	}
 }
